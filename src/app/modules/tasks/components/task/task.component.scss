@@ -1,0 +1,22 @@
+.task {
+  display: flex;
+  width: 560px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title{
+  width: 60%;
+}
+
+button{
+
+  width: 15%;
+  background: #fff;
+  color: #333;
+  border: #ccc solid 1px;
+}
+
+.date{
+  font-size: 14px;
+}

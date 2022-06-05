@@ -1,0 +1,22 @@
+.todos{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.todo-items{
+  display: flex;
+  flex-direction: column-reverse;
+
+}
+
+.todo-item{
+  background-color: khaki;
+  margin: 3px;
+}
+
+
+
+

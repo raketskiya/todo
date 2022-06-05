@@ -1,0 +1,23 @@
+form{
+  display: flex;
+  width: 550px;
+  padding: 0.4rem;
+  font-size: 1.2rem;
+  height: 30px;
+  justify-content: space-between;
+}
+
+input{
+  border: #ccc solid 1px;
+  width: 80%;
+}
+
+button{
+
+  width: 15%;
+  background: #fff;
+  color: #333;
+  border: #ccc solid 1px;
+}
+
+

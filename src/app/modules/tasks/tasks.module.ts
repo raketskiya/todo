@@ -4,6 +4,7 @@ import {TasksComponent} from './components/tasks/tasks.component';
 import {AddTaskFormComponent} from './components/add-task-form/add-task-form.component';
 import {TaskComponent} from './components/task/task.component';
 import {ReactiveFormsModule} from '@angular/forms';
+import {ControlsModule} from '../../shared/controls/controls.module';
 
 
 
@@ -15,7 +16,8 @@ import {ReactiveFormsModule} from '@angular/forms';
   ],
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ControlsModule
   ],
   exports: [
     TasksComponent

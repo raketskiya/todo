@@ -1,5 +1,5 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-add-task-form',
@@ -11,7 +11,7 @@ export class AddTaskFormComponent implements OnInit {
   @Output() onAdd = new EventEmitter<string>()
 
   tasksForm: FormGroup = new FormGroup({
-    name: new FormControl('')
+    name: new FormControl('', Validators.required)
   })
 
   constructor() {

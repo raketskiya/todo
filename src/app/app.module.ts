@@ -7,6 +7,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {TasksModule} from './modules/tasks/tasks.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+
 @NgModule({
   declarations: [
     AppComponent,

@@ -6,8 +6,6 @@ import { AppComponent } from './app.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {TasksModule} from './modules/tasks/tasks.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {AuthModule} from './modules/auth/auth.module';
-import {SharedModule} from './shared/shared.module';
 
 
 @NgModule({
@@ -19,9 +17,7 @@ import {SharedModule} from './shared/shared.module';
     AppRoutingModule,
     ReactiveFormsModule,
     TasksModule,
-    BrowserAnimationsModule,
-    AuthModule,
-    SharedModule
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

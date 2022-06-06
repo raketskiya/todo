@@ -1,0 +1,44 @@
+.auth{
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+
+}
+
+.auth-item{
+  display: flex;
+  justify-content: center;
+  margin-top: 3px;
+  margin-bottom: 3px;
+  height: 30px;
+  max-width: 400px;
+
+}
+
+form{
+  display: flex;
+  flex-direction: column;
+
+}
+
+.auth-wrapper{
+  display: flex;
+  justify-content: center;
+}
+
+button{
+  width: 209px;
+  background: #fff;
+  color: #333;
+  align-items: center;
+  border: black solid 0.1px;
+}
+
+.buttons{
+  display: flex;
+  justify-content: center;
+}
+
+.inputs{
+  max-width: 400px;
+}

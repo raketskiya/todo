@@ -7,6 +7,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {TasksModule} from './modules/tasks/tasks.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {AuthModule} from './modules/auth/auth.module';
+import {ComponentsModule} from './shared/components/components.module';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import {AuthModule} from './modules/auth/auth.module';
     ReactiveFormsModule,
     TasksModule,
     BrowserAnimationsModule,
-    AuthModule
+    AuthModule,
+    ComponentsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

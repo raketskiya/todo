@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {TaskInterface} from '../../../../shared/interfaces/task.interface';
+import {Task} from '../../../../shared/interfaces/task';
 
 @Component({
   selector: 'app-task',

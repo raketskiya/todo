@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {TaskInterface} from '../../../../shared/interfaces/task.interface';
+import {Task} from '../../../../shared/interfaces/task';
 import {TaskComponent} from '../task/task.component';
 
 @Component({
@@ -9,7 +9,7 @@ import {TaskComponent} from '../task/task.component';
 })
 export class TasksComponent implements OnInit {
 
-  tasks: TaskInterface[] = [{name:'123', date: new Date()}, {name:'122323', date: new Date()}];
+  tasks: Task[] = [{name:'123', date: new Date()}, {name:'122323', date: new Date()}];
 
   constructor() { }
 

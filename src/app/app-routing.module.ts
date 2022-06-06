@@ -4,8 +4,9 @@ import {AuthComponent} from './modules/auth/components/auth/auth.component';
 import {TasksComponent} from './modules/tasks/components/tasks/tasks.component';
 
 const routes: Routes = [
-  {path:'', component: AuthComponent},
-  {path:'tasks', loadChildren: () => import('./modules/tasks/tasks.module').then(m => m.TasksModule)}
+  {path:'sighIn', component: AuthComponent},
+  {path:'tasks', loadChildren: () => import('./modules/tasks/tasks.module').then(m => m.TasksModule)},
+  {path:'**', component: AuthComponent},
 ];
 
 @NgModule({

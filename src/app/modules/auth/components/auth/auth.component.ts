@@ -27,21 +27,28 @@ export class AuthComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  handleResponse(response: any, user: User){
+    this.authForm.reset();
+    if(response){
+      user.localId = response.localId;
+    }
+    this.roter.navigate(['/tasks']);
+  }
+
   submit(){
     const user: User = {
       email: this.authForm.value.email,
       password: this.authForm.value.password,
+      localId: '',
       returnSecureToken: false
     }
     if(this.isSignUp){
       this.auth.signUp(user).subscribe((response)=>{
-        this.authForm.reset();
-        this.roter.navigate(['/tasks']);
+        this.handleResponse(response, user);
       })
     } else{
       this.auth.login(user).subscribe((response)=>{
-        this.authForm.reset();
-        this.roter.navigate(['/tasks']);
+        this.handleResponse(response, user);
       })
     }
   }

@@ -25,12 +25,23 @@ export class AuthService{
       ...user,
       returnSecureToken: true
     }
-
     return this.http.post<FbAuthResponse>(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.apiKey}`, body)
       .pipe(
         tap(this.setToken)
       );
   }
+
+  signUp(user: User): Observable<FbAuthResponse | null> {
+    const body:User = {
+      ...user,
+      returnSecureToken: true
+    }
+    return this.http.post<FbAuthResponse>(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${environment.apiKey}`, body)
+      .pipe(
+        tap(this.setToken)
+      );
+  }
+
 
   logout(): void{
     this.setToken(null)

@@ -36,13 +36,11 @@ export class AuthComponent implements OnInit {
     if(this.isSignUp){
       this.auth.signUp(user).subscribe((response)=>{
         this.authForm.reset();
-        console.log(response)
         this.roter.navigate(['/tasks']);
       })
     } else{
       this.auth.login(user).subscribe((response)=>{
         this.authForm.reset();
-        console.log(response)
         this.roter.navigate(['/tasks']);
       })
     }

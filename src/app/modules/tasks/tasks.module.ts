@@ -5,6 +5,8 @@ import {AddTaskFormComponent} from './components/add-task-form/add-task-form.com
 import {TaskComponent} from './components/task/task.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {ControlsModule} from '../../shared/controls/controls.module';
+import {RouterModule} from '@angular/router';
+import {AuthGuard} from '../../shared/guards/auth.guard';
 
 
 
@@ -12,15 +14,23 @@ import {ControlsModule} from '../../shared/controls/controls.module';
   declarations: [
     TasksComponent,
     AddTaskFormComponent,
-    TaskComponent
+    TaskComponent,
+
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    ControlsModule
+    ControlsModule,
+    RouterModule.forChild([
+      {path:'', component: TasksComponent, canActivate: [AuthGuard]}
+    ])
   ],
   exports: [
-    TasksComponent
+    TasksComponent,
+    RouterModule
+  ],
+  providers:[
+    AuthGuard
   ]
 })
 export class TasksModule { }

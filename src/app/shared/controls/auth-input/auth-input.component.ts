@@ -1,26 +1,27 @@
 import {Component, forwardRef, Input, OnInit} from '@angular/core';
-import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
 
 @Component({
-  selector: 'app-password-input',
-  templateUrl: './password-input.component.html',
-  styleUrls: ['./password-input.component.scss'],
+  selector: 'app-auth-input',
+  templateUrl: './auth-input.component.html',
+  styleUrls: ['./auth-input.component.scss'],
   providers: [{
     provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(()=> PasswordInputComponent),
+    useExisting: forwardRef(()=> AuthInputComponent),
     multi: true
   }]
 })
-export class PasswordInputComponent implements OnInit, ControlValueAccessor {
-  @Input() place = 'Пароль'
-  passwordControl = new FormControl();
+export class AuthInputComponent implements OnInit, ControlValueAccessor {
+
   onChange!: (value: string) => void;
   onTouche!: () => void;
-
+  authControl = new FormControl(null, [Validators.required]);
+  @Input() place = '';
+  @Input() type = '';
   constructor() { }
 
   ngOnInit(){
-    this.passwordControl.valueChanges.subscribe((val)=> {
+    this.authControl.valueChanges.subscribe((val)=> {
       if(this.onChange) {
         this.onChange(val)
       }
@@ -39,6 +40,7 @@ export class PasswordInputComponent implements OnInit, ControlValueAccessor {
   }
 
   writeValue(value:string): void {
-    this.passwordControl.setValue(value)
+    this.authControl.setValue(value)
   }
+
 }

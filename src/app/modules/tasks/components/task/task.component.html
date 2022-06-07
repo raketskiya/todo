@@ -1,6 +1,9 @@
-<div class="task">
-  <h5 class="title">{{this.name}}</h5>
-  <p class="date">{{this.date | date:'M/d/yy, h:mm'}}</p>
-  <button>Удалить</button>
-  <input type="checkbox">
+
+<div class="task-wrapper">
+  <div class="task">
+    <h5 class="title task-item">{{this.name}}</h5>
+    <p class="date task-item">{{this.date | date:'d/M/yy, h:mm'}}</p>
+    <button>Delete</button>
+    <input type="checkbox">
+  </div>
 </div>

@@ -1,5 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {TasksService} from '../../../../shared/services/tasks.service';
+import {Task} from '../../../../shared/interfaces/task';
 
 @Component({
   selector: 'app-add-task-form',
@@ -8,13 +10,13 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 })
 export class AddTaskFormComponent implements OnInit {
 
-  @Output() onAdd = new EventEmitter<string>()
+  @Output() onAdd = new EventEmitter<Task>()
 
   tasksForm: FormGroup = new FormGroup({
     name: new FormControl('', Validators.required)
   })
 
-  constructor() {
+  constructor(private tasksService: TasksService ) {
 
   }
 
@@ -23,8 +25,15 @@ export class AddTaskFormComponent implements OnInit {
   }
 
   addTask(){
-    this.onAdd.emit(this.tasksForm.controls['name'].value);
-    this.tasksForm.reset();
+    const task: Task = {
+      name: this.tasksForm.controls['name'].value,
+      date: new Date()
+    }
+    this.onAdd.emit(task);
+    this.tasksService.create(task).subscribe((response)=>{
+      console.log(response)
+      this.tasksForm.reset();
+    });
   }
 
 

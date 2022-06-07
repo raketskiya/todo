@@ -1,10 +1,19 @@
 <div class="auth">
   <p>{{title}}</p>
   <form [formGroup]="authForm" (ngSubmit)="submit()">
-    <app-email-input class="form-item" formControlName="email"></app-email-input>
-    <app-password-input class="form-item" formControlName="password"></app-password-input>
-    <app-password-input class="form-item" formControlName="repeatPassword" *ngIf="isSignUp" place = "Повторите пароль"></app-password-input>
-    <button class="form-item" type="submit">{{formButtonLabel}}</button>
-    <button class="form-item" (click)="changeSighType()">{{changeLoginType}}</button>
+    <div class="form-item" >
+      <app-auth-input formControlName="email" place = "Email..." type="email"></app-auth-input>
+    </div>
+    <div class="form-item" >
+      <app-auth-input class="form-item" formControlName="password" place = "Password..." type="password"></app-auth-input>
+    </div>
+    <div class="form-item"  *ngIf="isSignUp" >
+      <app-auth-input class="form-item" formControlName="repeatPassword" place = "Repeat password..." type="password"></app-auth-input>
+    </div>
+    <div class="submit-btn-wrapper">
+      <button class="submit-btn" type="submit" [disabled]="authForm.invalid">{{formButtonLabel}}</button>
+    </div>
+
   </form>
+  <button class="form-item" (click)="changeSighType()">{{changeLoginType}}</button>
 </div>

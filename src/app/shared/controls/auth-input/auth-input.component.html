@@ -1,0 +1,7 @@
+<input [formControl]="authControl" [type]="type" [placeholder]="place">
+<ng-container *ngIf="type==''">
+  <div class="validation"  *ngIf="authControl?.touched && authControl?.invalid">
+    <small>Error</small>
+  </div>
+</ng-container>
+

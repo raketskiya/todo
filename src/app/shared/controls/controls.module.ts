@@ -2,16 +2,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TaskInputComponent } from './task-input/task-input.component';
 import {ReactiveFormsModule} from '@angular/forms';
-import {PasswordInputComponent} from './password-input/password-input.component';
-import {EmailInputComponent} from './email-input/email-input.component';
+import {AuthInputComponent} from './auth-input/auth-input.component';
 
 
 
 @NgModule({
   declarations: [
     TaskInputComponent,
-    PasswordInputComponent,
-    EmailInputComponent
+    AuthInputComponent,
   ],
   imports: [
     CommonModule,
@@ -19,8 +17,7 @@ import {EmailInputComponent} from './email-input/email-input.component';
   ],
   exports:[
     TaskInputComponent,
-    PasswordInputComponent,
-    EmailInputComponent
+    AuthInputComponent
   ]
 })
 export class ControlsModule { }

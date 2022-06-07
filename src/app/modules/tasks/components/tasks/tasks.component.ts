@@ -9,18 +9,15 @@ import {TaskComponent} from '../task/task.component';
 })
 export class TasksComponent implements OnInit {
 
-  tasks: Task[] = [{name:'123', date: new Date()}, {name:'122323', date: new Date()}];
+  tasks: Task[] = [];
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  updateTasks(name: string){
-    this.tasks.push({
-      name: name,
-      date: new Date()
-    })
+  updateTasks(task: Task){
+    this.tasks.push(task)
   }
 
 }

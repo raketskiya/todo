@@ -4,6 +4,7 @@ export interface Environment{
   apiKey: string,
   production: boolean,
   apiURL: string,
+  fbDbURL: string,
 }
 
 export interface  FbAuthResponse {
@@ -14,4 +15,8 @@ export interface  FbAuthResponse {
 
 export interface FbUserResponse{
   users: User[]
+}
+
+export interface FbCreateResponse {
+  name: string
 }

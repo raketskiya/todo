@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../../../../shared/services/auth.service';
 import {Router} from '@angular/router';
 import {User} from '../../../../shared/interfaces/user.interface';
@@ -12,8 +12,8 @@ import {User} from '../../../../shared/interfaces/user.interface';
 export class AuthComponent implements OnInit {
 
   title = 'Sign in';
-  formButtonLabel = 'Войти';
-  changeLoginType = 'Создать аккаунт';
+  formButtonLabel = 'Sign in';
+  changeLoginType = 'Create an account';
   isSignUp = false;
 
   authForm = new FormGroup({
@@ -22,18 +22,22 @@ export class AuthComponent implements OnInit {
     repeatPassword: new FormControl(''),
   })
 
-  constructor(private auth: AuthService, private roter: Router) { }
+
+
+  constructor(private auth: AuthService, private router: Router) { }
 
   ngOnInit(): void {
   }
 
   handleResponse(response: any, user: User){
     this.authForm.reset();
+    this.router.navigate(['/tasks']);
     if(response){
       user.localId = response.localId;
     }
-    this.roter.navigate(['/tasks']);
   }
+
+
 
   submit(){
     const user: User = {
@@ -43,12 +47,17 @@ export class AuthComponent implements OnInit {
       returnSecureToken: false
     }
     if(this.isSignUp){
+      console.log('up')
       this.auth.signUp(user).subscribe((response)=>{
         this.handleResponse(response, user);
-      })
+        this.auth.addUserToDB().subscribe((response)=>{
+          console.log(response)
+        })
+      });
     } else{
+      console.log('in')
       this.auth.login(user).subscribe((response)=>{
-        this.handleResponse(response, user);
+        this.handleResponse(response, user)
       })
     }
   }
@@ -56,7 +65,8 @@ export class AuthComponent implements OnInit {
   changeSighType() {
     this.isSignUp = !this.isSignUp;
     this.title = this.isSignUp ? 'Sign up' : 'Sign in';
-    this.formButtonLabel = this.isSignUp ? 'Создать' : 'Войти';
-    this.changeLoginType = this.isSignUp ? 'Аккаунт уже есть' : 'Создать аккаунт';
+    this.formButtonLabel = this.isSignUp ? 'Create' : 'Sign in';
+    this.changeLoginType = this.isSignUp ? 'I am already have an account' : 'Create an account';
+    this.authForm.reset();
   }
 }

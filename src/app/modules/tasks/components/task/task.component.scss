@@ -1,8 +1,11 @@
 .task {
   display: flex;
-  width: 560px;
+  width: 550px;
   justify-content: space-around;
   align-items: center;
+  margin-top: 3px;
+  margin-bottom: 3px;
+  border: solid 1px black;
 }
 
 .title{
@@ -10,7 +13,6 @@
 }
 
 button{
-
   width: 15%;
   background: #fff;
   color: #333;
@@ -19,4 +21,10 @@ button{
 
 .date{
   font-size: 14px;
+}
+
+.task-item{
+  margin: 5px;
+  display: flex;
+  align-items: center;
 }

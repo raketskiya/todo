@@ -29,11 +29,18 @@ export class AuthService{
       );
   }
 
+  addUserToDB():Observable<any>{
+    return this.http.post<any>(`${environment.fbDbURL}/users/${localStorage.getItem('userId')}.json`, {account:true} )
+  }
+
+
   signUp(user: User): Observable<FbAuthResponse | null> {
     const body:User = {
       ...user,
       returnSecureToken: true
     }
+    delete body.localId;
+    console.log(body)
     return this.http.post<FbAuthResponse>(`${environment.apiURL}signUp?key=${environment.apiKey}`, body)
       .pipe(
         tap(this.setToken)

@@ -4,3 +4,4 @@ export interface User{
   returnSecureToken: boolean
   localId?: string
 }
+

@@ -1,9 +1,9 @@
 
 <div class="task-wrapper">
-  <div class="task">
+  <div class="task" [class.complited]="checked">
     <h5 class="title task-item">{{this.name}}</h5>
     <p class="date task-item">{{this.date | date:'d/M/yy, h:mm'}}</p>
     <button (click)="taskRemove()">Delete</button>
-    <input type="checkbox">
+    <input type="checkbox" (change)="checked =! checked">
   </div>
 </div>

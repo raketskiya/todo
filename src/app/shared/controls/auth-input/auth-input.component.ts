@@ -15,9 +15,12 @@ export class AuthInputComponent implements OnInit, ControlValueAccessor {
 
   onChange!: (value: string) => void;
   onTouche!: () => void;
-  authControl = new FormControl(null);
+
+  authControl = new FormControl(null, [Validators.email, Validators.required, Validators.minLength(6)]);
+
   @Input() place = '';
   @Input() type = '';
+
   constructor() { }
 
   ngOnInit(){

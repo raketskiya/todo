@@ -12,6 +12,8 @@ export class AddTaskComponent implements OnInit {
 
   @Output() onAdd = new EventEmitter<Task>()
 
+  isEmpty: boolean = false;
+
   tasksForm: FormGroup = new FormGroup({
     name: new FormControl('', Validators.required)
   })
@@ -25,6 +27,13 @@ export class AddTaskComponent implements OnInit {
   }
 
   addTask(){
+    this.isEmpty = false;
+    console.log(this.isEmpty)
+    console.log(this.tasksForm.controls['name'].value)
+    if(this.tasksForm.controls['name'].value == null || this.tasksForm.controls['name'].value == ''){
+      this.isEmpty = !this.isEmpty;
+      return
+    }
     const task: Task = {
       name: this.tasksForm.controls['name'].value,
       date: new Date(),

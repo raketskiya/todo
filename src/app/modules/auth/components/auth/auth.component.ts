@@ -16,7 +16,7 @@ export class AuthComponent implements OnInit {
   authForm = new FormGroup({
     email: new FormControl(''),
     password: new FormControl(''),
-    repeatPassword: new FormControl(''),
+
   })
 
   constructor(private auth: AuthService, private router: Router) { }
@@ -42,8 +42,9 @@ export class AuthComponent implements OnInit {
       returnSecureToken: false
     }
     if(this.isSignUp){
-      console.log('up')
-      this.auth.signUp(user).subscribe((response)=>{
+      console.log('up');
+
+      this.auth.signUp(user).subscribe((response) => {
         this.handleResponse(response, user);
       });
     } else{
@@ -57,5 +58,6 @@ export class AuthComponent implements OnInit {
   changeSighType() {
     this.isSignUp = !this.isSignUp;
     this.authForm.reset();
+    this.isSignUp ? this.authForm.addControl('repeatPassword', new FormControl('')) : this.authForm.removeControl('repeatPassword')
   }
 }

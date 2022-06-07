@@ -8,6 +8,9 @@ import {Task} from '../../../../shared/interfaces/task';
 })
 export class TaskComponent implements OnInit {
 
+  checked: boolean = false;
+
+
   @Input() name:string = '';
   @Input() date: Date = new Date();
   @Input() id: string = '';
@@ -18,7 +21,7 @@ export class TaskComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  taskRemove() {
+  taskRemove(): void {
     this.onRemove.emit(this.id);
   }
 }

@@ -23,7 +23,10 @@ export class TasksService{
       )
   }
 
-  getAll(){
+  getAll(): Observable<any>{
     return this.http.get(`${environment.fbDbURL}/users/${localStorage.getItem('userId')}/tasks.json`)
+      .pipe(map((response)=>{
+        return Object.values(response);
+      }))
   }
 }

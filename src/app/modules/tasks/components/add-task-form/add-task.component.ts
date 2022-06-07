@@ -5,10 +5,10 @@ import {Task} from '../../../../shared/interfaces/task';
 
 @Component({
   selector: 'app-add-task-form',
-  templateUrl: './add-task-form.component.html',
-  styleUrls: ['./add-task-form.component.scss']
+  templateUrl: './add-task.component.html',
+  styleUrls: ['./add-task.component.scss']
 })
-export class AddTaskFormComponent implements OnInit {
+export class AddTaskComponent implements OnInit {
 
   @Output() onAdd = new EventEmitter<Task>()
 
@@ -27,10 +27,12 @@ export class AddTaskFormComponent implements OnInit {
   addTask(){
     const task: Task = {
       name: this.tasksForm.controls['name'].value,
-      date: new Date()
+      date: new Date(),
+      id: ''
     }
-    this.onAdd.emit(task);
     this.tasksService.create(task).subscribe((response)=>{
+      console.log(response)
+      this.onAdd.emit({...task, id: response.id});
       this.tasksForm.reset();
     });
   }

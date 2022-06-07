@@ -15,7 +15,7 @@ export class AuthInputComponent implements OnInit, ControlValueAccessor {
 
   onChange!: (value: string) => void;
   onTouche!: () => void;
-  authControl = new FormControl(null, [Validators.required]);
+  authControl = new FormControl(null);
   @Input() place = '';
   @Input() type = '';
   constructor() { }

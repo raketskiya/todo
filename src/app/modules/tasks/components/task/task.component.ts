@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Task} from '../../../../shared/interfaces/task';
 
 @Component({
@@ -10,12 +10,15 @@ export class TaskComponent implements OnInit {
 
   @Input() name:string = '';
   @Input() date: Date = new Date();
-
+  @Input() id: string = '';
+  @Output() onRemove = new EventEmitter<string>();
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-
+  taskRemove() {
+    this.onRemove.emit(this.id);
+  }
 }

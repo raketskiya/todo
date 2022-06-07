@@ -1,15 +1,13 @@
-<div *ngIf="tasks.length; else loading">
-  <div class="todos">
-    <app-add-task-form (onAdd)="updateTasks($event)" ></app-add-task-form>
-    <div class="todo-items">
-      <app-task class="todo-item" *ngFor="let task of tasks" [date]="task.date" [name]="task.name ">{{task}}</app-task>
-    </div>
+<div class="todos">
+  <app-add-task-form (onAdd)="updateTasks($event)" ></app-add-task-form>
+  <div class="todo-items">
+    <app-task class="todo-item"
+              *ngFor="let task of tasks"
+              (onRemove)="deleteTask($event)"
+              [date]="task.date"
+              [name]="task.name"
+              [id]="task.id"
+    >{{task}}</app-task>
   </div>
 </div>
-
-
-<ng-template #loading>
-  <p class="loading">Loading...</p>
-</ng-template>
-
 

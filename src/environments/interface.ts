@@ -18,5 +18,5 @@ export interface FbUserResponse{
 }
 
 export interface FbCreateResponse {
-  name: string
+  name: string,
 }

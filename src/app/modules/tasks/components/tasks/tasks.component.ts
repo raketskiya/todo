@@ -1,7 +1,7 @@
 import {Component,OnDestroy, OnInit} from '@angular/core';
 import {Task} from '../../../../shared/interfaces/task';
 import {TasksService} from '../../../../shared/services/tasks.service';
-import {Subscription} from 'rxjs';
+import {Subject, Subscription, takeUntil} from 'rxjs';
 
 @Component({
   selector: 'app-tasks',
@@ -12,30 +12,30 @@ import {Subscription} from 'rxjs';
 export class TasksComponent implements OnInit, OnDestroy {
 
   tasks: Task[] = [];
-  tSub: Subscription;
+  ngUnsubscribe: Subject<void> = new Subject();
 
-  constructor(private tasksService: TasksService) {
-
-  }
+  constructor(private tasksService: TasksService) { }
 
   ngOnInit(): void {
-    this.tSub = this.tasksService.getAll().subscribe((response)=>{
-      response.forEach((el: Task) =>{
-        this.tasks.push({
-          name: el.name,
-          date: el.date
-        })
-      })
+    this.tasksService.getAllTasks().pipe(takeUntil(this.ngUnsubscribe)).subscribe(tasks => {
+      this.tasks = tasks;
+    });
+  }
+
+  updateTasks(task: Task): void {
+    this.tasks.push(task);
+    console.log(this.tasks)
+  }
+
+  deleteTask(id: string){
+    this.tasksService.deleteTask(id).pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => {
+      this.tasks = this.tasks.filter( task => task.id !== id);
     })
+
   }
 
   ngOnDestroy(): void {
-    if(this.tSub){
-      this.tSub.unsubscribe();
-    }
-  }
-
-  updateTasks(task: Task) {
-    this.tasks.push(task);
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 }

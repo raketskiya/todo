@@ -10,7 +10,7 @@ export class TasksService{
   constructor(private http: HttpClient) {
   }
 
-  create(task: Task): Observable<Task>{
+  create(task: Task): Observable<Task> {
     return this.http.post<Task>(`${environment.fbDbURL}/users/${localStorage.getItem('userId')}/tasks.json`, task)
       .pipe(
         map((response:FbCreateResponse)=>{
@@ -23,10 +23,15 @@ export class TasksService{
       )
   }
 
-  getAll(): Observable<any>{
+  getAllTasks(): Observable<any> {
     return this.http.get(`${environment.fbDbURL}/users/${localStorage.getItem('userId')}/tasks.json`)
-      .pipe(map((response)=>{
-        return Object.values(response);
-      }))
+      .pipe(map((response) => {
+        return Object.entries(response).map( el => ( {id:el[0], name: el[1].name, date: el[1].date} ));
+      }));
+  }
+
+  deleteTask(id: string): Observable<any> {
+    return this.http.delete<void>(`${environment.fbDbURL}/users/${localStorage.getItem('userId')}/tasks/${id}.json`);
   }
 }
+

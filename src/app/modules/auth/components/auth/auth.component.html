@@ -1,5 +1,5 @@
 <div class="auth">
-  <p>{{title}}</p>
+  <p>{{this.isSignUp ? 'Sign up' : 'Sign in'}}</p>
   <form [formGroup]="authForm" (ngSubmit)="submit()">
     <div class="form-item" >
       <app-auth-input formControlName="email" place = "Email..." type="email"></app-auth-input>
@@ -11,9 +11,9 @@
       <app-auth-input class="form-item" formControlName="repeatPassword" place = "Repeat password..." type="password"></app-auth-input>
     </div>
     <div class="submit-btn-wrapper">
-      <button class="submit-btn" type="submit" [disabled]="authForm.invalid">{{formButtonLabel}}</button>
+      <button class="submit-btn" type="submit" [disabled]="authForm.invalid">{{this.isSignUp ? 'Create' : 'Sign in'}}</button>
     </div>
 
   </form>
-  <button class="form-item" (click)="changeSighType()">{{changeLoginType}}</button>
+  <button class="form-item" (click)="changeSighType()">{{this.isSignUp ? 'I am already have an account' : 'Create an account'}}</button>
 </div>

@@ -11,9 +11,6 @@ import {User} from '../../../../shared/interfaces/user.interface';
 })
 export class AuthComponent implements OnInit {
 
-  title = 'Sign in';
-  formButtonLabel = 'Sign in';
-  changeLoginType = 'Create an account';
   isSignUp = false;
 
   authForm = new FormGroup({
@@ -22,14 +19,12 @@ export class AuthComponent implements OnInit {
     repeatPassword: new FormControl(''),
   })
 
-
-
   constructor(private auth: AuthService, private router: Router) { }
 
   ngOnInit(): void {
   }
 
-  handleResponse(response: any, user: User){
+  handleResponse(response: any, user: User): void {
     this.authForm.reset();
     this.router.navigate(['/tasks']);
     if(response){
@@ -50,9 +45,6 @@ export class AuthComponent implements OnInit {
       console.log('up')
       this.auth.signUp(user).subscribe((response)=>{
         this.handleResponse(response, user);
-        this.auth.addUserToDB().subscribe((response)=>{
-          console.log(response)
-        })
       });
     } else{
       console.log('in')
@@ -64,9 +56,6 @@ export class AuthComponent implements OnInit {
 
   changeSighType() {
     this.isSignUp = !this.isSignUp;
-    this.title = this.isSignUp ? 'Sign up' : 'Sign in';
-    this.formButtonLabel = this.isSignUp ? 'Create' : 'Sign in';
-    this.changeLoginType = this.isSignUp ? 'I am already have an account' : 'Create an account';
     this.authForm.reset();
   }
 }

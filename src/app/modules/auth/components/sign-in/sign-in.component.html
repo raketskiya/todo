@@ -1,0 +1,17 @@
+<div class="auth">
+  <p>Sign in</p>
+  <form [formGroup]="signInForm" (ngSubmit)="submit()">
+    <div class="authError">
+    </div>
+    <div class="form-item" >
+      <app-auth-input formControlName="email" place = "Email..." type="email"></app-auth-input>
+    </div>
+    <div class="form-item" >
+      <app-auth-input class="form-item" formControlName="password" place = "Password..." type="password"></app-auth-input>
+    </div>
+    <div class="submit-btn-wrapper">
+      <button class="submit-btn" type="submit" [disabled]="signInForm.invalid">Sign in</button>
+    </div>
+  </form>
+  <button class="form-item" (click)="changeSighType()">Create an account</button>
+</div>

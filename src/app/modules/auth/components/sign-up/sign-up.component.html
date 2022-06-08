@@ -1,8 +1,8 @@
 <div class="auth">
-  <p>{{this.isSignUp ? 'Sign up' : 'Sign in'}}</p>
-  <form [formGroup]="authForm" (ngSubmit)="submit()">
-    <div class="authError" *ngIf="auth.error$ | async as error">
-      {{error}}
+  <p>Sign up</p>
+  <form [formGroup]="signUpForm" (ngSubmit)="submit()">
+    <div class="authError" *ngIf="!matchPassword">
+
     </div>
     <div class="form-item" >
       <app-auth-input formControlName="email" place = "Email..." type="email"></app-auth-input>
@@ -10,12 +10,12 @@
     <div class="form-item" >
       <app-auth-input class="form-item" formControlName="password" place = "Password..." type="password"></app-auth-input>
     </div>
-    <div class="form-item"  *ngIf="isSignUp" >
+    <div class="form-item" >
       <app-auth-input class="form-item" formControlName="repeatPassword" place = "Repeat password..." type="password"></app-auth-input>
     </div>
     <div class="submit-btn-wrapper">
-      <button class="submit-btn" type="submit" >{{this.isSignUp ? 'Create' : 'Sign in'}}</button>
+      <button class="submit-btn" type="submit" [disabled]="signUpForm.invalid">Sign up</button>
     </div>
   </form>
-  <button class="form-item" (click)="changeSighType()">{{this.isSignUp ? 'I am already have an account' : 'Create an account'}}</button>
+  <button class="form-item" (click)="changeSighType()" >I am have an account</button>
 </div>

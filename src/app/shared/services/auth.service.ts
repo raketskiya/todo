@@ -68,6 +68,9 @@ export class AuthService{
       case 'MISSING_PASSWORD':
         this.error$.next('Missing password');
         break;
+      case 'ADMIN_ONLY_OPERATION':
+        this.error$.next('Enter date for sign up');
+        break;
     }
     console.log(message)
     return throwError(error)

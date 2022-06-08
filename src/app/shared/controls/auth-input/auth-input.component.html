@@ -1,4 +1,4 @@
-<input [formControl]="authControl" [type]="type" [placeholder]="place">
+<input [formControl]="authControl" [type]="type" [placeholder]="place" >
 <div class="validation"  *ngIf="authControl?.touched && authControl?.invalid">
   <div *ngIf="type=='email'">
     <small *ngIf="authControl.errors?.required">
@@ -8,7 +8,15 @@
       This input is should be email
     </small>
   </div>
-  <div *ngIf="type=='password'">
+  <div *ngIf="type=='password' && place=='Password...'">
+    <small *ngIf="authControl.errors?.required">
+      Enter your password
+    </small>
+    <small *ngIf="authControl.errors?.minlength">
+      Password should be at least 6 characters
+    </small>
+  </div>
+  <div *ngIf="type=='password' && place=='Repeat password...'">
     <small *ngIf="authControl.errors?.required">
       Enter your password
     </small>

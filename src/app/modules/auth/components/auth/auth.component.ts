@@ -12,20 +12,20 @@ import {User} from '../../../../shared/interfaces/user.interface';
 export class AuthComponent implements OnInit {
 
   isSignUp = false;
+  formTouched = false;
 
   authForm = new FormGroup({
-    email: new FormControl(''),
-    password: new FormControl(''),
+    email: new FormControl('', [Validators.required]),
+    password: new FormControl('', [Validators.required]),
 
   })
 
-  constructor(private auth: AuthService, private router: Router) { }
+  constructor(public auth: AuthService, private router: Router) { }
 
   ngOnInit(): void {
   }
 
   handleResponse(response: any, user: User): void {
-    this.authForm.reset();
     this.router.navigate(['/tasks']);
     if(response){
       user.localId = response.localId;
@@ -34,7 +34,7 @@ export class AuthComponent implements OnInit {
 
 
 
-  submit(){
+  submit(): void {
     const user: User = {
       email: this.authForm.value.email,
       password: this.authForm.value.password,
@@ -42,22 +42,21 @@ export class AuthComponent implements OnInit {
       returnSecureToken: false
     }
     if(this.isSignUp){
-      console.log('up');
-
       this.auth.signUp(user).subscribe((response) => {
         this.handleResponse(response, user);
       });
     } else{
-      console.log('in')
       this.auth.login(user).subscribe((response)=>{
-        this.handleResponse(response, user)
+        this.handleResponse(response, user);
       })
     }
   }
 
-  changeSighType() {
+  changeSighType(): void {
+    this.formTouched = !this.formTouched;
     this.isSignUp = !this.isSignUp;
     this.authForm.reset();
-    this.isSignUp ? this.authForm.addControl('repeatPassword', new FormControl('')) : this.authForm.removeControl('repeatPassword')
+    this.isSignUp ? this.authForm.addControl('repeatPassword', new FormControl(''))
+      : this.authForm.removeControl('repeatPassword');
   }
 }

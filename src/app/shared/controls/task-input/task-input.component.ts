@@ -1,5 +1,5 @@
-import {Component, forwardRef} from '@angular/core';
-import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {Component, forwardRef, Input} from '@angular/core';
+import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-task-input',
@@ -14,7 +14,8 @@ import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR} from '@angular/for
 export class TaskInputComponent implements ControlValueAccessor {
   onChange!: (value: string) => void;
   onTouche!: () => void;
-  textControl = new FormControl();
+  textControl = new FormControl('', [Validators.required]);
+
 
   constructor() { }
 

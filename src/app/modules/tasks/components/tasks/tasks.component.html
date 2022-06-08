@@ -1,5 +1,5 @@
 <div class="todos">
-  <app-add-task-form (onAdd)="updateTasks($event)" ></app-add-task-form>
+  <app-add-task (onAdd)="updateTasks($event)" ></app-add-task>
   <div class="todo-items">
     <app-task class="todo-item"
               *ngFor="let task of tasks"

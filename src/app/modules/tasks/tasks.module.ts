@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {TasksComponent} from './components/tasks/tasks.component';
-import {AddTaskComponent} from './components/add-task-form/add-task.component';
+import {AddTaskComponent} from './components/add-task/add-task.component';
 import {TaskComponent} from './components/task/task.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {ControlsModule} from '../../shared/controls/controls.module';

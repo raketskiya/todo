@@ -1,10 +1,11 @@
 form{
   display: flex;
   width: 550px;
-  padding: 0.4rem;
+  margin-top: 10px;
   font-size: 1.2rem;
   height: 30px;
   justify-content: space-between;
+  margin-bottom: 20px;
 }
 
 app-task-input{
@@ -15,10 +16,11 @@ button{
   width: 15%;
   background: #fff;
   color: #333;
-  border: #ccc solid 1px;
 }
 
 .validation{
   color: red;
 }
+
+
 

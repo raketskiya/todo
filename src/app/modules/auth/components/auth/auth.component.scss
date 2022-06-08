@@ -33,7 +33,6 @@ p{
 
 .submit-btn-wrapper{
   display: flex;
-  display: flex;
   justify-content: center;
 }
 
@@ -41,3 +40,7 @@ p{
   color: red;
 }
 
+.authError{
+  color: red;
+  margin-bottom: 3px;
+}

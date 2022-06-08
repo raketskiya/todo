@@ -1,12 +1,15 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {User} from '../interfaces/user.interface';
-import {catchError, map, Observable, of, tap} from 'rxjs';
+import {catchError, map, Observable, of, Subject, tap, throwError} from 'rxjs';
 import {environment} from '../../../environments/environment';
 import {FbAuthResponse, FbUserResponse} from '../../../environments/interface';
 
 @Injectable()
 export class AuthService{
+
+  public error$: Subject<string> = new Subject<string>();
+
   constructor(private  http: HttpClient) {}
 
   get token(): string | null {
@@ -25,7 +28,8 @@ export class AuthService{
     }
     return this.http.post<FbAuthResponse>(`${environment.apiURL}signInWithPassword?key=${environment.apiKey}`, body)
       .pipe(
-        tap(this.setToken)
+        tap(this.setToken),
+        catchError(this.handleAuthError.bind(this))
       );
   }
 
@@ -38,8 +42,35 @@ export class AuthService{
     console.log(body)
     return this.http.post<FbAuthResponse>(`${environment.apiURL}signUp?key=${environment.apiKey}`, body)
       .pipe(
-        tap(this.setToken)
+        tap(this.setToken),
+        catchError(this.handleAuthError.bind(this))
       );
+  }
+
+  handleAuthError(error: HttpErrorResponse) {
+    const {message} = error.error.error;
+    switch (message) {
+      case 'EMAIL_NOT_FOUND':
+        this.error$.next('Email not found');
+        break;
+      case 'INVALID_EMAIL':
+        this.error$.next('Invalid email');
+        break;
+      case 'INVALID_PASSWORD':
+        this.error$.next('Invalid password');
+        break;
+      case 'EMAIL_EXISTS':
+        this.error$.next('Email exists');
+        break;
+      case 'WEAK_PASSWORD : Password should be at least 6 characters':
+        this.error$.next('Weak password');
+        break;
+      case 'MISSING_PASSWORD':
+        this.error$.next('Missing password');
+        break;
+    }
+    console.log(message)
+    return throwError(error)
   }
 
   getUserInfo(){

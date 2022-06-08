@@ -1,7 +1,6 @@
 <div>
   <form [formGroup]="tasksForm" (ngSubmit)="addTask()">
     <app-task-input formControlName="name"></app-task-input>
-    <small class="validation" *ngIf="isEmpty">empty string</small>
-    <button>Add</button>
+    <button [disabled]="tasksForm.invalid">Add</button>
   </form>
 </div>

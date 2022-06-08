@@ -3,6 +3,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../../../../shared/services/auth.service';
 import {Router} from '@angular/router';
 import {User} from '../../../../shared/interfaces/user.interface';
+import {FbAuthResponse} from '../../../../../environments/interface';
 
 @Component({
   selector: 'app-auth',
@@ -17,22 +18,18 @@ export class AuthComponent implements OnInit {
   authForm = new FormGroup({
     email: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required]),
-
   })
 
   constructor(public auth: AuthService, private router: Router) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
-  handleResponse(response: any, user: User): void {
+  handleResponse(response: FbAuthResponse | null, user: User): void {
     this.router.navigate(['/tasks']);
     if(response){
       user.localId = response.localId;
     }
   }
-
-
 
   submit(): void {
     const user: User = {

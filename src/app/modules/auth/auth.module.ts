@@ -7,7 +7,6 @@ import {AuthService} from '../../shared/services/auth.service';
 import {SharedModule} from '../../shared/shared.module';
 import {RouterModule} from '@angular/router';
 import {AuthGuard} from '../../shared/guards/auth.guard';
-import {AuthInputComponent} from '../../shared/controls/auth-input/auth-input.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +17,6 @@ import {AuthInputComponent} from '../../shared/controls/auth-input/auth-input.co
     ControlsModule,
     ReactiveFormsModule,
     SharedModule,
-
   ],
   exports: [
     AuthComponent,

@@ -9,18 +9,11 @@ import {AuthService} from '../../services/auth.service';
 })
 export class HeaderComponent implements OnInit {
 
-  visibility = true;
-
   constructor(private router: Router, public auth: AuthService) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void { }
 
-  }
-
-
-
-
-  logOut(){
+  logOut(): void {
     this.auth.logout();
     this.router.navigate(['signIn']);
   }

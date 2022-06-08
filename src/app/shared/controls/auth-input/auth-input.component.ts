@@ -23,7 +23,7 @@ export class AuthInputComponent implements OnInit, ControlValueAccessor {
 
   constructor() { }
 
-  ngOnInit(){
+  ngOnInit(): void {
     this.authControl.valueChanges.subscribe((val)=> {
       if(this.onChange) {
         this.onChange(val)
@@ -31,8 +31,7 @@ export class AuthInputComponent implements OnInit, ControlValueAccessor {
     })
   }
 
-  setDisabledState(isDisabled: boolean): void {
-  }
+  setDisabledState(isDisabled: boolean): void { }
 
   registerOnChange(fn: any): void {
     this.onChange = fn;
@@ -45,5 +44,4 @@ export class AuthInputComponent implements OnInit, ControlValueAccessor {
   writeValue(value:string): void {
     this.authControl.setValue(value)
   }
-
 }

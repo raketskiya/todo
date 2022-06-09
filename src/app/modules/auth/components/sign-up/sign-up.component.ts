@@ -39,14 +39,18 @@ export class SignUpComponent implements OnInit {
       this.signUpForm.reset();
       return
     }
+
     const user: User = {
       email: this.signUpForm.value.email,
       password: this.signUpForm.value.password,
       localId: '',
       returnSecureToken: false
     }
+
     this.auth.signUp(user).subscribe((response) => {
       this.handleResponse(response, user);
+    },() => {
+      this.signUpForm.reset();
     });
 
   }

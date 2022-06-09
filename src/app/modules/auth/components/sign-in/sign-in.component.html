@@ -1,5 +1,8 @@
 <div class="auth">
   <p>Sign in</p>
+  <div class="error" *ngIf="auth.error$ | async as error">
+    {{error}}
+  </div>
   <form [formGroup]="signInForm" (ngSubmit)="submit()">
     <div class="authError">
     </div>

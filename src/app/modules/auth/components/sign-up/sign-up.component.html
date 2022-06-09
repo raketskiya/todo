@@ -1,8 +1,11 @@
 <div class="auth">
   <p>Sign up</p>
   <form [formGroup]="signUpForm" (ngSubmit)="submit()">
-    <div class="authError" *ngIf="!matchPassword">
-
+    <div class="error" *ngIf="auth.error$ | async as error">
+      {{error}}
+    </div>
+    <div class="error" *ngIf="notMatchPasswords">
+      Passwords don't match
     </div>
     <div class="form-item" >
       <app-auth-input formControlName="email" place = "Email..." type="email"></app-auth-input>

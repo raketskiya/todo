@@ -12,17 +12,13 @@ export class AddTaskComponent implements OnInit {
 
   @Output() onAdd = new EventEmitter<Task>()
 
-
-
   tasksForm: FormGroup = new FormGroup({
     name: new FormControl('', Validators.required)
   })
 
   constructor(private tasksService: TasksService ) { }
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void { }
 
   addTask(): void {
     const task: Task = {

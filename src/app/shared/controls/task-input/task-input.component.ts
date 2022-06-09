@@ -19,7 +19,7 @@ export class TaskInputComponent implements ControlValueAccessor {
 
   constructor() { }
 
-  ngOnInit(){
+  ngOnInit(): void {
     this.textControl.valueChanges.subscribe((val)=> {
       if(this.onChange) {
         this.onChange(val)

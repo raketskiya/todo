@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {Injectable, OnDestroy} from '@angular/core';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {User} from '../interfaces/user.interface';
 import {catchError, map, Observable, of, Subject, tap, throwError} from 'rxjs';
@@ -6,7 +6,7 @@ import {environment} from '../../../environments/environment';
 import {FbAuthResponse, FbUserResponse} from '../../../environments/interface';
 
 @Injectable()
-export class AuthService{
+export class AuthService implements OnDestroy{
 
   public error$: Subject<string> = new Subject<string>();
 
@@ -15,10 +15,10 @@ export class AuthService{
   get token(): string | null {
     const expDate = new Date(Number(localStorage.getItem('fb-token-exp')))
     if (new Date() > expDate) {
-      this.logout()
-      return null
+      this.logout();
+      return null;
     }
-    return localStorage.getItem('fb-token')
+    return localStorage.getItem('fb-token');
   }
 
   login(user: User): Observable<FbAuthResponse | null> {
@@ -28,7 +28,7 @@ export class AuthService{
     }
     return this.http.post<FbAuthResponse>(`${environment.apiURL}signInWithPassword?key=${environment.apiKey}`, body)
       .pipe(
-        tap(this.setToken),
+        tap(AuthService.setToken),
         catchError(this.handleAuthError.bind(this))
       );
   }
@@ -39,15 +39,14 @@ export class AuthService{
       returnSecureToken: true
     }
     delete body.localId;
-    console.log(body)
     return this.http.post<FbAuthResponse>(`${environment.apiURL}signUp?key=${environment.apiKey}`, body)
       .pipe(
-        tap(this.setToken),
+        tap(AuthService.setToken),
         catchError(this.handleAuthError.bind(this))
       );
   }
 
-  handleAuthError(error: HttpErrorResponse) {
+  handleAuthError(error: HttpErrorResponse): Observable<never> {
     const {message} = error.error.error;
     switch (message) {
       case 'EMAIL_NOT_FOUND':
@@ -75,7 +74,7 @@ export class AuthService{
     return throwError(error)
   }
 
-  getUserInfo(){
+  getUserInfo(): Observable<boolean> {
     const token = localStorage.getItem('fb-token');
     return this.http.post<FbUserResponse>(`${environment.apiURL}lookup?key=${environment.apiKey}`, {idToken: token})
       .pipe(
@@ -87,24 +86,21 @@ export class AuthService{
           }
         }),
         catchError(() => {
-          localStorage.clear()
+          localStorage.clear();
           return of(false);
         })
       );
   }
 
-
-
-
-  logout(): void{
-    this.setToken(null)
+  logout(): void {
+    AuthService.setToken(null)
   }
 
-  isAuthenticated(): boolean{
+  isAuthenticated(): boolean {
     return !!this.token;
   }
 
-  private setToken( response: FbAuthResponse | null ) {
+  private static setToken(response: FbAuthResponse | null ): void {
     if(response) {
       const expDate = new Date(new Date().getTime() + +response.expiresIn * 1000);
       localStorage.setItem('fb-token', response.idToken);
@@ -113,7 +109,9 @@ export class AuthService{
     } else {
       localStorage.clear();
     }
+  }
 
-
+  ngOnDestroy(): void {
+    this.error$.unsubscribe();
   }
 }

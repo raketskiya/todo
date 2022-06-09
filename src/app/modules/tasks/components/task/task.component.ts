@@ -1,5 +1,4 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Task} from '../../../../shared/interfaces/task';
 
 @Component({
   selector: 'app-task',
@@ -10,7 +9,6 @@ export class TaskComponent implements OnInit {
 
   checked: boolean = false;
 
-
   @Input() name:string = '';
   @Input() date: Date = new Date();
   @Input() id: string = '';
@@ -18,8 +16,7 @@ export class TaskComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
   taskRemove(): void {
     this.onRemove.emit(this.id);

@@ -5,10 +5,11 @@ import {Task} from '../interfaces/task';
 import {environment} from '../../../environments/environment';
 import {FbCreateResponse} from '../../../environments/interface';
 
+
 @Injectable({providedIn: 'root'})
 export class TasksService{
-  constructor(private http: HttpClient) {
-  }
+
+  constructor(private http: HttpClient) { }
 
   create(task: Task): Observable<Task> {
     return this.http.post<Task>(`${environment.fbDbURL}/users/${localStorage.getItem('userId')}/tasks.json`, task)
@@ -23,7 +24,7 @@ export class TasksService{
       )
   }
 
-  getAllTasks(): Observable<any> {
+  getAllTasks(): Observable<Task[]> {
     return this.http.get(`${environment.fbDbURL}/users/${localStorage.getItem('userId')}/tasks.json`)
       .pipe(map((response) => {
         return Object.entries(response).map( el => ( {id:el[0], name: el[1].name, date: el[1].date} ));

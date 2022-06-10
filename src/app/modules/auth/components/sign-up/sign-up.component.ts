@@ -3,13 +3,15 @@ import {AuthService} from '../../../../shared/services/auth.service';
 import {Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {User} from '../../../../shared/interfaces/user.interface';
+import {FbAuthResponse} from '../../../../../environments/interface';
+import {Subject, takeUntil} from 'rxjs';
 
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.scss']
 })
-export class SignUpComponent implements OnInit {
+export class SignUpComponent implements OnInit, OnDestroy {
 
   constructor(public auth: AuthService, private router: Router) { }
 
@@ -24,8 +26,9 @@ export class SignUpComponent implements OnInit {
 
   notMatchPasswords = false;
 
+  ngUnsubscribe: Subject<void> = new Subject();
 
-  handleResponse(response: any, user: User): void {
+  handleResponse(response: FbAuthResponse | null, user: User): void {
     this.router.navigate(['/tasks']);
     if(response){
       user.localId = response.localId;
@@ -47,7 +50,7 @@ export class SignUpComponent implements OnInit {
       returnSecureToken: false
     }
 
-    this.auth.signUp(user).subscribe((response) => {
+    this.auth.signUp(user).pipe(takeUntil(this.ngUnsubscribe)).subscribe((response) => {
       this.handleResponse(response, user);
     },() => {
       this.signUpForm.reset();
@@ -57,6 +60,11 @@ export class SignUpComponent implements OnInit {
 
   changeSighType(): void {
     this.router.navigate(['sighIn']);
+  }
+
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
 }

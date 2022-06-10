@@ -112,6 +112,6 @@ export class AuthService implements OnDestroy{
   }
 
   ngOnDestroy(): void {
-    this.error$.unsubscribe();
+    this.error$.complete();
   }
 }

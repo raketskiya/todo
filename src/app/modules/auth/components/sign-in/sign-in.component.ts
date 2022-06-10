@@ -3,6 +3,8 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../../../../shared/services/auth.service';
 import {Router} from '@angular/router';
 import {User} from '../../../../shared/interfaces/user.interface';
+import {FbAuthResponse} from '../../../../../environments/interface';
+import {Subject, takeUntil} from 'rxjs';
 
 @Component({
   selector: 'app-sign-in',
@@ -20,10 +22,12 @@ export class SignInComponent implements OnInit, OnDestroy {
     password: new FormControl('', [Validators.required, Validators.minLength(6)]),
   })
 
+  ngUnsubscribe: Subject<void> = new Subject();
+
   ngOnInit(): void { }
 
 
-  handleResponse(response: any, user: User): void {
+  handleResponse(response: FbAuthResponse | null, user: User): void {
     this.router.navigate(['/tasks']);
     if(response){
       user.localId = response.localId;
@@ -39,7 +43,7 @@ export class SignInComponent implements OnInit, OnDestroy {
     }
 
 
-    this.auth.login(user).subscribe((response)=>{
+    this.auth.login(user).pipe(takeUntil(this.ngUnsubscribe)).subscribe((response)=>{
         this.handleResponse(response, user);
     }, () => {
       this.signInForm.reset();
@@ -53,6 +57,7 @@ export class SignInComponent implements OnInit, OnDestroy {
 
 
   ngOnDestroy() {
-
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 }

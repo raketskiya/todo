@@ -7,6 +7,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {ControlsModule} from '../../shared/controls/controls.module';
 import {RouterModule} from '@angular/router';
 import {AuthGuard} from '../../shared/guards/auth.guard';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 
 
@@ -17,14 +18,15 @@ import {AuthGuard} from '../../shared/guards/auth.guard';
     TaskComponent,
 
   ],
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    ControlsModule,
-    RouterModule.forChild([
-      {path:'', component: TasksComponent, canActivate: [AuthGuard]}
-    ])
-  ],
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        ControlsModule,
+        RouterModule.forChild([
+            {path: '', component: TasksComponent, canActivate: [AuthGuard]}
+        ]),
+        DragDropModule
+    ],
   exports: [
     TasksComponent,
     RouterModule

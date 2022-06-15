@@ -1,9 +1,24 @@
 <div class="todos">
   <app-add-task (onAdd)="addTask($event)" ></app-add-task>
-  <div class="todo-items">
+  active
+  <div class="todo-active-items">
     <app-task class="todo-item"
-              *ngFor="let task of tasks"
+              *ngFor="let task of activeTasks"
               (onRemove)="deleteTask($event)"
+              (completeChangeData) = "completeTask($event)"
+              [(complete)] = task.complete
+              [date]="task.date"
+              [name]="task.name"
+              [id]="task.id"
+    >{{task}}</app-task>
+  </div>
+  complited
+  <div class="todo-complete-items">
+    <app-task class="todo-item"
+              *ngFor="let task of complitedTasks"
+              (onRemove)="deleteTask($event)"
+              (completeChangeData) = "completeTask($event)"
+              [(complete)] = task.complete
               [date]="task.date"
               [name]="task.name"
               [id]="task.id"

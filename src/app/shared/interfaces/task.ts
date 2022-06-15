@@ -1,5 +1,6 @@
 export interface Task {
   name: string,
   date: Date,
-  id: string
+  id: string,
+  complete: boolean
 }

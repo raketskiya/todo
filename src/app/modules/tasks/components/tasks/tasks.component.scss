@@ -8,7 +8,12 @@
   padding-bottom: 7px;
 }
 
-.todo-items{
+.todo-active-items{
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+todo-complete-items{
   display: flex;
   flex-direction: column-reverse;
 }

@@ -24,7 +24,9 @@ export class AddTaskComponent implements OnInit {
     const task: Task = {
       name: this.tasksForm.controls['name'].value,
       date: new Date(),
-      id: ''
+      id: '',
+      complete: false
+
     }
     this.tasksService.create(task).subscribe((response) => {
       this.onAdd.emit({...task, id: response.id});

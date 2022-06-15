@@ -10,24 +10,35 @@ import {Subject, takeUntil} from 'rxjs';
 })
 export class TasksComponent implements OnInit, OnDestroy {
 
-  tasks: Task[] = [];
+  complitedTasks: Task[] = [];
+  activeTasks: Task[] = [];
   ngUnsubscribe: Subject<void> = new Subject();
 
   constructor(private tasksService: TasksService) { }
 
   ngOnInit(): void {
     this.tasksService.getAllTasks().pipe(takeUntil(this.ngUnsubscribe)).subscribe(tasks => {
-      this.tasks = tasks;
+      tasks.forEach(task => {
+        task.complete ? this.complitedTasks.push(task) : this.activeTasks.push(task);
+      })
     });
   }
 
   addTask(task: Task): void {
-    this.tasks.push(task);
+    this.activeTasks.push(task);
+  }
+
+  completeTask(complete: any){
+    if(complete.complete === true){
+      this.complitedTasks = [...this.complitedTasks, ...this.activeTasks.splice(this.activeTasks.findIndex(el => {return el.id === complete.id}),1)];
+    } else {
+      this.activeTasks = [...this.activeTasks, ...this.complitedTasks.splice(this.complitedTasks.findIndex(el => {return el.id === complete.id}),1)];
+    }
   }
 
   deleteTask(id: string): void {
     this.tasksService.deleteTask(id).pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => {
-      this.tasks = this.tasks.filter( task => task.id !== id);
+      this.activeTasks = this.activeTasks.filter( task => task.id !== id);
     })
   }
 

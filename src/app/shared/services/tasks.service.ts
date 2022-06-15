@@ -27,12 +27,16 @@ export class TasksService{
   getAllTasks(): Observable<Task[]> {
     return this.http.get(`${environment.fbDbURL}/users/${localStorage.getItem('userId')}/tasks.json`)
       .pipe(map((response) => {
-        return response ? Object.entries(response).map( el => ( {id:el[0], name: el[1].name, date: el[1].date} )) : [];
+        return response ? Object.entries(response).map( el => ( {id:el[0], name: el[1].name, date: el[1].date, complete: el[1].complete} )) : [];
       }));
   }
 
   deleteTask(id: string): Observable<any> {
     return this.http.delete<void>(`${environment.fbDbURL}/users/${localStorage.getItem('userId')}/tasks/${id}.json`);
+  }
+
+  completeTask(task: Task): Observable<any> {
+    return this.http.put<Task>(`${environment.fbDbURL}/users/${localStorage.getItem('userId')}/tasks/${task.id}.json`, task);
   }
 }
 

@@ -1,4 +1,4 @@
-<input [formControl]="authControl" [type]="type" [placeholder]="place" >
+<input [formControl]="authControl" [type]="type" [placeholder]="place" maxlength="40">
 <div class="validation"  *ngIf="authControl?.touched && authControl?.invalid">
   <div *ngIf="type=='email'">
     <small *ngIf="authControl.errors?.required">
@@ -6,6 +6,9 @@
     </small>
     <small *ngIf="authControl.errors?.email">
       This input is should be email
+    </small>
+    <small *ngIf="authControl.errors?.maxlength">
+      Email maximum length can be 40 characters
     </small>
   </div>
   <div *ngIf="type=='password' && place=='Password...'">
@@ -15,6 +18,9 @@
     <small *ngIf="authControl.errors?.minlength">
       Password should be at least 6 characters
     </small>
+    <small *ngIf="authControl.errors?.maxlength">
+      Password maximum length can be 40 characters
+    </small>
   </div>
   <div *ngIf="type=='password' && place=='Repeat password...'">
     <small *ngIf="authControl.errors?.required">
@@ -22,6 +28,9 @@
     </small>
     <small *ngIf="authControl.errors?.minlength">
       Password should be at least 6 characters
+    </small>
+    <small *ngIf="authControl.errors?.maxlength">
+      Password maximum length can be 40 characters
     </small>
   </div>
 </div>

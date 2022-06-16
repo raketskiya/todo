@@ -1,24 +1,32 @@
-<div class="auth">
-  <p>Sign up</p>
-  <form [formGroup]="signUpForm" (ngSubmit)="submit()">
-    <div class="error" *ngIf="auth.error$ | async as error">
-      {{error}}
+<div class="auth-wrapper">
+  <div class="auth">
+    <p class="page-title">Sign up</p>
+    <!--    <div class="error" *ngIf="auth.error$ | async as error">-->
+    <!--      {{error}}-->
+    <!--    </div>-->
+    <ngb-alert type="danger" *ngIf="auth.error$ | async as error" [dismissible]="false">{{ error }}</ngb-alert>
+    <ngb-alert type="danger" *ngIf="notMatchPasswords" [dismissible]="false">Passwords don't match</ngb-alert>
+    <div class="form-wrapper">
+      <form [formGroup]="signUpForm" (ngSubmit)="submit()">
+        <div class="authError">
+        </div>
+        <div class="form-item" >
+          <app-auth-input formControlName="email" place = "Email..." type="email"></app-auth-input>
+        </div>
+        <div class="form-item" >
+          <app-auth-input class="form-item" formControlName="password" place = "Password..." type="password"></app-auth-input>
+        </div>
+        <div class="form-item" >
+          <app-auth-input class="form-item" formControlName="repeatPassword" place = "Repeat password..." type="password"></app-auth-input>
+        </div>
+        <div class="submit-btn-wrapper">
+          <button class="submit-btn btn btn-primary" type="submit" [disabled]="signUpForm.invalid">Sign up</button>
+        </div>
+      </form>
     </div>
-    <div class="error" *ngIf="notMatchPasswords">
-      Passwords don't match
+    <div class="form-wrapper">
+      <button class="form-item change-type-btn btn btn-secondary" (click)="changeSighType()">I am already have an account</button>
     </div>
-    <div class="form-item" >
-      <app-auth-input formControlName="email" place = "Email..." type="email"></app-auth-input>
-    </div>
-    <div class="form-item" >
-      <app-auth-input class="form-item" formControlName="password" place = "Password..." type="password"></app-auth-input>
-    </div>
-    <div class="form-item" >
-      <app-auth-input class="form-item" formControlName="repeatPassword" place = "Repeat password..." type="password"></app-auth-input>
-    </div>
-    <div class="submit-btn-wrapper">
-      <button class="submit-btn" type="submit" [disabled]="signUpForm.invalid">Sign up</button>
-    </div>
-  </form>
-  <button class="form-item" (click)="changeSighType()" >I am have an account</button>
+
+  </div>
 </div>

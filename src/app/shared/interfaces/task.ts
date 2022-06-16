@@ -2,5 +2,6 @@ export interface Task {
   name: string,
   date: Date,
   id: string,
-  complete: boolean
+  complete: boolean,
+  description: string
 }

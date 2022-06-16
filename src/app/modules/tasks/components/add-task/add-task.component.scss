@@ -1,26 +1,56 @@
 form{
+  margin-top: 30px;
+  margin-bottom: 30px;
   display: flex;
-  width: 550px;
-  margin-top: 10px;
-  font-size: 1.2rem;
-  height: 30px;
-  justify-content: space-between;
-  margin-bottom: 20px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.add-form{
+  margin-top: 30px;
+  margin-bottom: 40px;
+  background-color: white;
+  width: 900px;
+}
+
+.add-form-wrapper{
+  display: flex;
+  justify-content: center;
+}
+
+.input-wrapper{
+  display: flex;
+  justify-content: space-around;
 }
 
 app-task-input{
-  width: 80%;
+  width: 200px
 }
 
 button{
+  margin-right: 25px;
+  margin-top: 15px;
   width: 15%;
-  background: #fff;
-  color: #333;
+  border-radius: 10px;
+}
+
+.description{
+  vertical-align: center;
+  width: 500px;
+  height: 40px;
+  resize: none;
 }
 
 .validation{
   color: red;
 }
 
+.description-wrapper{
+  margin-left: 10px;
+  margin-top: 5px;
+}
 
-
+.name-wrapper{
+  margin-left: 20px;
+}

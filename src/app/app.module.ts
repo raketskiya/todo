@@ -11,6 +11,7 @@ import {ComponentsModule} from './shared/components/components.module';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {AuthInterceptor} from './shared/interceptors/auth.interceptor';
 import {MatDialogModule} from '@angular/material/dialog';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 const INTERCEPTOR_PROVIDER: Provider = {
@@ -31,7 +32,8 @@ const INTERCEPTOR_PROVIDER: Provider = {
     BrowserAnimationsModule,
     AuthModule,
     ComponentsModule,
-    MatDialogModule
+    MatDialogModule,
+    NgbModule
   ],
   providers: [INTERCEPTOR_PROVIDER],
   bootstrap: [AppComponent]

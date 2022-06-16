@@ -1,23 +1,49 @@
+.auth-wrapper{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: auto;
+
+}
 
 .auth{
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 400px;
-  height: 400px;
-  margin: 0 auto;
+  width: 450px;
+  height: 500px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
   background-color: white;
-  border: solid 1px black;
+  border: solid 2px white;
+  border-radius: 20px;
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.5);
 }
 
-form{
+.form-wrapper{
   display: flex;
   flex-direction: column;
 }
 
+.change-type-btn{
+  margin-top: 20px;
+  width: 200px;
+}
+
+hr{
+  width: 350px;
+
+}
+
 .form-item{
   margin-bottom: 30px;
-  height: 30px;
+  height: 40px;
 }
 
 p{
@@ -26,9 +52,13 @@ p{
 }
 
 .submit-btn{
-  margin-bottom: 30px;
-  height: 30px;
+  margin-bottom: 20px;
+  height: 40px;
   width: 200px;
+}
+
+.btn{
+  border-radius: 10px;
 }
 
 .submit-btn-wrapper{
@@ -47,3 +77,17 @@ p{
   text-align: center;
   background-color: red;
 }
+
+.page-title{
+  font-size: 30px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+ngb-alert{
+  display: flex;
+  align-items: center;
+  width: 300px;
+  height: 20px;
+}
+

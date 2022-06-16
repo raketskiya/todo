@@ -27,7 +27,7 @@ export class TasksService{
   getAllTasks(): Observable<Task[]> {
     return this.http.get(`${environment.fbDbURL}/users/${localStorage.getItem('userId')}/tasks.json`)
       .pipe(map((response) => {
-        return response ? Object.entries(response).map( el => ( {id:el[0], name: el[1].name, date: el[1].date, complete: el[1].complete} )) : [];
+        return response ? Object.entries(response).map( el => ( {id:el[0], name: el[1].name, date: el[1].date, complete: el[1].complete, description: el[1].description} )) : [];
       }));
   }
 

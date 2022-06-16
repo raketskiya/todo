@@ -1,6 +1,15 @@
-<div>
-  <form [formGroup]="tasksForm" (ngSubmit)="addTask()">
-    <app-task-input formControlName="name"></app-task-input>
-    <button [disabled]="tasksForm.invalid">Add</button>
-  </form>
+<div class="add-form-wrapper">
+  <div class="add-form">
+    <form [formGroup]="tasksForm" (ngSubmit)="addTask()">
+      <div class="name-wrapper">
+        <label>Name:</label>
+        <app-task-input class="form-item" formControlName="name"></app-task-input>
+      </div>
+      <div class="description-wrapper">
+        <label>Description:</label>
+        <textarea class="form-item description" formControlName="description" maxlength="60"></textarea>
+      </div>
+      <button class="form-item btn btn-primary" [disabled]="tasksForm.invalid">Add</button>
+    </form>
+  </div>
 </div>

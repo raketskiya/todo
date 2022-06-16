@@ -1,9 +1,22 @@
 
 <div class="task-wrapper">
-  <div class="task" [class.complited]="this.complete">
-    <h5 class="title task-item">{{this.name}}</h5>
-    <p class="date task-item">{{this.date | date:'d/M/yy, h:mm'}}</p>
-    <button (click)="taskRemove()">Delete</button>
-    <input type="checkbox" (change)="taskChecked()" [checked]="complete">
+  <div class="task" >
+    <mat-accordion>
+      <mat-expansion-panel hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title [class.complited]="complete">
+            <h4 class="title task-item">{{this.name}}</h4>
+            <p class="date task-item">{{this.date | date:'d/M/yy, h:mm'}}</p>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <p class="description" [class.complited]="complete">{{this.description}}</p>
+      </mat-expansion-panel>
+    </mat-accordion>
+    <div class="controls">
+      <button class="task-item btn btn-danger" (click)="taskRemove()">Delete</button>
+      <input class="task-item check" type="checkbox" (change)="taskChecked()" [checked]="complete">
+    </div>
   </div>
 </div>
+
+

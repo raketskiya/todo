@@ -1,52 +1,57 @@
+<div class="tasks-wrapper">
+  <app-add-task (onAdd)="addTask($event)" ></app-add-task>
 
-<app-add-task (onAdd)="addTask($event)" ></app-add-task>
-
-
-<div cdkDropListGroup>
-  <div class="example-container">
-    <h2>To do</h2>
-
-    <div
-      cdkDropList
-      [cdkDropListData]="activeTasks"
-      class="example-list"
-      (cdkDropListDropped)="drop($event)">
-      <app-task
-        class="example-box"
-        *ngFor="let item of activeTasks"
-        cdkDrag
-        (onRemove)="deleteTask($event)"
-        (completeChangeData) = "completeTask($event)"
-        [(complete)] = item.complete
-        [date]="item.date"
-        [name]="item.name"
-        [id]="item.id"
-      >{{item}}</app-task>
+<div class="all-tasks">
+  <div cdkDropListGroup>
+    <div class="tasks-container active-tasks">
+      <h2>Active tasks</h2>
+      <div
+        cdkDropList
+        [cdkDropListData]="activeTasks"
+        class="tasks"
+        (cdkDropListDropped)="drop($event)">
+        <app-task
+          @appearance
+          class="task"
+          *ngFor="let item of activeTasks"
+          cdkDrag
+          (onRemove)="deleteTask($event)"
+          (completeChangeData) = "completeTask($event)"
+          [(complete)] = item.complete
+          [date]="item.date"
+          [name]="item.name"
+          [id]="item.id"
+          [description]="item.description"
+        >{{item}}</app-task>
+      </div>
     </div>
-  </div>
 
-  <div class="example-container">
-    <h2>Done</h2>
-
-    <div
-      cdkDropList
-      [cdkDropListData]="complitedTasks"
-      class="example-list"
-      (cdkDropListDropped)="drop($event)">
-      <app-task
-        class="example-box"
-        *ngFor="let item of complitedTasks"
-        cdkDrag
-        (onRemove)="deleteTask($event)"
-        (completeChangeData) = "completeTask($event)"
-        [(complete)] = item.complete
-        [date]="item.date"
-        [name]="item.name"
-        [id]="item.id"
-      >{{item}}</app-task>
+    <div class="tasks-container complited-tasks">
+      <h2>Complited tasks</h2>
+      <div
+        cdkDropList
+        [cdkDropListData]="complitedTasks"
+        class="tasks"
+        (cdkDropListDropped)="drop($event)">
+        <app-task
+          @appearance
+          class="task"
+          *ngFor="let item of complitedTasks"
+          cdkDrag
+          (onRemove)="deleteTask($event)"
+          (completeChangeData) = "completeTask($event)"
+          [(complete)] = item.complete
+          [date]="item.date"
+          [name]="item.name"
+          [id]="item.id"
+          [description]="item.description"
+        >{{item}}</app-task>
+      </div>
     </div>
   </div>
 </div>
 
+
+</div>
 
 

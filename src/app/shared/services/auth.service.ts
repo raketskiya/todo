@@ -48,6 +48,19 @@ export class AuthService implements OnDestroy{
 
   handleAuthError(error: HttpErrorResponse): Observable<never> {
     const {message} = error.error.error;
+
+    // const errors: any = {
+    //   'INVALID_EMAIL':this.error$.next('Invalid email'),
+    //   'EMAIL_NOT_FOUND':this.error$.next('Email not found'),
+    //   'INVALID_PASSWORD':this.error$.next('Invalid password'),
+    //   'EMAIL_EXISTS':this.error$.next('Email exists'),
+    //   'WEAK_PASSWORD : Password should be at least 6 characters':this.error$.next('Weak password'),
+    //   'MISSING_PASSWORD':this.error$.next('Missing password'),
+    //   'ADMIN_ONLY_OPERATION':this.error$.next('Enter date for sign up'),
+    // }
+    //
+    // errors[message];
+
     switch (message) {
       case 'EMAIL_NOT_FOUND':
         this.error$.next('Email not found');

@@ -1,16 +1,18 @@
 div{
   display: flex;
   justify-content: flex-end;
-  background-color: red;
+  background-color: rgba(21,104,255,0.69) ;
   height: 40px;
   align-items: center;
 }
 
 button{
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-right: 30px;
   height: 30px;
-  width: 10%;
-  background: #fff;
+  width: 7%;
   color: #333;
   border: #ccc solid 1px;
 }

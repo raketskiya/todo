@@ -1,6 +1,5 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Task} from '../../../../shared/interfaces/task';
-import {TasksService} from '../../../../shared/services/tasks.service';
 import {Subject, takeUntil} from 'rxjs';
 
 @Component({
@@ -8,7 +7,7 @@ import {Subject, takeUntil} from 'rxjs';
   templateUrl: './task.component.html',
   styleUrls: ['./task.component.scss']
 })
-export class TaskComponent implements OnInit, OnDestroy {
+export class TaskComponent implements OnInit {
 
   ngUnsubscribe: Subject<void> = new Subject();
 
@@ -18,16 +17,15 @@ export class TaskComponent implements OnInit, OnDestroy {
   @Input() id: string = '';
   @Input() complete?: boolean;
   @Output() completeChange = new EventEmitter<boolean>();
-  @Output() completeChangeData = new EventEmitter<any>();
-  @Output() onRemove = new EventEmitter<string>();
+  @Output() completeData = new EventEmitter<Task>();
+  @Output() onRemove = new EventEmitter<Object>();
 
-  constructor(private tasksService: TasksService) { }
-
+  constructor() { }
 
   ngOnInit(): void { }
 
   taskRemove(): void {
-    this.onRemove.emit(this.id);
+    this.onRemove.emit({id: this.id, complete: this.complete});
   }
 
   taskChecked(): void {
@@ -39,12 +37,8 @@ export class TaskComponent implements OnInit, OnDestroy {
       complete: this.complete,
       description: this.description
     }
-    this.tasksService.completeTask(task).pipe(takeUntil(this.ngUnsubscribe)).subscribe();
     this.completeChange.emit(this.complete)
-    this.completeChangeData.emit({complete: this.complete, id: this.id});
+    this.completeData.emit(task);
   }
 
-  ngOnDestroy(): void {
-
-  }
 }

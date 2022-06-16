@@ -16,7 +16,7 @@
           *ngFor="let item of activeTasks"
           cdkDrag
           (onRemove)="deleteTask($event)"
-          (completeChangeData) = "completeTask($event)"
+          (completeData) = "completeTask($event)"
           [(complete)] = item.complete
           [date]="item.date"
           [name]="item.name"
@@ -39,7 +39,7 @@
           *ngFor="let item of complitedTasks"
           cdkDrag
           (onRemove)="deleteTask($event)"
-          (completeChangeData) = "completeTask($event)"
+          (completeData) = "completeTask($event)"
           [(complete)] = item.complete
           [date]="item.date"
           [name]="item.name"

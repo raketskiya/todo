@@ -21,9 +21,8 @@ import {animate, style, transition, trigger} from '@angular/animations';
     ])
   ]
 })
+
 export class TasksComponent implements OnInit, OnDestroy {
-
-
 
 
   complitedTasks: Task[] = [];
@@ -44,18 +43,19 @@ export class TasksComponent implements OnInit, OnDestroy {
     this.activeTasks.push(task);
   }
 
-  completeTask(complete: any | Task){
-    if(complete.complete === true){
-      this.complitedTasks = [...this.complitedTasks, ...this.activeTasks.splice(this.activeTasks.findIndex(el => {return el.id === complete.id}),1)];
+  completeTask(task: Task){
+    if(task.complete){
+      this.complitedTasks = [...this.complitedTasks, ...this.activeTasks.splice(this.activeTasks.findIndex(el => {return el.id === task.id}),1)];
     } else {
-      this.activeTasks = [...this.activeTasks, ...this.complitedTasks.splice(this.complitedTasks.findIndex(el => {return el.id === complete.id}),1)];
+      this.activeTasks = [...this.activeTasks, ...this.complitedTasks.splice(this.complitedTasks.findIndex(el => {return el.id === task.id}),1)];
     }
+    this.tasksService.completeTask(task).pipe(takeUntil(this.ngUnsubscribe)).subscribe();
   }
 
-  deleteTask(id: string): void {
-    this.tasksService.deleteTask(id).pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => {
-      this.activeTasks = this.activeTasks.filter( task => task.id !== id);
-      this.complitedTasks = this.complitedTasks.filter( task => task.id !== id);
+  deleteTask(DeletedTask: any): void {
+    console.log(DeletedTask)
+    this.tasksService.deleteTask(DeletedTask.id).pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => {
+      DeletedTask.complete ? this.complitedTasks = this.complitedTasks.filter( task => task.id !== DeletedTask.id) : this.activeTasks = this.activeTasks.filter( task => task.id !== DeletedTask.id);
     })
   }
 
@@ -85,3 +85,4 @@ export class TasksComponent implements OnInit, OnDestroy {
     this.ngUnsubscribe.complete();
   }
 }
+

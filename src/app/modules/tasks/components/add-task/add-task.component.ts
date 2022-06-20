@@ -1,28 +1,25 @@
-import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {TasksService} from '../../../../shared/services/tasks.service';
-import {Task} from '../../../../shared/interfaces/task';
-import {Subject, takeUntil} from 'rxjs';
+import { Component, EventEmitter, OnDestroy, Output } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { TasksService } from '../../../../shared/services/tasks.service';
+import { Task } from '../../../../shared/interfaces/task';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-add-task',
   templateUrl: './add-task.component.html',
-  styleUrls: ['./add-task.component.scss']
+  styleUrls: ['./add-task.component.scss'],
 })
-export class AddTaskComponent implements OnInit, OnDestroy {
-
+export class AddTaskComponent implements OnDestroy {
   ngUnsubscribe: Subject<void> = new Subject();
 
-  @Output() onAdd = new EventEmitter<Task>()
+  @Output() onAdd = new EventEmitter<Task>();
 
   tasksForm: FormGroup = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.maxLength(30)]),
-    description: new FormControl('', Validators.maxLength(500))
-  })
+    description: new FormControl('', Validators.maxLength(500)),
+  });
 
-  constructor(private tasksService: TasksService ) { }
-
-  ngOnInit(): void { }
+  constructor(private tasksService: TasksService) {}
 
   addTask(): void {
     const task: Task = {
@@ -30,13 +27,15 @@ export class AddTaskComponent implements OnInit, OnDestroy {
       date: new Date(),
       id: '',
       complete: false,
-      description: this.tasksForm.controls['description'].value
-
-    }
-    this.tasksService.create(task).pipe(takeUntil(this.ngUnsubscribe)).subscribe((response) => {
-      this.onAdd.emit({...task, id: response.id});
-      this.tasksForm.reset();
-    });
+      description: this.tasksForm.controls['description'].value,
+    };
+    this.tasksService
+      .create(task)
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((response) => {
+        this.onAdd.emit({ ...task, id: response.id });
+        this.tasksForm.reset();
+      });
   }
 
   ngOnDestroy() {

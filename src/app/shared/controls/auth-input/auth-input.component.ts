@@ -1,47 +1,58 @@
-import {Component, forwardRef, Input, OnInit} from '@angular/core';
-import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
+import { Component, forwardRef, Input, OnInit } from '@angular/core';
+import {
+  ControlValueAccessor,
+  FormControl,
+  NG_VALUE_ACCESSOR,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-auth-input',
   templateUrl: './auth-input.component.html',
   styleUrls: ['./auth-input.component.scss'],
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(()=> AuthInputComponent),
-    multi: true
-  }]
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => AuthInputComponent),
+      multi: true,
+    },
+  ],
 })
 export class AuthInputComponent implements OnInit, ControlValueAccessor {
-
   onChange!: (value: string) => void;
   onTouche!: () => void;
 
-  authControl = new FormControl(null, [Validators.email, Validators.required, Validators.minLength(6), Validators.maxLength(40)]);
+  public authControl = new FormControl(null, [
+    Validators.email,
+    Validators.required,
+    Validators.minLength(6),
+    Validators.maxLength(40),
+  ]);
 
   @Input() place = '';
   @Input() type = '';
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
-    this.authControl.valueChanges.subscribe((val)=> {
-      if(this.onChange) {
-        this.onChange(val)
+    this.authControl.valueChanges.subscribe((val) => {
+      if (this.onChange) {
+        this.onChange(val);
       }
-    })
+    });
   }
 
-  setDisabledState(isDisabled: boolean): void { }
+  public setDisabledState(isDisabled: boolean): void {}
 
-  registerOnChange(fn: any): void {
+  public registerOnChange(fn: any): void {
     this.onChange = fn;
   }
 
-  registerOnTouched(fn: any): void {
+  public registerOnTouched(fn: any): void {
     this.onTouche = fn;
   }
 
-  writeValue(value:string): void {
-    this.authControl.setValue(value)
+  public writeValue(value: string): void {
+    this.authControl.setValue(value);
   }
 }

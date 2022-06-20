@@ -9,34 +9,34 @@
   word-wrap: break-word;
 }
 
-.task-wrapper{
+.task-wrapper {
 
   display: flex;
   justify-content: space-between;
 }
 
-.title{
+.title {
   width: 60%;
 }
 
-button{
+button {
   width: 15%;
   background: #fff;
   color: #333;
   border: #ccc solid 1px;
 }
 
-.date{
+.date {
   font-size: 14px;
 }
 
-.task-item{
+.task-item {
   margin: 5px;
   display: flex;
   align-items: center;
 }
 
-.complited{
+.complited {
   opacity: 50%;
   text-decoration: line-through;
 }
@@ -45,18 +45,18 @@ button{
   margin-left: 8px;
 }
 
-.description{
+.description {
   margin-left: 5px;
 }
 
-.check{
+.check {
   margin-left: 20px;
-  transform:scale(1.3);
-  opacity:0.9;
-  cursor:pointer;
+  transform: scale(1.3);
+  opacity: 0.9;
+  cursor: pointer;
 }
 
-.controls{
+.controls {
   display: flex;
   align-items: center;
 }

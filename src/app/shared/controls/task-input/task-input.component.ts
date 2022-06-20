@@ -1,46 +1,49 @@
-import {Component, forwardRef, Input} from '@angular/core';
-import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
+import { Component, forwardRef, OnInit } from '@angular/core';
+import {
+  ControlValueAccessor,
+  FormControl,
+  NG_VALUE_ACCESSOR,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-task-input',
   templateUrl: './task-input.component.html',
   styleUrls: ['./task-input.component.scss'],
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(()=> TaskInputComponent),
-    multi: true
-  }]
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => TaskInputComponent),
+      multi: true,
+    },
+  ],
 })
-export class TaskInputComponent implements ControlValueAccessor {
+export class TaskInputComponent implements ControlValueAccessor, OnInit {
   onChange!: (value: string) => void;
   onTouche!: () => void;
-  textControl = new FormControl('', [Validators.required]);
+  public textControl = new FormControl('', [Validators.required]);
 
-
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
-    this.textControl.valueChanges.subscribe((val)=> {
-      if(this.onChange) {
-        this.onChange(val)
+    this.textControl.valueChanges.subscribe((val) => {
+      if (this.onChange) {
+        this.onChange(val);
       }
-    })
+    });
   }
 
-  setDisabledState(isDisabled: boolean): void {
-  }
+  public setDisabledState(isDisabled: boolean): void {}
 
-  registerOnChange(fn: any): void {
+  public registerOnChange(fn: any): void {
     this.onChange = fn;
   }
 
-  registerOnTouched(fn: any): void {
+  public registerOnTouched(fn: any): void {
     this.onTouche = fn;
   }
 
-  writeValue(value:string): void {
-    this.textControl.setValue(value)
+  public writeValue(value: string): void {
+    this.textControl.setValue(value);
   }
-
-
 }

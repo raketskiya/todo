@@ -1,13 +1,13 @@
-form{
-  margin-top: 30px;
-  margin-bottom: 30px;
+form {
+  margin-top: 10px;
+  margin-bottom: 10px;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
 }
 
-.add-form{
+.add-form {
   margin-top: 30px;
   margin-bottom: 40px;
   background-color: white;
@@ -15,43 +15,43 @@ form{
   border: solid 1px #ccc;
 }
 
-.add-form-wrapper{
+.add-form-wrapper {
   display: flex;
   justify-content: center;
 }
 
-.input-wrapper{
+.input-wrapper {
   display: flex;
   justify-content: space-around;
 }
 
-app-task-input{
+app-task-input {
   width: 200px
 }
 
-button{
+button {
   margin-right: 25px;
   margin-top: 15px;
   width: 15%;
   border-radius: 10px;
 }
 
-.description{
+.description {
   vertical-align: center;
   width: 500px;
   height: 40px;
-  resize: none;
+  margin-bottom: 5px;
 }
 
-.validation{
+.validation {
   color: red;
 }
 
-.description-wrapper{
+.description-wrapper {
   margin-left: 10px;
   margin-top: 5px;
 }
 
-.name-wrapper{
+.name-wrapper {
   margin-left: 20px;
 }

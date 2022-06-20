@@ -7,7 +7,7 @@
       </div>
       <div class="description-wrapper">
         <label>Description:</label>
-        <textarea class="form-item description" formControlName="description" maxlength="60"></textarea>
+        <input type="text" class="form-item description" formControlName="description" maxlength="60">
       </div>
       <button class="form-item btn btn-primary" [disabled]="tasksForm.invalid">Add</button>
     </form>

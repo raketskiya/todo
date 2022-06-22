@@ -12,10 +12,10 @@ export class HeaderComponent implements OnInit {
   constructor(private router: Router, public auth: AuthService) {}
 
   ngOnInit(): void {
-    if (localStorage.getItem(fbToken)) {
-      this.auth.fbToken = String(localStorage.getItem(fbToken));
-      this.auth.fbTokenExp = String(localStorage.getItem(fbTokenExp));
-      this.auth.userId = String(localStorage.getItem(userId));
+    if (sessionStorage.getItem(fbToken)) {
+      this.auth.fbToken = String(sessionStorage.getItem(fbToken));
+      this.auth.fbTokenExp = String(sessionStorage.getItem(fbTokenExp));
+      this.auth.userId = String(sessionStorage.getItem(userId));
     }
   }
 

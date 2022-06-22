@@ -15,19 +15,7 @@ import {
   FbAuthResponse,
   FbUserResponse,
 } from '../../../environments/interface';
-import {
-  adminOnlyOperation,
-  emailExists,
-  emailNotFound,
-  fbToken,
-  fbTokenExp,
-  invalidEmail,
-  invalidPassword,
-  missingPassword,
-  userId,
-  weakPassword,
-  weakPasswordKey,
-} from '../consts/consts';
+import { ConstsErrors, fbToken, fbTokenExp, userId } from '../consts/consts';
 
 @Injectable()
 export class AuthService implements OnDestroy {
@@ -79,17 +67,16 @@ export class AuthService implements OnDestroy {
   private handleAuthError(error: HttpErrorResponse): Observable<never> {
     const { message } = error.error.error;
 
-    const errors: any = {
-      INVALID_EMAIL: invalidEmail,
-      EMAIL_NOT_FOUND: emailNotFound,
-      INVALID_PASSWORD: invalidPassword,
-      EMAIL_EXISTS: emailExists,
-      [weakPasswordKey]: weakPassword,
-      MISSING_PASSWORD: missingPassword,
-      ADMIN_ONLY_OPERATION: adminOnlyOperation,
-    };
+    enum Errors {
+      INVALID_EMAIL = ConstsErrors.invalidEmail,
+      EMAIL_NOT_FOUND = ConstsErrors.emailNotFound,
+      INVALID_PASSWORD = ConstsErrors.invalidPassword,
+      EMAIL_EXISTS = ConstsErrors.emailExists,
+      MISSING_PASSWORD = ConstsErrors.missingPassword,
+      ADMIN_ONLY_OPERATION = ConstsErrors.adminOnlyOperation,
+    }
 
-    this.error$.next(errors[message]);
+    this.error$.next(Errors[message]);
 
     return throwError(error);
   }
@@ -123,13 +110,13 @@ export class AuthService implements OnDestroy {
       ).toString();
       this.userId = String(response.localId);
 
-      localStorage.setItem(fbToken, this.fbToken);
-      localStorage.setItem(fbTokenExp, this.fbTokenExp);
-      localStorage.setItem(userId, this.userId);
+      sessionStorage.setItem(fbToken, this.fbToken);
+      sessionStorage.setItem(fbTokenExp, this.fbTokenExp);
+      sessionStorage.setItem(userId, this.userId);
     } else {
-      localStorage.removeItem(fbToken);
-      localStorage.removeItem(fbTokenExp);
-      localStorage.removeItem(userId);
+      sessionStorage.removeItem(fbToken);
+      sessionStorage.removeItem(fbTokenExp);
+      sessionStorage.removeItem(userId);
       this.fbToken = this.fbTokenExp = this.userId = '';
     }
   }

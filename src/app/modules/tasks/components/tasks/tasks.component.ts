@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Task } from '../../../../shared/interfaces/task';
 import { TasksService } from '../../../../shared/services/tasks.service';
 import { Store } from '@ngrx/store';
-import { Subject, takeUntil } from 'rxjs';
+import { Observable, Subject, takeUntil } from 'rxjs';
 import {
   CdkDragDrop,
   CdkDragEnter,
@@ -33,7 +33,10 @@ export class TasksComponent implements OnInit, OnDestroy {
   activeTasks: Task[] = [];
   ngUnsubscribe: Subject<void> = new Subject();
 
-  constructor(private tasksService: TasksService, private store: Store) {}
+  constructor(
+    private tasksService: TasksService,
+    private store: Store<AppState>
+  ) {}
 
   ngOnInit(): void {
     this.tasksService
@@ -52,9 +55,6 @@ export class TasksComponent implements OnInit, OnDestroy {
     this.activeTasks.push(task);
   }
 
-  // @ts-ignore
-  public activeT$ = this.store.select(selectActiveTasks);
-  //
   public test(task: any) {
     this.store.dispatch(addtask({ task }));
   }

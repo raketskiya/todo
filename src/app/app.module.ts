@@ -15,7 +15,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from './shared/services/auth.service';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { tasksReducer } from './store/tasks/reducers';
+import { tasksReducer } from './store/tasks/reducer';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+import { appReducers } from './store/reducers';
 
 const INTERCEPTOR_PROVIDER: Provider = {
   provide: HTTP_INTERCEPTORS,
@@ -35,8 +38,12 @@ const INTERCEPTOR_PROVIDER: Provider = {
     ComponentsModule,
     MatDialogModule,
     NgbModule,
-    StoreModule.forRoot({ tasksReducer }, {}),
+    StoreModule.forRoot(appReducers),
     EffectsModule.forRoot([]),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: environment.production,
+    }),
   ],
   providers: [INTERCEPTOR_PROVIDER, AuthService],
   bootstrap: [AppComponent],

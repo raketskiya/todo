@@ -1,4 +1,4 @@
-import { TasksState } from './tasks/reducers';
+import { TasksState } from './tasks/reducer';
 
 export interface AppState {
   tasks: TasksState;

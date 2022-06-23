@@ -21,7 +21,7 @@ export class AddTaskComponent implements OnDestroy {
 
   constructor(private tasksService: TasksService) {}
 
-  addTask(): void {
+  public addTask(): void {
     const task: Task = {
       name: this.tasksForm.controls['name'].value,
       date: new Date(),

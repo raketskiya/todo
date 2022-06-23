@@ -44,16 +44,20 @@ export class TasksComponent implements OnInit, OnDestroy {
       });
   }
 
-  addTask(task: Task): void {
+  public addTask(task: Task): void {
     this.activeTasks.push(task);
   }
 
-  transferTask(senderArray: Task[], receiverArray: Task[], task: Task): Task[] {
+  private transferTask(
+    senderArray: Task[],
+    receiverArray: Task[],
+    task: Task
+  ): Task[] {
     const index = senderArray.findIndex((el) => el.id === task.id);
     return [...receiverArray, ...senderArray.splice(index, 1)];
   }
 
-  completeTask(completeTask: Task): void {
+  public completeTask(completeTask: Task): void {
     if (completeTask.complete) {
       this.complitedTasks = this.transferTask(
         this.activeTasks,
@@ -70,7 +74,7 @@ export class TasksComponent implements OnInit, OnDestroy {
     this.sendCompleteChangeTask(completeTask);
   }
 
-  deleteTask(DeletedTask: any): void {
+  public deleteTask(DeletedTask: any): void {
     this.tasksService
       .deleteTask(DeletedTask.id)
       .pipe(takeUntil(this.ngUnsubscribe))
@@ -85,14 +89,14 @@ export class TasksComponent implements OnInit, OnDestroy {
       });
   }
 
-  sendCompleteChangeTask(task: Task): void {
+  private sendCompleteChangeTask(task: Task): void {
     this.tasksService
       .completeTask(task)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe();
   }
 
-  drop(event: CdkDragDrop<Task[]>): void {
+  public drop(event: CdkDragDrop<Task[]>): void {
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,
@@ -107,15 +111,11 @@ export class TasksComponent implements OnInit, OnDestroy {
         event.previousIndex,
         event.currentIndex
       );
-      if (task.complete) {
-        this.sendCompleteChangeTask(task);
-      } else {
-        this.sendCompleteChangeTask(task);
-      }
+      this.sendCompleteChangeTask(task);
     }
   }
 
-  changeCompleteProperty(event: CdkDragEnter) {
+  public changeCompleteProperty(event: CdkDragEnter) {
     event.item.data.complete = !event.item.data.complete;
   }
 

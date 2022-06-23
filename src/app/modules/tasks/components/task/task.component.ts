@@ -21,11 +21,11 @@ export class TaskComponent {
 
   constructor() {}
 
-  taskRemove(): void {
+  public taskRemove(): void {
     this.onRemove.emit({ id: this.id, complete: this.complete });
   }
 
-  taskChecked(): void {
+  public taskChecked(): void {
     this.complete = !this.complete;
     const task: Task = {
       name: this.name,

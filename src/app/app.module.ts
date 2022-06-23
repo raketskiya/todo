@@ -13,6 +13,9 @@ import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
 import { MatDialogModule } from '@angular/material/dialog';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from './shared/services/auth.service';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { tasksReducer } from './store/tasks/reducers';
 
 const INTERCEPTOR_PROVIDER: Provider = {
   provide: HTTP_INTERCEPTORS,
@@ -32,6 +35,8 @@ const INTERCEPTOR_PROVIDER: Provider = {
     ComponentsModule,
     MatDialogModule,
     NgbModule,
+    StoreModule.forRoot({ tasksReducer }, {}),
+    EffectsModule.forRoot([]),
   ],
   providers: [INTERCEPTOR_PROVIDER, AuthService],
   bootstrap: [AppComponent],

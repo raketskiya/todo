@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Task } from '../../../../shared/interfaces/task';
 import { TasksService } from '../../../../shared/services/tasks.service';
+import { Store } from '@ngrx/store';
 import { Subject, takeUntil } from 'rxjs';
 import {
   CdkDragDrop,
@@ -9,6 +10,9 @@ import {
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
 import { animate, style, transition, trigger } from '@angular/animations';
+import { addtask } from '../../../../store/tasks/actions';
+import { selectActiveTasks } from '../../../../store/tasks/selectors';
+import { AppState } from '../../../../store/app-state';
 
 @Component({
   selector: 'app-tasks',
@@ -29,7 +33,7 @@ export class TasksComponent implements OnInit, OnDestroy {
   activeTasks: Task[] = [];
   ngUnsubscribe: Subject<void> = new Subject();
 
-  constructor(private tasksService: TasksService) {}
+  constructor(private tasksService: TasksService, private store: Store) {}
 
   ngOnInit(): void {
     this.tasksService
@@ -46,6 +50,13 @@ export class TasksComponent implements OnInit, OnDestroy {
 
   public addTask(task: Task): void {
     this.activeTasks.push(task);
+  }
+
+  // @ts-ignore
+  public activeT$ = this.store.select(selectActiveTasks);
+  //
+  public test(task: any) {
+    this.store.dispatch(addtask({ task }));
   }
 
   private transferTask(

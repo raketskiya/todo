@@ -35,8 +35,8 @@ export class TasksComponent implements OnInit, OnDestroy {
     this.tasksService
       .getAllTasks()
       .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe((tasks) => {
-        tasks.forEach((task) => {
+      .subscribe((tasks: Task[]) => {
+        tasks.forEach((task: Task) => {
           task.complete
             ? this.complitedTasks.push(task)
             : this.activeTasks.push(task);

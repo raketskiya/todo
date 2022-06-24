@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
 import { Task } from '../interfaces/task';
 import { environment } from '../../../environments/environment';
 import { FbCreateResponse } from '../../../environments/interface';
@@ -32,7 +32,18 @@ export class TasksService {
       .get(`${environment.fbDbURL}/users/${this.auth.userId}/tasks.json`)
       .pipe(
         map((response) => {
-          return response ? Object.entries(response).map((el) => el[1]) : [];
+          return response
+            ? Object.entries(response).map((el) => {
+                let { name, date, complete, description } = el[1];
+                return {
+                  id: el[0],
+                  name,
+                  date,
+                  complete,
+                  description,
+                };
+              })
+            : [];
         })
       );
   }

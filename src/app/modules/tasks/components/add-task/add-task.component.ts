@@ -29,13 +29,8 @@ export class AddTaskComponent implements OnDestroy {
       complete: false,
       description: this.tasksForm.controls['description'].value,
     };
-    this.tasksService
-      .create(task)
-      .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe((response) => {
-        this.onAdd.emit({ ...task, id: response.id });
-        this.tasksForm.reset();
-      });
+    this.onAdd.emit(task);
+    this.tasksForm.reset();
   }
 
   ngOnDestroy() {

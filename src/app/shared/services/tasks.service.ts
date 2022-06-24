@@ -27,22 +27,24 @@ export class TasksService {
       );
   }
 
-  public getAllTasks(): Observable<Task[]> {
+  public getAllTasks(completed: boolean): Observable<Task[]> {
     return this.http
       .get(`${environment.fbDbURL}/users/${this.auth.userId}/tasks.json`)
       .pipe(
         map((response) => {
           return response
-            ? Object.entries(response).map((el) => {
-                let { name, date, complete, description } = el[1];
-                return {
-                  id: el[0],
-                  name,
-                  date,
-                  complete,
-                  description,
-                };
-              })
+            ? Object.entries(response)
+                .filter((task) => task[1].complete === completed)
+                .map((el) => {
+                  let { name, date, complete, description } = el[1];
+                  return {
+                    id: el[0],
+                    name,
+                    date,
+                    complete,
+                    description,
+                  };
+                })
             : [];
         })
       );

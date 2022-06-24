@@ -14,8 +14,8 @@ export class TaskComponent {
   @Input() name: string = '';
   @Input() date: Date = new Date();
   @Input() id: string = '';
-  @Input() complete?: boolean;
-  @Output() completeChange = new EventEmitter<boolean>();
+  @Input() complete?: any;
+  //@Output() completeChange = new EventEmitter<boolean>();
   @Output() completeData = new EventEmitter<Task>();
   @Output() onRemove = new EventEmitter<Object>();
 
@@ -34,7 +34,7 @@ export class TaskComponent {
       complete: this.complete,
       description: this.description,
     };
-    this.completeChange.emit(this.complete);
+    //this.completeChange.emit(this.complete);
     this.completeData.emit(task);
   }
 }

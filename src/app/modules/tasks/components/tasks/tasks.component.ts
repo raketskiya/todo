@@ -10,9 +10,18 @@ import {
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
 import { animate, style, transition, trigger } from '@angular/animations';
-import { addtask } from '../../../../store/tasks/actions';
-import { selectActiveTasks } from '../../../../store/tasks/selectors';
+import {
+  selectActiveTasks,
+  selectCompleteTasks,
+} from '../../../../store/tasks/selectors';
 import { AppState } from '../../../../store/app-state';
+import {
+  addActiveTask,
+  completeTask,
+  deleteTask,
+  getAllActiveTasks,
+  getAllCompletedTasks,
+} from '../../../../store/tasks/actions';
 
 @Component({
   selector: 'app-tasks',
@@ -29,8 +38,11 @@ import { AppState } from '../../../../store/app-state';
   ],
 })
 export class TasksComponent implements OnInit, OnDestroy {
-  complitedTasks: Task[] = [];
+  completedTasks: Task[] = [];
   activeTasks: Task[] = [];
+  completedTasks$ = this.store.select(selectCompleteTasks);
+  activeTasks$ = this.store.select(selectActiveTasks);
+
   ngUnsubscribe: Subject<void> = new Subject();
 
   constructor(
@@ -39,95 +51,49 @@ export class TasksComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.tasksService
-      .getAllTasks()
+    this.store.dispatch(getAllActiveTasks());
+    this.store.dispatch(getAllCompletedTasks());
+    this.activeTasks$
       .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe((tasks: Task[]) => {
-        tasks.forEach((task: Task) => {
-          task.complete
-            ? this.complitedTasks.push(task)
-            : this.activeTasks.push(task);
-        });
-      });
+      .subscribe((activeTasks) => (this.activeTasks = activeTasks));
+    this.completedTasks$
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((completedTasks) => (this.completedTasks = completedTasks));
   }
 
   public addTask(task: Task): void {
-    this.activeTasks.push(task);
+    this.store.dispatch(addActiveTask({ task }));
   }
 
-  public test(task: any) {
-    this.store.dispatch(addtask({ task }));
+  public deleteTask(deletedTask: any): void {
+    this.store.dispatch(deleteTask(deletedTask));
   }
 
-  private transferTask(
-    senderArray: Task[],
-    receiverArray: Task[],
-    task: Task
-  ): Task[] {
-    const index = senderArray.findIndex((el) => el.id === task.id);
-    return [...receiverArray, ...senderArray.splice(index, 1)];
-  }
-
-  public completeTask(completeTask: Task): void {
-    if (completeTask.complete) {
-      this.complitedTasks = this.transferTask(
-        this.activeTasks,
-        this.complitedTasks,
-        completeTask
-      );
-    } else {
-      this.activeTasks = this.transferTask(
-        this.complitedTasks,
-        this.activeTasks,
-        completeTask
-      );
-    }
-    this.sendCompleteChangeTask(completeTask);
-  }
-
-  public deleteTask(DeletedTask: any): void {
-    this.tasksService
-      .deleteTask(DeletedTask.id)
-      .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe(() => {
-        DeletedTask.complete
-          ? (this.complitedTasks = this.complitedTasks.filter(
-              (task) => task.id !== DeletedTask.id
-            ))
-          : (this.activeTasks = this.activeTasks.filter(
-              (task) => task.id !== DeletedTask.id
-            ));
-      });
-  }
-
-  private sendCompleteChangeTask(task: Task): void {
-    this.tasksService
-      .completeTask(task)
-      .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe();
+  public completeTask(task: Task): void {
+    this.store.dispatch(completeTask({ task }));
   }
 
   public drop(event: CdkDragDrop<Task[]>): void {
     if (event.previousContainer === event.container) {
-      moveItemInArray(
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
+      // moveItemInArray(
+      //   event.container.data,
+      //   event.previousIndex,
+      //   event.currentIndex
+      // );
     } else {
-      const task = event.previousContainer.data[event.previousIndex];
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
-      this.sendCompleteChangeTask(task);
+      const task = {
+        ...event.previousContainer.data[event.previousIndex],
+        complete: !event.previousContainer.data[event.previousIndex].complete,
+      };
+      // transferArrayItem(
+      //   event.previousContainer.data,
+      //   event.container.data,
+      //   event.previousIndex,
+      //   event.currentIndex
+      // );
+      this.store.dispatch(completeTask({ task }));
+      //this.sendCompleteChangeTask(task);
     }
-  }
-
-  public changeCompleteProperty(event: CdkDragEnter) {
-    event.item.data.complete = !event.item.data.complete;
   }
 
   ngOnDestroy(): void {

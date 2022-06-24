@@ -19,6 +19,7 @@ import { tasksReducer } from './store/tasks/reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { appReducers } from './store/reducers';
+import { TasksEffects } from './store/tasks/effects';
 
 const INTERCEPTOR_PROVIDER: Provider = {
   provide: HTTP_INTERCEPTORS,
@@ -39,7 +40,7 @@ const INTERCEPTOR_PROVIDER: Provider = {
     MatDialogModule,
     NgbModule,
     StoreModule.forRoot(appReducers),
-    EffectsModule.forRoot([]),
+    EffectsModule.forRoot([TasksEffects]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,

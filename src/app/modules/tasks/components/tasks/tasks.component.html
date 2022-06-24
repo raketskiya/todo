@@ -7,7 +7,6 @@
         <h2>Active tasks</h2>
         <div
           cdkDropList
-          (cdkDropListEntered)="changeCompleteProperty($event)"
           [cdkDropListData]="activeTasks"
           class="tasks"
           (cdkDropListDropped)="drop($event)">
@@ -19,7 +18,7 @@
             [cdkDragData]="item"
             (onRemove)="deleteTask($event)"
             (completeData)="completeTask($event)"
-            [(complete)]=item.complete
+            [complete]=item.complete
             [date]="item.date"
             [name]="item.name"
             [id]="item.id"
@@ -32,19 +31,18 @@
         <h2>Complited tasks</h2>
         <div
           cdkDropList
-          [cdkDropListData]="complitedTasks"
+          [cdkDropListData]="completedTasks"
           class="tasks"
-          (cdkDropListEntered)="changeCompleteProperty($event)"
           (cdkDropListDropped)="drop($event)">
           <app-task
             @appearance
             class="task"
-            *ngFor="let item of complitedTasks"
+            *ngFor="let item of completedTasks"
             cdkDrag
             [cdkDragData]="item"
             (onRemove)="deleteTask($event)"
             (completeData)="completeTask($event)"
-            [(complete)]=item.complete
+            [complete]=item.complete
             [date]="item.date"
             [name]="item.name"
             [id]="item.id"

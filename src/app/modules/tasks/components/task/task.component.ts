@@ -1,13 +1,24 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  Output,
+} from '@angular/core';
 import { Task } from '../../../../shared/interfaces/task';
-import { Subject } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { EditModalComponent } from '../edit-modal/edit-modal.component';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../../../store/app-state';
+import { editTask } from '../../../../store/tasks/actions';
 
 @Component({
   selector: 'app-task',
   templateUrl: './task.component.html',
   styleUrls: ['./task.component.scss'],
 })
-export class TaskComponent {
+export class TaskComponent implements OnDestroy {
   ngUnsubscribe: Subject<void> = new Subject();
 
   @Input() description: string = '';
@@ -19,14 +30,35 @@ export class TaskComponent {
   @Output() completeData = new EventEmitter<Task>();
   @Output() onRemove = new EventEmitter<Object>();
 
-  constructor() {}
+  constructor(public dialog: MatDialog, private store: Store<AppState>) {}
 
   public taskRemove(): void {
     this.onRemove.emit({ id: this.id, complete: this.complete });
   }
 
+  public taskEdit(): void {
+    const dialogRef = this.dialog.open(EditModalComponent, {
+      width: '520px',
+      height: '300px',
+      data: { name: this.name, description: this.description },
+    });
+
+    dialogRef
+      .afterClosed()
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((result) => {
+        const task: Task = {
+          name: result.name,
+          date: new Date(),
+          id: this.id,
+          complete: this.complete,
+          description: result.description,
+        };
+        this.store.dispatch(editTask({ task }));
+      });
+  }
+
   public taskChecked(): void {
-    this.complete = !this.complete;
     const task: Task = {
       name: this.name,
       date: this.date,
@@ -36,5 +68,10 @@ export class TaskComponent {
     };
     //this.completeChange.emit(this.complete);
     this.completeData.emit(task);
+  }
+
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 }

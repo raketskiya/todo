@@ -46,3 +46,13 @@ export const completeTaskSuccess = createAction(
   '[Tasks] Complete task success',
   props<{ task: Task }>()
 );
+
+export const updateTasks = createAction(
+  '[Tasks] Update tasks',
+  props<{ tasks: string }>()
+);
+
+export const editTask = createAction(
+  '[Tasks] Update tasks',
+  props<{ task: Task }>()
+);

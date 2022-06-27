@@ -20,10 +20,12 @@ import {
   completeTaskSuccess,
   deleteTask,
   deleteTaskSuccess,
+  editTask,
   getAllActiveTasks,
   getAllActiveTasksSuccess,
   getAllCompletedTasks,
   getAllCompletedTasksSuccess,
+  updateTasks,
 } from './actions';
 
 @Injectable()
@@ -85,12 +87,39 @@ export class TasksEffects {
     this.actions$.pipe(
       ofType(completeTask),
       mergeMap((task) =>
-        this.tasksService.completeTask(task.task).pipe(
-          map(() =>
-            completeTaskSuccess({
-              task: task.task,
-            })
-          ),
+        this.tasksService
+          .completeTask({ ...task.task, complete: !task.task.complete })
+          .pipe(
+            map(() =>
+              completeTaskSuccess({
+                task: { ...task.task, complete: !task.task.complete },
+              })
+            ),
+            catchError(() => EMPTY)
+          )
+      )
+    )
+  );
+
+  // updateTask$ = createEffect(() =>
+  //   this.actions$.pipe(
+  //     ofType(updateTasks),
+  //     tap(console.log),
+  //     mergeMap((tasks) =>
+  //       this.tasksService.updateTasks(tasks.tasks).pipe(
+  //         map(() => getAllActiveTasks(), getAllCompletedTasks()),
+  //         catchError(() => EMPTY)
+  //       )
+  //     )
+  //   )
+  // );
+
+  editTask$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(editTask),
+      mergeMap((task) =>
+        this.tasksService.updateTask(task.task).pipe(
+          switchMap(() => [getAllCompletedTasks(), getAllActiveTasks()]),
           catchError(() => EMPTY)
         )
       )

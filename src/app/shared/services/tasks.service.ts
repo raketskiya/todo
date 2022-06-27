@@ -28,6 +28,7 @@ export class TasksService {
   }
 
   public getAllTasks(completed: boolean): Observable<Task[]> {
+    console.log('GET');
     return this.http
       .get(`${environment.fbDbURL}/users/${this.auth.userId}/tasks.json`)
       .pipe(
@@ -57,6 +58,23 @@ export class TasksService {
   }
 
   public completeTask(task: Task): Observable<any> {
+    return this.http.put<Task>(
+      `${environment.fbDbURL}/users/${this.auth.userId}/tasks/${task.id}.json`,
+      task
+    );
+  }
+
+  // public updateTasks(tasks: any): Observable<any> {
+  //   //console.log(tasks);
+  //   return this.http.put<any>(
+  //     `${environment.fbDbURL}/users/${this.auth.userId}.json`,
+  //
+  //     tasks
+  //   );
+  // }
+
+  public updateTask(task: Task): Observable<Task> {
+    console.log(task);
     return this.http.put<Task>(
       `${environment.fbDbURL}/users/${this.auth.userId}/tasks/${task.id}.json`,
       task

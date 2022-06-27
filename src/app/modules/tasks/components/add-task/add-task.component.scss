@@ -4,7 +4,7 @@ form {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
 .add-form {
@@ -13,6 +13,7 @@ form {
   background-color: white;
   width: 900px;
   border: solid 1px #ccc;
+  height: 100px;
 }
 
 .add-form-wrapper {
@@ -25,33 +26,34 @@ form {
   justify-content: space-around;
 }
 
-app-task-input {
-  width: 200px
-}
 
 button {
+  margin-top: 10px;
   margin-right: 25px;
-  margin-top: 20px;
-  width: 15%;
-  border-radius: 10px;
+  border: #c9ece6 solid 1px;
+  border-radius: 50%;
+
 }
 
-.description {
-  vertical-align: center;
-  width: 500px;
-  height: 40px;
-  margin-bottom: 5px;
-}
 
-.validation {
-  color: red;
-}
 
-.description-wrapper {
-  margin-left: 10px;
-  margin-top: 5px;
-}
 
 .name-wrapper {
   margin-left: 20px;
+  margin-bottom: 3px;
+}
+
+
+
+textarea {
+  max-width: 400px;
+  width: 500px;
+  height: 20px;
+
+}
+
+mat-form-field{
+  max-width: 450px;
+  width: 500px;
+  height: 20px;
 }

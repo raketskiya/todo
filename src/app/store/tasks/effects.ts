@@ -32,7 +32,7 @@ import {
 export class TasksEffects {
   constructor(private actions$: Actions, private tasksService: TasksService) {}
 
-  loadAllActiveTasks$ = createEffect(() =>
+  private loadAllActiveTasks$ = createEffect(() =>
     this.actions$.pipe(
       ofType(getAllActiveTasks),
       switchMap(() =>
@@ -44,7 +44,7 @@ export class TasksEffects {
     )
   );
 
-  loadAllCompletedTasks$ = createEffect(() =>
+  private loadAllCompletedTasks$ = createEffect(() =>
     this.actions$.pipe(
       ofType(getAllCompletedTasks),
       switchMap(() =>
@@ -56,7 +56,7 @@ export class TasksEffects {
     )
   );
 
-  addActiveTask$ = createEffect(() =>
+  private addActiveTask$ = createEffect(() =>
     this.actions$.pipe(
       ofType(addActiveTask),
       mergeMap((el) =>
@@ -68,7 +68,7 @@ export class TasksEffects {
     )
   );
 
-  deleteTask$ = createEffect(() =>
+  private deleteTask$ = createEffect(() =>
     this.actions$.pipe(
       ofType(deleteTask),
       tap(console.log),
@@ -83,7 +83,7 @@ export class TasksEffects {
     )
   );
 
-  completeTask$ = createEffect(() =>
+  private completeTask$ = createEffect(() =>
     this.actions$.pipe(
       ofType(completeTask),
       mergeMap((task) =>
@@ -101,24 +101,23 @@ export class TasksEffects {
     )
   );
 
-  // updateTask$ = createEffect(() =>
-  //   this.actions$.pipe(
-  //     ofType(updateTasks),
-  //     tap(console.log),
-  //     mergeMap((tasks) =>
-  //       this.tasksService.updateTasks(tasks.tasks).pipe(
-  //         map(() => getAllActiveTasks(), getAllCompletedTasks()),
-  //         catchError(() => EMPTY)
-  //       )
-  //     )
-  //   )
-  // );
-
-  editTask$ = createEffect(() =>
+  private editTask$ = createEffect(() =>
     this.actions$.pipe(
       ofType(editTask),
       mergeMap((task) =>
-        this.tasksService.updateTask(task.task).pipe(
+        this.tasksService.editTask(task.task).pipe(
+          switchMap(() => [getAllCompletedTasks(), getAllActiveTasks()]),
+          catchError(() => EMPTY)
+        )
+      )
+    )
+  );
+
+  updateTasks$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(updateTasks),
+      switchMap((tasks) =>
+        this.tasksService.updateTasks(tasks.tasks).pipe(
           switchMap(() => [getAllCompletedTasks(), getAllActiveTasks()]),
           catchError(() => EMPTY)
         )

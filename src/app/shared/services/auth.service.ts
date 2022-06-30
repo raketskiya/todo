@@ -15,7 +15,7 @@ import {
   FbAuthResponse,
   FbUserResponse,
 } from '../../../environments/interface';
-import { ConstsErrors, fbToken, fbTokenExp, userId } from '../consts/consts';
+import { fbToken, fbTokenExp, userId } from '../consts/consts';
 
 @Injectable()
 export class AuthService implements OnDestroy {
@@ -68,12 +68,12 @@ export class AuthService implements OnDestroy {
     const { message } = error.error.error;
 
     enum Errors {
-      INVALID_EMAIL = ConstsErrors.invalidEmail,
-      EMAIL_NOT_FOUND = ConstsErrors.emailNotFound,
-      INVALID_PASSWORD = ConstsErrors.invalidPassword,
-      EMAIL_EXISTS = ConstsErrors.emailExists,
-      MISSING_PASSWORD = ConstsErrors.missingPassword,
-      ADMIN_ONLY_OPERATION = ConstsErrors.adminOnlyOperation,
+      INVALID_EMAIL = 'Invalid email',
+      EMAIL_NOT_FOUND = 'Email not found',
+      INVALID_PASSWORD = 'Invalid password',
+      EMAIL_EXISTS = 'Email exists',
+      MISSING_PASSWORD = 'Missing password',
+      ADMIN_ONLY_OPERATION = 'Enter date for sign up',
     }
 
     this.error$.next(Errors[message]);

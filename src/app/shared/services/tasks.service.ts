@@ -30,20 +30,23 @@ export class TasksService {
   public getAllTasks(completed: boolean): Observable<Task[]> {
     console.log('GET');
     return this.http
-      .get(`${environment.fbDbURL}/users/${this.auth.userId}/tasks.json`)
+      .get<Task[]>(
+        `${environment.fbDbURL}/users/${this.auth.userId}/tasks.json`
+      )
       .pipe(
         map((response) => {
           return response
             ? Object.entries(response)
                 .filter((task) => task[1].complete === completed)
                 .map((el) => {
-                  let { name, date, complete, description } = el[1];
+                  let { name, date, complete, description, position } = el[1];
                   return {
                     id: el[0],
                     name,
                     date,
                     complete,
                     description,
+                    position,
                   };
                 })
             : [];
@@ -51,30 +54,29 @@ export class TasksService {
       );
   }
 
-  public deleteTask(id: string): Observable<any> {
+  public deleteTask(id: string): Observable<void> {
     return this.http.delete<void>(
       `${environment.fbDbURL}/users/${this.auth.userId}/tasks/${id}.json`
     );
   }
 
-  public completeTask(task: Task): Observable<any> {
+  public completeTask(task: Task): Observable<Task> {
     return this.http.put<Task>(
       `${environment.fbDbURL}/users/${this.auth.userId}/tasks/${task.id}.json`,
       task
     );
   }
 
-  // public updateTasks(tasks: any): Observable<any> {
-  //   //console.log(tasks);
-  //   return this.http.put<any>(
-  //     `${environment.fbDbURL}/users/${this.auth.userId}.json`,
-  //
-  //     tasks
-  //   );
-  // }
+  public updateTasks(tasks: any): Observable<any> {
+    console.log(tasks);
+    return this.http.put<any>(
+      `${environment.fbDbURL}/users/${this.auth.userId}/tasks.json`,
 
-  public updateTask(task: Task): Observable<Task> {
-    console.log(task);
+      tasks
+    );
+  }
+
+  public editTask(task: Task): Observable<Task> {
     return this.http.put<Task>(
       `${environment.fbDbURL}/users/${this.auth.userId}/tasks/${task.id}.json`,
       task

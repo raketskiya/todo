@@ -44,6 +44,7 @@ export const tasksReducer = createReducer(
     }
   }),
   on(completeTaskSuccess, (state, { task }) => {
+    console.log('complete');
     if (task.complete) {
       const active = state.activeTasks.filter((el) => el.id != task.id);
       return {

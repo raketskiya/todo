@@ -5,13 +5,13 @@
   <form ngForm>
     <mat-form-field class="example-full-width" appearance="fill">
       <mat-label>Name</mat-label>
-      <input matInput #name maxlength="55" [(ngModel)]="data.name" name="name">
-      <mat-hint align="end">{{name.value.length}} / 55</mat-hint>
+      <input matInput #name maxlength="30" [(ngModel)]="data.name" name="name">
+      <mat-hint align="end">{{name.value.length}} / 30</mat-hint>
     </mat-form-field>
     <mat-form-field class="example-full-width" appearance="fill">
       <mat-label>Description</mat-label>
-      <textarea matInput cdkTextareaAutosize  #description maxlength="256" [(ngModel)]="data.description" name="description"></textarea>
-      <mat-hint align="end">{{description.value.length}} / 256</mat-hint>
+      <textarea matInput cdkTextareaAutosize  #description maxlength="100" [(ngModel)]="data.description" name="description"></textarea>
+      <mat-hint align="end">{{description.value.length}} / 100</mat-hint>
     </mat-form-field>
   </form>
   <div mat-dialog-actions>

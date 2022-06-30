@@ -4,4 +4,5 @@ export interface Task {
   id: string;
   complete: boolean;
   description: string;
+  position: number;
 }

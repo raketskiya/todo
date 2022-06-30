@@ -49,10 +49,10 @@ export const completeTaskSuccess = createAction(
 
 export const updateTasks = createAction(
   '[Tasks] Update tasks',
-  props<{ tasks: string }>()
+  props<{ tasks: Object }>()
 );
 
 export const editTask = createAction(
-  '[Tasks] Update tasks',
+  '[Tasks] Edit tasks',
   props<{ task: Task }>()
 );

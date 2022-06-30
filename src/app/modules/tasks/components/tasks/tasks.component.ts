@@ -20,6 +20,7 @@ import {
   deleteTask,
   getAllActiveTasks,
   getAllCompletedTasks,
+  updateTasks,
 } from '../../../../store/tasks/actions';
 
 @Component({
@@ -37,12 +38,12 @@ import {
   ],
 })
 export class TasksComponent implements OnInit, OnDestroy {
-  completedTasks: Task[] = [];
-  activeTasks: Task[] = [];
-  completedTasks$ = this.store.select(selectCompleteTasks);
-  activeTasks$ = this.store.select(selectActiveTasks);
+  public completedTasks: Task[] = [];
+  public activeTasks: Task[] = [];
+  private completedTasks$ = this.store.select(selectCompleteTasks);
+  private activeTasks$ = this.store.select(selectActiveTasks);
 
-  ngUnsubscribe: Subject<void> = new Subject();
+  private ngUnsubscribe: Subject<void> = new Subject();
 
   constructor(
     private tasksService: TasksService,
@@ -54,24 +55,46 @@ export class TasksComponent implements OnInit, OnDestroy {
     this.store.dispatch(getAllCompletedTasks());
     this.activeTasks$
       .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe((activeTasks) => (this.activeTasks = [...activeTasks]));
+      .subscribe((activeTasks) => {
+        this.activeTasks = [...activeTasks].sort((a, b) => {
+          // @ts-ignore
+
+          return a.position - b.position;
+        });
+        //console.log(this.activeTasks);
+      });
     this.completedTasks$
       .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe(
-        (completedTasks) => (this.completedTasks = [...completedTasks])
-      );
+      .subscribe((completedTasks) => {
+        this.completedTasks = [...completedTasks].sort((a, b) => {
+          // @ts-ignore
+          return a.position - b.position;
+        });
+        //console.log(this.completedTasks);
+      });
   }
 
   public addTask(task: Task): void {
     this.store.dispatch(addActiveTask({ task }));
   }
 
-  public deleteTask(deletedTask: any): void {
-    this.store.dispatch(deleteTask(deletedTask));
+  public deleteTask(task: any): void {
+    if (task.complete) {
+      const index: number = this.completedTasks.findIndex(
+        (el) => el.id === task.id
+      );
+      this.completedTasks.splice(index, 1);
+    } else {
+      const index: number = this.activeTasks.findIndex(
+        (el) => el.id === task.id
+      );
+      this.activeTasks.splice(index, 1);
+    }
+    this.updateTasks(this.activeTasks, this.completedTasks);
   }
 
   public completeTask(task: Task): void {
-    this.store.dispatch(completeTask({ task }));
+    this.updateTasks(this.activeTasks, this.completedTasks, task, true);
   }
 
   public drop(event: CdkDragDrop<Task[]>): void {
@@ -81,18 +104,53 @@ export class TasksComponent implements OnInit, OnDestroy {
         event.previousIndex,
         event.currentIndex
       );
+      this.updateTasks(this.activeTasks, this.completedTasks);
     } else {
       const task = event.previousContainer.data[event.previousIndex];
-
-      this.store.dispatch(completeTask({ task }));
-
       transferArrayItem(
         event.previousContainer.data,
         event.container.data,
         event.previousIndex,
         event.currentIndex
       );
+      this.updateTasks(this.activeTasks, this.completedTasks, task);
     }
+  }
+
+  private updateTasks(
+    active: Task[],
+    complete: Task[],
+    task?: Task,
+    inComplete: boolean = false
+  ): void {
+    const activeTasksObj: Object = {};
+    const completeTasksObj: Object = {};
+    const tasksObj: Object = {};
+
+    if (inComplete && task) {
+      if (task?.complete) {
+        const index = this.completedTasks.findIndex((el) => el.id === task.id);
+        this.activeTasks.push(this.completedTasks.splice(index, 1)[0]);
+      } else {
+        const index = this.activeTasks.findIndex((el) => el.id === task.id);
+        this.completedTasks.push(this.activeTasks.splice(index, 1)[0]);
+      }
+    }
+
+    active.forEach(
+      (el, index) => (activeTasksObj[el.id] = { ...el, position: index })
+    );
+    complete.forEach(
+      (el, index) => (completeTasksObj[el.id] = { ...el, position: index })
+    );
+
+    Object.assign(tasksObj, activeTasksObj, completeTasksObj);
+
+    if (task) {
+      tasksObj[task.id].complete = !tasksObj[task.id].complete;
+    }
+
+    this.store.dispatch(updateTasks({ tasks: tasksObj }));
   }
 
   ngOnDestroy(): void {

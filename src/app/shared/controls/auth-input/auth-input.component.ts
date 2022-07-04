@@ -32,6 +32,7 @@ export class AuthInputComponent implements OnInit, ControlValueAccessor {
   public hide: boolean = true;
 
   public authControl = new FormControl(null, [
+    Validators.email,
     Validators.required,
     Validators.minLength(6),
     Validators.maxLength(40),

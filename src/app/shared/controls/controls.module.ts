@@ -6,6 +6,7 @@ import { AuthInputComponent } from './auth-input/auth-input.component';
 import { NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [TaskInputComponent, AuthInputComponent],
@@ -15,6 +16,7 @@ import { MatIconModule } from '@angular/material/icon';
     NgbAlertModule,
     MatInputModule,
     MatIconModule,
+    TranslateModule,
   ],
   exports: [TaskInputComponent, AuthInputComponent],
 })

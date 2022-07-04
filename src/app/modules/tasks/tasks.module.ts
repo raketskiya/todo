@@ -18,6 +18,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { TranslateModule } from '@ngx-translate/core';
 import { ThemeComponent } from '../../shared/components/theme/theme.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { ThemeComponent } from '../../shared/components/theme/theme.component';
     MatInputModule,
     FormsModule,
     TranslateModule,
+    MatProgressSpinnerModule,
   ],
   exports: [TasksComponent, RouterModule],
   providers: [AuthGuard],

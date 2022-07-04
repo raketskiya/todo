@@ -14,6 +14,30 @@
     "Complete": "Completed tasks"
   },
   "Header": {
-    "Logout": "Log out"
+    "Logout": "Log out",
+    "Theme": "Theme"
+  },
+  "Edit": {
+    "Title": "Task edit",
+    "Cancel": "Cancel",
+    "Ok": "Ok"
+  },
+  "Add": {
+    "Description": "Description",
+    "Name": "Name"
+  },
+  "Auth": {
+    "Email": "Enter your email",
+    "Password": "Enter your password",
+    "repeatPassword": "Repeat your password",
+    "Validation": {
+      "EnterYourEmail": "Enter Your Email",
+      "ThisInputIsShouldBeEmail": "This input is should be email",
+      "EnterYourPassword": " Enter your password",
+      "PasswordShouldBeAtLeast6Characters": "Password should be at least 6 characters",
+      "RepeatYourPassword": "Repeat your password",
+      "PasswordsDoNotMatch": "Passwords don't match"
+    }
   }
+
 }

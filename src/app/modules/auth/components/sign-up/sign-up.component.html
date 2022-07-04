@@ -3,7 +3,7 @@
     <p class="page-title">{{'Sign up.TITLE' | translate}}</p>
     <div class="error">
       <p type="danger" *ngIf="authService.error$ | async as error" >{{ error }}</p>
-      <p type="danger" *ngIf="notMatchPasswords" >Passwords don't match</p>
+      <p type="danger" *ngIf="notMatchPasswords" > {{"Auth.Validation.PasswordsDoNotMatch" | translate}}</p>
     </div>
 
     <div class="form-wrapper">

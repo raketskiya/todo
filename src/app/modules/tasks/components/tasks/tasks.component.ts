@@ -48,6 +48,8 @@ export class TasksComponent implements OnInit, OnDestroy {
   private completedTasks$ = this.store.select(selectCompleteTasks);
   private activeTasks$ = this.store.select(selectActiveTasks);
 
+  public spinner: boolean = true;
+
   private ngUnsubscribe: Subject<void> = new Subject();
 
   constructor(

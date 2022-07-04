@@ -50,7 +50,7 @@ export class TaskComponent implements OnDestroy {
   public taskEdit(): void {
     const dialogRef = this.dialog.open(EditModalComponent, {
       width: '520px',
-      height: '300px',
+      height: '360px',
       data: { name: this.name, description: this.description },
     });
 

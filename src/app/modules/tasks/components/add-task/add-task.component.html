@@ -7,7 +7,7 @@
 
         <div class="description-wrapper">
           <mat-form-field appearance="fill">
-            <mat-label>Description</mat-label>
+            <mat-label>{{'Add.Description' | translate}}</mat-label>
             <textarea matInput  cdkTextareaAutosize  #description maxlength="100"  cdkAutosizeMinRows="1"
                       cdkAutosizeMaxRows="2" name="description" formControlName="description"></textarea>
             <mat-hint align="end">{{description.value.length}} / 100</mat-hint>

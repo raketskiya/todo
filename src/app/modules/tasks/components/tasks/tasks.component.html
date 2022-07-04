@@ -6,6 +6,7 @@
     <div cdkDropListGroup>
       <div class="tasks-container active-tasks">
         <h2>{{'Tasks.Active' | translate}}</h2>
+        <mat-spinner *ngIf="spinner"></mat-spinner>
         <div
           cdkDropList
 

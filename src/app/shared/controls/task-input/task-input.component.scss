@@ -18,3 +18,32 @@ mat-form-field{
 small {
   font-size: 12px;
 }
+
+
+/*Responsive*/
+
+
+/* 992px - 1200px */
+@media screen and (max-width: 1200px) {
+
+}
+
+/* 768px - 992px */
+@media screen and (max-width: 992px) {
+
+}
+
+/* 576px - 768px */
+@media screen and (max-width: 768px) {
+  mat-form-field{
+    max-width: 320px;
+  }
+}
+
+/* 320px - 576px */
+@media screen and (max-width: 576px) {
+  mat-form-field{
+    max-width: 275px;
+    font-size: 12px;
+  }
+}

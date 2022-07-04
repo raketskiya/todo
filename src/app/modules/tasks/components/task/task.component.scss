@@ -4,10 +4,19 @@
   margin-right: 16px;
   align-items: center;
   justify-content: space-between;
+
 }
 .mat-form-field + .mat-form-field {
   margin-left: 8px;
 
+}
+
+
+.task-data{
+
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
 }
 
 .description{
@@ -31,6 +40,7 @@
   display: flex;
   align-items: center;
   margin-top: 10px;
+
 }
 
 .date{
@@ -66,15 +76,18 @@ mat-panel-title{
 width: 660px;
 }
 
+
 span{
   display: flex;
   flex: 1;
+  justify-content: space-between;
   flex-direction: row;
   overflow: hidden;
   align-items: center;
 }
 
 .controls{
+
   width: 140px;
   display: flex;
   align-items: center;
@@ -92,4 +105,90 @@ span{
   border: #ccc solid 1px;
   border-radius: 50%;
   box-shadow: none;
+}
+
+mat-accordion{
+  max-width: 130px;
+  width: 130px;
+}
+
+
+
+
+/*Responsive*/
+
+
+/* 992px - 1200px */
+@media screen and (max-width: 1200px) {
+
+}
+
+/* 768px - 992px */
+@media screen and (max-width: 992px) {
+}
+
+/* 576px - 768px */
+@media screen and (max-width: 768px) {
+  span{
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    overflow: hidden;
+
+  }
+  .controls{
+
+    width: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .task-data{
+
+    width: 455px;
+  }
+  .mat-expansion-panel-header{
+    height: 100px;
+  }
+  mat-expansion-panel{
+    max-width: 490px;
+  }
+
+
+}
+
+/* 320px - 576px */
+@media screen and (max-width: 576px) {
+  .task-data{
+    width: 170px;
+    display: flex;
+    justify-content: start;
+  }
+  .mat-expansion-panel-header{
+    height: 200px;
+
+
+  }
+  mat-expansion-panel{
+    max-width: 235px;
+
+
+  }
+  mat-panel-title{
+    width: 170px;
+    display: flex;
+    flex-direction: column;
+
+
+  }
+  .date-wrapper{
+    width: 170px;
+  }
+
+  .title-wrapper{
+
+    word-wrap: break-word;
+    width: 170px;
+  }
+
 }

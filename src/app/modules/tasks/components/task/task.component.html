@@ -4,10 +4,18 @@
       <mat-expansion-panel hideToggle>
         <mat-expansion-panel-header>
           <span>
-            <mat-panel-title [class.complited]="complete">
-            <p class="title task-item">{{this.name}}</p>
-            <p class="date task-item">{{this.date | date:'d/M/yy, h:mm'}}</p>
-          </mat-panel-title>
+            <div class="task-data">
+               <mat-panel-title [class.complited]="complete">
+                 <div class="title-wrapper">
+                    {{this.name}}
+                 </div>
+                 <div class="date-wrapper">
+                   <p class="date task-item">{{this.date | date:'d/M/yy, h:mm'}}</p>
+                 </div>
+
+               </mat-panel-title>
+            </div>
+
             <div class="controls">
               <button mat-fab class="btn-delete" (click)="taskRemove()">
               <mat-icon>delete</mat-icon>

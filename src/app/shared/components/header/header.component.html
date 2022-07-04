@@ -1,3 +1,12 @@
 <div>
-  <button class="btn btn-light" *ngIf="!!this.auth.fbToken" (click)="logOut()">Log out</button>
+  <div class="container">
+    <button class="lng-btn" mat-flat-button (click)="changeLanguage()">
+      <mat-icon>language</mat-icon>
+      {{language}}
+    </button>
+    <button  mat-flat-button color="primary"  class="logout-btn" *ngIf="!!this.auth.fbToken" (click)="logOut()">
+      <mat-icon>logout</mat-icon>
+      {{'Header.Logout' | translate}}
+    </button>
+  </div>
 </div>

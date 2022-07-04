@@ -30,3 +30,16 @@ form{
 }
 
 
+/* 320px - 576px */
+@media screen and (max-width: 576px) {
+  mat-form-field{
+    max-width:220px;
+    width: 220px;
+  }
+  input{
+    font-size: 12px;
+    max-width:215px;
+    width: 215px;
+  }
+}
+

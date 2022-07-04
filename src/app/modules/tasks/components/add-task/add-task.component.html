@@ -4,16 +4,19 @@
       <div class="name-wrapper">
         <app-task-input class="form-item" formControlName="name"></app-task-input>
       </div>
-      <div class="description-wrapper">
-        <mat-form-field class="example-full-width" appearance="fill">
-          <mat-label>Description</mat-label>
-          <textarea matInput  cdkTextareaAutosize  #description maxlength="100"  name="description" formControlName="description"></textarea>
-          <mat-hint align="end">{{description.value.length}} / 100</mat-hint>
-        </mat-form-field>
-      </div>
-      <button mat-fab class="form-item btn btn-primary" [disabled]="tasksForm.invalid">
-        <mat-icon>add</mat-icon>
-      </button>
+
+        <div class="description-wrapper">
+          <mat-form-field appearance="fill">
+            <mat-label>Description</mat-label>
+            <textarea matInput  cdkTextareaAutosize  #description maxlength="100"  cdkAutosizeMinRows="1"
+                      cdkAutosizeMaxRows="2" name="description" formControlName="description"></textarea>
+            <mat-hint align="end">{{description.value.length}} / 100</mat-hint>
+          </mat-form-field>
+        </div>
+        <button mat-fab class="form-item btn btn-primary" [disabled]="tasksForm.invalid">
+          <mat-icon>add</mat-icon>
+        </button>
+
     </form>
   </div>
 </div>

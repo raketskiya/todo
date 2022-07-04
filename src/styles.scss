@@ -39,10 +39,9 @@ $todo-theme: mat.define-light-theme((
 
 
 html, body { height: 100%; background-color: #ececec  }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; font-size: 1px }
 
-/* Importing Bootstrap SCSS file. */
-@import '~bootstrap/scss/bootstrap';
+
 
 :root{
   --bs-body-bg: #ECECEC;

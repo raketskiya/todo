@@ -9,6 +9,7 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [SignUpComponent, SignInComponent],
@@ -19,6 +20,7 @@ import { NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
     SharedModule,
     MatDialogModule,
     NgbAlertModule,
+    TranslateModule,
   ],
   exports: [SignInComponent, SignUpComponent, RouterModule],
   providers: [AuthGuard],

@@ -13,7 +13,7 @@ form {
   background-color: white;
   width: 900px;
   border: solid 1px #ccc;
-  height: 100px;
+  height: 110px;
 }
 
 .add-form-wrapper {
@@ -49,11 +49,126 @@ textarea {
   max-width: 400px;
   width: 500px;
   height: 20px;
-
+  overflow: auto;
 }
 
 mat-form-field{
   max-width: 450px;
   width: 500px;
   height: 20px;
+}
+
+
+
+
+
+/*Responsive*/
+
+
+/* 992px - 1200px */
+@media screen and (max-width: 1200px) {
+
+}
+
+/* 768px - 992px */
+@media screen and (max-width: 992px) {
+  .add-form{
+    width: 700px;
+  }
+  mat-form-field{
+    max-width: 260px;
+  }
+  textarea {
+    max-width: 250px;
+    overflow: auto;
+  }
+  .add-form-wrapper {
+    display: flex;
+    justify-content: center;
+  }
+  form{
+    justify-content: space-between;
+  }
+}
+
+/* 576px - 768px */
+@media screen and (max-width: 768px) {
+  .add-form{
+    width: 400px;
+    height: 250px;
+  }
+  form{
+    flex-direction: column;
+
+  }
+
+  mat-form-field{
+    max-width: 320px;
+    margin-bottom: 50px;
+  }
+
+  .name-wrapper {
+    margin-left: 0;
+    margin-bottom: 30px;
+  }
+
+
+  .mat-form-field-wrapper{
+    width: 400px;
+  }
+
+  .add-form-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 544px;
+
+
+  }
+
+  textarea {
+    max-width: 300px;
+    overflow: auto;
+  }
+
+
+}
+
+/* 320px - 576px */
+@media screen and (max-width: 576px) {
+  .add-form{
+    width: 280px;
+    height: 250px;
+  }
+  form{
+    flex-direction: column;
+
+  }
+
+  mat-form-field{
+    max-width: 275px;
+    margin-bottom: 50px;
+  }
+
+  .name-wrapper {
+    margin-left: 0;
+    margin-bottom: 30px;
+  }
+
+
+  .mat-form-field-wrapper{
+    width: 275px;
+  }
+
+  .add-form-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 288px;
+
+
+  }
+
+  textarea {
+    max-width: 260px;
+    overflow: auto;
+  }
 }

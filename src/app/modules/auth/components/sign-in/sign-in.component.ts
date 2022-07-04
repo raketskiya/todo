@@ -57,6 +57,10 @@ export class SignInComponent implements OnDestroy {
     this.router.navigate(['sighUp']);
   }
 
+  test() {
+    console.log(11);
+  }
+
   ngOnDestroy() {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();

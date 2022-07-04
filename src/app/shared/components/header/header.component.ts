@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { fbToken, fbTokenExp, userId } from '../../consts/consts';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-header',
@@ -9,7 +10,13 @@ import { fbToken, fbTokenExp, userId } from '../../consts/consts';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  constructor(private router: Router, public auth: AuthService) {}
+  constructor(
+    private router: Router,
+    public auth: AuthService,
+    public translate: TranslateService
+  ) {}
+
+  public language: string = 'en';
 
   ngOnInit(): void {
     if (sessionStorage.getItem(fbToken)) {
@@ -19,7 +26,12 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  logOut(): void {
+  public changeLanguage() {
+    this.language === 'en' ? (this.language = 'ru') : (this.language = 'en');
+    this.translate.use(this.language);
+  }
+
+  public logOut(): void {
     this.auth.logout();
     this.router.navigate(['signIn']);
   }

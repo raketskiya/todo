@@ -1,9 +1,6 @@
 <div class="auth-wrapper">
   <div class="auth">
-    <p class="page-title">Sign up</p>
-    <!--    <div class="error" *ngIf="authService.error$ | async as error">-->
-    <!--      {{error}}-->
-    <!--    </div>-->
+    <p class="page-title">{{'Sign up.TITLE' | translate}}</p>
     <ngb-alert type="danger" *ngIf="authService.error$ | async as error" [dismissible]="false">{{ error }}</ngb-alert>
     <ngb-alert type="danger" *ngIf="notMatchPasswords" [dismissible]="false">Passwords don't match</ngb-alert>
     <div class="form-wrapper">
@@ -22,13 +19,12 @@
                           type="password"></app-auth-input>
         </div>
         <div class="submit-btn-wrapper">
-          <button class="submit-btn btn btn-primary" type="submit" [disabled]="signUpForm.invalid">Sign up</button>
+          <button class="submit-btn btn btn-primary" type="submit" [disabled]="signUpForm.invalid">{{'Sign up.Sign up button' | translate}}</button>
         </div>
       </form>
     </div>
     <div class="form-wrapper">
-      <button class="form-item change-type-btn btn btn-secondary" (click)="changeSighType()">I am already have an
-        account
+      <button class="form-item change-type-btn btn btn-secondary" (click)="changeSighType()">{{'Sign up.Have button' | translate}}
       </button>
     </div>
 

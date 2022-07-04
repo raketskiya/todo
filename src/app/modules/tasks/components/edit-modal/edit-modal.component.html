@@ -3,14 +3,15 @@
 <h1 mat-dialog-title>Task edit</h1>
 <div mat-dialog-content>
   <form ngForm>
-    <mat-form-field class="example-full-width" appearance="fill">
+    <mat-form-field appearance="fill">
       <mat-label>Name</mat-label>
       <input matInput #name maxlength="30" [(ngModel)]="data.name" name="name">
       <mat-hint align="end">{{name.value.length}} / 30</mat-hint>
     </mat-form-field>
-    <mat-form-field class="example-full-width" appearance="fill">
+    <mat-form-field appearance="fill">
       <mat-label>Description</mat-label>
-      <textarea matInput cdkTextareaAutosize  #description maxlength="100" [(ngModel)]="data.description" name="description"></textarea>
+      <textarea matInput  cdkTextareaAutosize  #description maxlength="100"  cdkAutosizeMinRows="1"
+                cdkAutosizeMaxRows="1" name="description" formControlName="description"></textarea>
       <mat-hint align="end">{{description.value.length}} / 100</mat-hint>
     </mat-form-field>
   </form>

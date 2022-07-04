@@ -16,6 +16,7 @@ import { EditModalComponent } from './components/edit-modal/edit-modal.component
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { MatInputModule } from '@angular/material/input';
     MatFormFieldModule,
     MatInputModule,
     FormsModule,
+    TranslateModule,
   ],
   exports: [TasksComponent, RouterModule],
   providers: [AuthGuard],

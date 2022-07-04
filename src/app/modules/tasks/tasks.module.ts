@@ -17,6 +17,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { TranslateModule } from '@ngx-translate/core';
+import { ThemeComponent } from '../../shared/components/theme/theme.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,11 @@ import { TranslateModule } from '@ngx-translate/core';
     ReactiveFormsModule,
     ControlsModule,
     RouterModule.forChild([
+      {
+        path: 'theme',
+        component: ThemeComponent,
+        data: { breadcrumb: 'Theme' },
+      },
       { path: '', component: TasksComponent, canActivate: [AuthGuard] },
     ]),
     DragDropModule,

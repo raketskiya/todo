@@ -5,7 +5,7 @@
   flex-direction: column;
   align-items: center;
   width: 450px;
-  height: 500px;
+  height: 400px;
   position: absolute;
   top: 0;
   right: 0;
@@ -44,7 +44,7 @@ p {
 }
 
 .submit-btn {
-  margin-bottom: 20px;
+  margin-top: 10px;
   height: 40px;
   width: 200px;
 }
@@ -63,11 +63,13 @@ p {
 }
 
 .error {
+  display: flex;
+  justify-content: center;
   margin-bottom: 5px;
   width: 305px;
-  color: white;
-  text-align: center;
-  background-color: red;
+  color: #ba3939;
+  background: #ffe0e0;
+
 }
 
 .page-title {
@@ -83,3 +85,12 @@ ngb-alert {
   height: 20px;
 }
 
+app-auth-input{
+  margin-top: 10px;
+}
+
+@media screen and (max-width: 576px) {
+ .auth{
+   width: 290px;
+ }
+}

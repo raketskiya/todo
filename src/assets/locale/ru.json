@@ -1,0 +1,19 @@
+{
+  "Sign in": {
+    "TITLE": "Вход",
+    "Sign in button": "Войти",
+    "Create button" : "Создать аккаунт"
+  },
+  "Sign up": {
+    "TITLE": "Регистрация",
+    "Sign up button": "Создать",
+    "Have button" : "У меня уже есть аккаунт"
+  },
+  "Tasks": {
+    "Active": "Активные задачи",
+    "Complete": "Выполненные задачи"
+  },
+  "Header": {
+    "Logout": "Выйти"
+  }
+}

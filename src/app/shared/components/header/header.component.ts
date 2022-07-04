@@ -31,6 +31,10 @@ export class HeaderComponent implements OnInit {
     this.translate.use(this.language);
   }
 
+  test() {
+    this.router.navigate(['tasks/theme']);
+  }
+
   public logOut(): void {
     this.auth.logout();
     this.router.navigate(['signIn']);

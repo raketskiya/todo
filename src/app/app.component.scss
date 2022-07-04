@@ -5,6 +5,23 @@
   margin: 0 auto;
 
 }
+
+breadcrumb{
+  width: 100%;
+  background: #eccbe3;
+  display: flex;
+  flex-direction: row;
+}
+
+.breadcrumb{
+
+  display: flex;
+  flex-direction: row;
+}
+
+li {
+  list-style-type: none;
+}
 /* 992px - 1200px */
 @media screen and (max-width: 1200px) {
   .container{

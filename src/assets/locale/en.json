@@ -1,0 +1,19 @@
+{
+  "Sign in": {
+    "TITLE": "Sign in",
+    "Sign in button": "Sign in",
+    "Create button" : "Create an account"
+  },
+  "Sign up": {
+    "TITLE": "Sign up",
+    "Sign up button": "Sign up",
+    "Have button" : "I am already have an account"
+  },
+  "Tasks": {
+    "Active": "Active tasks",
+    "Complete": "Completed tasks"
+  },
+  "Header": {
+    "Logout": "Log out"
+  }
+}

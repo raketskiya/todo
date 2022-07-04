@@ -1,4 +1,27 @@
-<input [formControl]="authControl" [type]="type" [placeholder]="place" maxlength="40">
+
+<div *ngIf="type==='email'" class="example-container">
+  <mat-form-field appearance="fill">
+    <mat-label>Enter your email</mat-label>
+    <input matInput #email placeholder="pat@example.com" [formControl]="authControl" maxlength="40" required>
+  </mat-form-field>
+</div>
+
+<div *ngIf="type==='password'" class="example-container">
+  <mat-form-field appearance="fill">
+    <mat-label>Enter your password</mat-label>
+    <input type="password" matInput  [formControl]="authControl" required maxlength="40">
+  </mat-form-field>
+</div>
+
+<div *ngIf="type==='repeatPassword'" class="example-container">
+  <mat-form-field appearance="fill">
+    <mat-label>Repeat your password</mat-label>
+    <input type="password" matInput  [formControl]="authControl" required maxlength="40">
+  </mat-form-field>
+</div>
+
+
+
 <div class="validation" *ngIf="authControl?.touched && authControl?.invalid">
   <div *ngIf="type==='email'">
     <small *ngIf="authControl.errors?.required">
@@ -22,9 +45,9 @@
       Password maximum length can be 40 characters
     </small>
   </div>
-  <div *ngIf="type==='password' && place==='Repeat password...'">
+  <div *ngIf="type==='repeatPassword' && place==='Repeat password...'">
     <small *ngIf="authControl.errors?.required">
-      Enter your password
+      Repeat your password
     </small>
     <small *ngIf="authControl.errors?.minlength">
       Password should be at least 6 characters
@@ -34,5 +57,3 @@
     </small>
   </div>
 </div>
-
-

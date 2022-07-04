@@ -1,12 +1,39 @@
-input {
-  width: 300px;
-  height: 40px;
-  border: solid 1px black;
-  border-radius: 10px;
-
+mat-form-field{
+  width: 350px;
+  height: 50px;
 }
 
 .validation {
   color: red;
 }
 
+.example-container .mat-form-field + .mat-form-field {
+  margin-left: 8px;
+
+}
+
+.example-right-align {
+  text-align: right;
+}
+
+input.example-right-align::-webkit-outer-spin-button,
+input.example-right-align::-webkit-inner-spin-button {
+  display: none;
+}
+
+input.example-right-align {
+  -moz-appearance: textfield;
+}
+
+small{
+  margin-left: 8px;
+}
+
+@media screen and (max-width: 576px) {
+  mat-form-field{
+    width: 290px;
+  }
+  input{
+    font-size: 13px;
+  }
+}

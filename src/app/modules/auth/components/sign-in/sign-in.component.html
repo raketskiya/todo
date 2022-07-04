@@ -1,6 +1,9 @@
  <div class="auth">
     <p class="page-title">{{'Sign in.TITLE' | translate}}</p>
-    <ngb-alert type="danger" *ngIf="authService.error$ | async as error" [dismissible]="false">{{ error }}</ngb-alert>
+   <div class="error">
+     <p type="danger" *ngIf="authService.error$ | async as error" >{{ error }}</p>
+   </div>
+
 
     <div class="form-wrapper">
       <form [formGroup]="signInForm" (ngSubmit)="submit()">
@@ -14,11 +17,11 @@
                           type="password"></app-auth-input>
         </div>
         <div class="submit-btn-wrapper">
-          <button class="submit-btn btn btn-primary" type="submit" [disabled]="signInForm.invalid">{{'Sign in.Sign in button' | translate}}</button>
+          <button mat-flat-button color="primary" class="submit-btn btn btn-primary" type="submit" [disabled]="signInForm.invalid">{{'Sign in.Sign in button' | translate}}</button>
         </div>
       </form>
     </div>
     <div class="form-wrapper">
-      <button class="form-item change-type-btn btn btn-secondary" (click)="changeSighType()">{{'Sign in.Create button' | translate}}</button>
+      <button mat-flat-button color="primary"  class="form-item change-type-btn btn btn-secondary" (click)="changeSighType()">{{'Sign in.Create button' | translate}}</button>
     </div>
   </div>

@@ -22,6 +22,7 @@ import {
   getAllCompletedTasks,
   updateTasks,
 } from '../../../../store/tasks/actions';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tasks',
@@ -47,7 +48,8 @@ export class TasksComponent implements OnInit, OnDestroy {
 
   constructor(
     private tasksService: TasksService,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private router: Router
   ) {}
 
   ngOnInit(): void {

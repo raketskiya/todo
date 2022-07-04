@@ -22,6 +22,8 @@ export class AuthInputComponent implements OnInit, ControlValueAccessor {
   onChange!: (value: string) => void;
   onTouche!: () => void;
 
+  public hide: boolean = true;
+
   public authControl = new FormControl(null, [
     Validators.email,
     Validators.required,

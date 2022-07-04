@@ -1,8 +1,11 @@
 <div class="auth-wrapper">
   <div class="auth">
     <p class="page-title">{{'Sign up.TITLE' | translate}}</p>
-    <ngb-alert type="danger" *ngIf="authService.error$ | async as error" [dismissible]="false">{{ error }}</ngb-alert>
-    <ngb-alert type="danger" *ngIf="notMatchPasswords" [dismissible]="false">Passwords don't match</ngb-alert>
+    <div class="error">
+      <p type="danger" *ngIf="authService.error$ | async as error" >{{ error }}</p>
+      <p type="danger" *ngIf="notMatchPasswords" >Passwords don't match</p>
+    </div>
+
     <div class="form-wrapper">
       <form [formGroup]="signUpForm" (ngSubmit)="submit()">
         <div class="authError">
@@ -16,15 +19,15 @@
         </div>
         <div class="form-item">
           <app-auth-input class="form-item" formControlName="repeatPassword" place="Repeat password..."
-                          type="password"></app-auth-input>
+                          type="repeatPassword"></app-auth-input>
         </div>
         <div class="submit-btn-wrapper">
-          <button class="submit-btn btn btn-primary" type="submit" [disabled]="signUpForm.invalid">{{'Sign up.Sign up button' | translate}}</button>
+          <button mat-flat-button color="primary" class="submit-btn btn btn-primary" type="submit" [disabled]="signUpForm.invalid">{{'Sign up.Sign up button' | translate}}</button>
         </div>
       </form>
     </div>
     <div class="form-wrapper">
-      <button class="form-item change-type-btn btn btn-secondary" (click)="changeSighType()">{{'Sign up.Have button' | translate}}
+      <button mat-flat-button color="primary" class="form-item change-type-btn btn btn-secondary" (click)="changeSighType()">{{'Sign up.Have button' | translate}}
       </button>
     </div>
 

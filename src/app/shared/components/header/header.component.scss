@@ -4,6 +4,14 @@ div {
   align-items: center;
 }
 
+.buttons{
+  width: 190px;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+
+}
+
 
 .logout-btn{
   display: flex;
@@ -17,7 +25,7 @@ div {
 
 .lng-btn{
   height: 30px;
-  margin-left: 30px ;
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -59,6 +67,9 @@ div {
 /* 320px - 576px */
 @media screen and (max-width: 576px) {
   .container{
-    width:288px;
+    width:290px;
+  }
+  .logout-btn{
+    margin-right: 20px;
   }
 }

@@ -1,9 +1,9 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   Input,
   OnDestroy,
-  OnInit,
   Output,
 } from '@angular/core';
 import { Task } from '../../../../shared/interfaces/task';
@@ -13,15 +13,12 @@ import { EditModalComponent } from '../edit-modal/edit-modal.component';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../../store/app-state';
 import { editTask } from '../../../../store/tasks/actions';
-import {
-  selectActiveTasks,
-  selectCompleteTasks,
-} from '../../../../store/tasks/selectors';
 
 @Component({
   selector: 'app-task',
   templateUrl: './task.component.html',
   styleUrls: ['./task.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TaskComponent implements OnDestroy {
   ngUnsubscribe: Subject<void> = new Subject();

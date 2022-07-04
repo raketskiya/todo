@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   OnDestroy,
@@ -11,13 +12,13 @@ import { Task } from '../../../../shared/interfaces/task';
 import { Subject, takeUntil } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../../store/app-state';
-import { getAllActiveTasks } from '../../../../store/tasks/actions';
 import { selectActiveTasks } from '../../../../store/tasks/selectors';
 
 @Component({
   selector: 'app-add-task',
   templateUrl: './add-task.component.html',
   styleUrls: ['./add-task.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddTaskComponent implements OnDestroy, OnInit {
   ngUnsubscribe: Subject<void> = new Subject();

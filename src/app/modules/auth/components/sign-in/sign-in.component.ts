@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../../../shared/services/auth.service';
 import { Router } from '@angular/router';
@@ -10,6 +10,7 @@ import { Subject, takeUntil } from 'rxjs';
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SignInComponent implements OnDestroy {
   signInForm = new FormGroup({
@@ -55,10 +56,6 @@ export class SignInComponent implements OnDestroy {
 
   public changeSighType(): void {
     this.router.navigate(['sighUp']);
-  }
-
-  test() {
-    console.log(11);
   }
 
   ngOnDestroy() {

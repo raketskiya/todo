@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { fbToken, fbTokenExp, userId } from '../../consts/consts';
@@ -8,6 +8,7 @@ import { TranslateService } from '@ngx-translate/core';
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent implements OnInit {
   constructor(
@@ -31,7 +32,7 @@ export class HeaderComponent implements OnInit {
     this.translate.use(this.language);
   }
 
-  test() {
+  theme() {
     this.router.navigate(['tasks/theme']);
   }
 

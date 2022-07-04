@@ -1,4 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { Task } from '../../../../shared/interfaces/task';
 import { TasksService } from '../../../../shared/services/tasks.service';
 import { Store } from '@ngrx/store';
@@ -16,18 +22,16 @@ import {
 import { AppState } from '../../../../store/app-state';
 import {
   addActiveTask,
-  completeTask,
-  deleteTask,
   getAllActiveTasks,
   getAllCompletedTasks,
   updateTasks,
 } from '../../../../store/tasks/actions';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tasks',
   templateUrl: './tasks.component.html',
   styleUrls: ['./tasks.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     trigger('appearance', [
       transition('void => *', [
@@ -49,7 +53,7 @@ export class TasksComponent implements OnInit, OnDestroy {
   constructor(
     private tasksService: TasksService,
     private store: Store<AppState>,
-    private router: Router
+    private ref: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -59,20 +63,16 @@ export class TasksComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((activeTasks) => {
         this.activeTasks = [...activeTasks].sort((a, b) => {
-          // @ts-ignore
-
           return a.position - b.position;
         });
-        //console.log(this.activeTasks);
+        this.ref.markForCheck();
       });
     this.completedTasks$
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((completedTasks) => {
         this.completedTasks = [...completedTasks].sort((a, b) => {
-          // @ts-ignore
           return a.position - b.position;
         });
-        //console.log(this.completedTasks);
       });
   }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { environment } from '../environments/environment';
 import { Router } from '@angular/router';
@@ -7,14 +7,12 @@ import { Router } from '@angular/router';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent implements OnInit {
   title = 'todo';
 
-  constructor(
-    public translateService: TranslateService,
-    private router: Router
-  ) {}
+  constructor(public translateService: TranslateService) {}
   ngOnInit(): void {
     this.translateService.use(environment.locales[0]);
   }

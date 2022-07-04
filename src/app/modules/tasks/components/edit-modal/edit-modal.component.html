@@ -10,8 +10,8 @@
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>Description</mat-label>
-      <textarea matInput  cdkTextareaAutosize  #description maxlength="100"  cdkAutosizeMinRows="1"
-                cdkAutosizeMaxRows="1" name="description" formControlName="description"></textarea>
+      <textarea matInput  cdkTextareaAutosize  #description maxlength="100"  [(ngModel)]="data.description" cdkAutosizeMinRows="1"
+                cdkAutosizeMaxRows="1" name="description" ></textarea>
       <mat-hint align="end">{{description.value.length}} / 100</mat-hint>
     </mat-form-field>
   </form>

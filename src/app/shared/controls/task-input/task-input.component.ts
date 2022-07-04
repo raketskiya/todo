@@ -1,4 +1,9 @@
-import { Component, forwardRef, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  forwardRef,
+  OnInit,
+} from '@angular/core';
 import {
   ControlValueAccessor,
   FormControl,
@@ -10,6 +15,7 @@ import {
   selector: 'app-task-input',
   templateUrl: './task-input.component.html',
   styleUrls: ['./task-input.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

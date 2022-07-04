@@ -1,4 +1,10 @@
-import { Component, forwardRef, Input, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  forwardRef,
+  Input,
+  OnInit,
+} from '@angular/core';
 import {
   ControlValueAccessor,
   FormControl,
@@ -10,6 +16,7 @@ import {
   selector: 'app-auth-input',
   templateUrl: './auth-input.component.html',
   styleUrls: ['./auth-input.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -25,7 +32,6 @@ export class AuthInputComponent implements OnInit, ControlValueAccessor {
   public hide: boolean = true;
 
   public authControl = new FormControl(null, [
-    Validators.email,
     Validators.required,
     Validators.minLength(6),
     Validators.maxLength(40),

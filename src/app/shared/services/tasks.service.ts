@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map, Observable, Subject, tap } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { Task } from '../interfaces/task';
 import { environment } from '../../../environments/environment';
 import { FbCreateResponse } from '../../../environments/interface';
@@ -27,7 +27,7 @@ export class TasksService {
       );
   }
 
-  public getAllTasks(completed: boolean): Observable<Task[]> {
+  public getAllTasks(): Observable<Task[]> {
     return this.http
       .get<Task[]>(
         `${environment.fbDbURL}/users/${this.auth.userId}/tasks.json`
@@ -35,19 +35,17 @@ export class TasksService {
       .pipe(
         map((response) => {
           return response
-            ? Object.entries(response)
-                .filter((task) => task[1].complete === completed)
-                .map((el) => {
-                  let { name, date, complete, description, position } = el[1];
-                  return {
-                    id: el[0],
-                    name,
-                    date,
-                    complete,
-                    description,
-                    position,
-                  };
-                })
+            ? Object.entries(response).map((el) => {
+                let { name, date, complete, description, position } = el[1];
+                return {
+                  id: el[0],
+                  name,
+                  date,
+                  complete,
+                  description,
+                  position,
+                };
+              })
             : [];
         })
       );

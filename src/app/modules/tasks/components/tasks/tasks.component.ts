@@ -22,8 +22,7 @@ import {
 import { AppState } from '../../../../store/app-state';
 import {
   addActiveTask,
-  getAllActiveTasks,
-  getAllCompletedTasks,
+  getAllTasks,
   updateTasks,
 } from '../../../../store/tasks/actions';
 
@@ -60,8 +59,9 @@ export class TasksComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.store.dispatch(getAllActiveTasks());
-    this.store.dispatch(getAllCompletedTasks());
+    // this.store.dispatch(getAllActiveTasks());
+    // this.store.dispatch(getAllCompletedTasks());
+    this.store.dispatch(getAllTasks());
     this.activeTasks$
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((activeTasks) => {
@@ -102,7 +102,14 @@ export class TasksComponent implements OnInit, OnDestroy {
   }
 
   public completeTask(task: Task): void {
-    this.updateTasks(this.activeTasks, this.completedTasks, task, true);
+    if (task.complete) {
+      const index = this.completedTasks.findIndex((el) => el.id === task.id);
+      this.activeTasks.push(this.completedTasks.splice(index, 1)[0]);
+    } else {
+      const index = this.activeTasks.findIndex((el) => el.id === task.id);
+      this.completedTasks.push(this.activeTasks.splice(index, 1)[0]);
+    }
+    this.updateTasks(this.activeTasks, this.completedTasks, task);
   }
 
   public drop(event: CdkDragDrop<Task[]>): void {
@@ -125,25 +132,10 @@ export class TasksComponent implements OnInit, OnDestroy {
     }
   }
 
-  private updateTasks(
-    active: Task[],
-    complete: Task[],
-    task?: Task,
-    inComplete: boolean = false
-  ): void {
+  private updateTasks(active: Task[], complete: Task[], task?: Task): void {
     const activeTasksObj: Object = {};
     const completeTasksObj: Object = {};
     const tasksObj: Object = {};
-
-    if (inComplete && task) {
-      if (task?.complete) {
-        const index = this.completedTasks.findIndex((el) => el.id === task.id);
-        this.activeTasks.push(this.completedTasks.splice(index, 1)[0]);
-      } else {
-        const index = this.activeTasks.findIndex((el) => el.id === task.id);
-        this.completedTasks.push(this.activeTasks.splice(index, 1)[0]);
-      }
-    }
 
     active.forEach(
       (el, index) => (activeTasksObj[el.id] = { ...el, position: index })

@@ -31,8 +31,14 @@ export class AuthInputComponent implements OnInit, ControlValueAccessor {
 
   public hide: boolean = true;
 
-  public authControl = new FormControl(null, [
+  public authControlEmail = new FormControl(null, [
     Validators.email,
+    Validators.required,
+    Validators.minLength(6),
+    Validators.maxLength(40),
+  ]);
+
+  public authControlPassword = new FormControl(null, [
     Validators.required,
     Validators.minLength(6),
     Validators.maxLength(40),
@@ -44,7 +50,12 @@ export class AuthInputComponent implements OnInit, ControlValueAccessor {
   constructor() {}
 
   ngOnInit(): void {
-    this.authControl.valueChanges.subscribe((val) => {
+    this.authControlEmail.valueChanges.subscribe((val) => {
+      if (this.onChange) {
+        this.onChange(val);
+      }
+    });
+    this.authControlPassword.valueChanges.subscribe((val) => {
       if (this.onChange) {
         this.onChange(val);
       }
@@ -62,6 +73,7 @@ export class AuthInputComponent implements OnInit, ControlValueAccessor {
   }
 
   public writeValue(value: string): void {
-    this.authControl.setValue(value);
+    this.authControlEmail.setValue(value);
+    this.authControlPassword.setValue(value);
   }
 }

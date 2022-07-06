@@ -2,50 +2,50 @@
 <div *ngIf="type==='email'" class="example-container">
   <mat-form-field appearance="fill">
     <mat-label>{{"Auth.Email" | translate}}</mat-label>
-    <input matInput #email placeholder="pat@example.com" [formControl]="authControl" maxlength="40" required>
+    <input matInput #email placeholder="pat@example.com" [formControl]="authControlEmail" maxlength="40" required>
   </mat-form-field>
 </div>
 
 <div *ngIf="type==='password'" class="example-container">
   <mat-form-field appearance="fill">
     <mat-label>{{"Auth.Password" | translate}}</mat-label>
-    <input type="password" matInput  [formControl]="authControl" required maxlength="40">
+    <input type="password" matInput  [formControl]="authControlPassword" required maxlength="40">
   </mat-form-field>
 </div>
 
 <div *ngIf="type==='repeatPassword'" class="example-container">
   <mat-form-field appearance="fill">
     <mat-label>{{"Auth.repeatPassword" | translate}}</mat-label>
-    <input type="password" matInput  [formControl]="authControl" required maxlength="40">
+    <input type="password" matInput  [formControl]="authControlPassword" required maxlength="40">
   </mat-form-field>
 </div>
 
 
 
-<div class="validation" *ngIf="authControl?.touched && authControl?.invalid">
+<div class="validation" *ngIf="(authControlEmail?.touched && authControlEmail?.invalid) || (authControlPassword?.touched && authControlPassword?.invalid)">
   <div *ngIf="type==='email'">
-    <small *ngIf="authControl.errors?.required">
+    <small *ngIf="authControlEmail.errors?.required">
       {{"Auth.Validation.EnterYourEmail" | translate}}
     </small>
-    <small *ngIf="authControl.errors?.email">
+    <small *ngIf="authControlEmail.errors?.email">
       {{"Auth.Validation.ThisInputIsShouldBeEmail" | translate}}
     </small>
 
   </div>
   <div *ngIf="type==='password' && place==='Password...'">
-    <small *ngIf="authControl.errors?.required">
+    <small *ngIf="authControlPassword.errors?.required">
       {{"Auth.Validation.EnterYourPassword" | translate}}
     </small>
-    <small *ngIf="authControl.errors?.minlength">
+    <small *ngIf="authControlPassword.errors?.minlength">
       {{"Auth.Validation.PasswordShouldBeAtLeast6Characters" | translate}}
     </small>
 
   </div>
   <div *ngIf="type==='repeatPassword' && place==='Repeat password...'">
-    <small *ngIf="authControl.errors?.required">
+    <small *ngIf="authControlPassword.errors?.required">
       {{"Auth.Validation.RepeatYourPassword" | translate}}
     </small>
-    <small *ngIf="authControl.errors?.minlength">
+    <small *ngIf="authControlPassword.errors?.minlength">
       {{"Auth.Validation.PasswordShouldBeAtLeast6Characters" | translate}}
     </small>
 

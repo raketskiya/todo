@@ -1,8 +1,18 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { fbToken, fbTokenExp, userId } from '../../consts/consts';
 import { TranslateService } from '@ngx-translate/core';
+import { selectActiveTasks } from '../../../store/tasks/selectors';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../../store/app-state';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -10,14 +20,17 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     public auth: AuthService,
-    public translate: TranslateService
+    public translate: TranslateService,
+    private ref: ChangeDetectorRef
   ) {}
 
   public language: string = 'en';
+
+  private ngUnsubscribe: Subject<void> = new Subject();
 
   ngOnInit(): void {
     if (sessionStorage.getItem(fbToken)) {
@@ -25,19 +38,28 @@ export class HeaderComponent implements OnInit {
       this.auth.fbTokenExp = String(sessionStorage.getItem(fbTokenExp));
       this.auth.userId = String(sessionStorage.getItem(userId));
     }
+
+    this.auth.isLogin.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => {
+      this.ref.markForCheck();
+    });
   }
 
-  public changeLanguage() {
+  public changeLanguage(): void {
     this.language === 'en' ? (this.language = 'ru') : (this.language = 'en');
     this.translate.use(this.language);
   }
 
-  theme() {
+  public theme(): void {
     this.router.navigate(['tasks/theme']);
   }
 
   public logOut(): void {
     this.auth.logout();
     this.router.navigate(['signIn']);
+  }
+
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 }

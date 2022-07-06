@@ -21,6 +21,7 @@ import { fbToken, fbTokenExp, userId } from '../consts/consts';
 export class AuthService implements OnDestroy {
   public error$: Subject<string> = new Subject<string>();
 
+  public isLogin: Subject<void> = new Subject();
   public fbToken: string = '';
   public fbTokenExp: string = '';
   public userId: string = '';
@@ -113,6 +114,7 @@ export class AuthService implements OnDestroy {
       sessionStorage.setItem(fbToken, this.fbToken);
       sessionStorage.setItem(fbTokenExp, this.fbTokenExp);
       sessionStorage.setItem(userId, this.userId);
+      this.isLogin.next();
     } else {
       sessionStorage.removeItem(fbToken);
       sessionStorage.removeItem(fbTokenExp);

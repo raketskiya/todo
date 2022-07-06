@@ -48,7 +48,8 @@ export class TasksComponent implements OnInit, OnDestroy {
   private completedTasks$ = this.store.select(selectCompleteTasks);
   private activeTasks$ = this.store.select(selectActiveTasks);
 
-  public spinner: boolean = true;
+  public activeSpinner: number = 0;
+  public completedSpinner: number = 0;
 
   private ngUnsubscribe: Subject<void> = new Subject();
 
@@ -67,6 +68,7 @@ export class TasksComponent implements OnInit, OnDestroy {
         this.activeTasks = [...activeTasks].sort((a, b) => {
           return a.position - b.position;
         });
+        this.activeSpinner++;
         this.ref.markForCheck();
       });
     this.completedTasks$
@@ -75,6 +77,8 @@ export class TasksComponent implements OnInit, OnDestroy {
         this.completedTasks = [...completedTasks].sort((a, b) => {
           return a.position - b.position;
         });
+        this.completedSpinner++;
+        this.ref.markForCheck();
       });
   }
 

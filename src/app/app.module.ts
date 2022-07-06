@@ -25,8 +25,6 @@ import { appReducers } from './store/reducers';
 import { TasksEffects } from './store/tasks/effects';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { ThemeComponent } from './shared/components/theme/theme.component';
-import { BreadcrumbModule } from 'angular-crumbs';
 
 const INTERCEPTOR_PROVIDER: Provider = {
   provide: HTTP_INTERCEPTORS,
@@ -50,7 +48,6 @@ export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
     ComponentsModule,
     MatDialogModule,
     NgbModule,
-    BreadcrumbModule,
     StoreModule.forRoot(appReducers),
     EffectsModule.forRoot([TasksEffects]),
     StoreDevtoolsModule.instrument({

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map, Observable, tap } from 'rxjs';
+import { map, Observable, Subject, tap } from 'rxjs';
 import { Task } from '../interfaces/task';
 import { environment } from '../../../environments/environment';
 import { FbCreateResponse } from '../../../environments/interface';
@@ -28,7 +28,6 @@ export class TasksService {
   }
 
   public getAllTasks(completed: boolean): Observable<Task[]> {
-    console.log('GET');
     return this.http
       .get<Task[]>(
         `${environment.fbDbURL}/users/${this.auth.userId}/tasks.json`

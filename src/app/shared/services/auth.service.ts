@@ -120,6 +120,7 @@ export class AuthService implements OnDestroy {
       sessionStorage.removeItem(fbTokenExp);
       sessionStorage.removeItem(userId);
       this.fbToken = this.fbTokenExp = this.userId = '';
+      this.isLogin.next();
     }
   }
 

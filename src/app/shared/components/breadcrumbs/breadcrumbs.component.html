@@ -1,0 +1,15 @@
+<div class="container-wrapper" *ngIf="!!this.auth.fbToken">
+  <div class="container">
+    <breadcrumb #parent>
+      <ul class="breadcrumb">
+        <ng-template ngFor let-route [ngForOf]="parent.breadcrumbs">
+          <li *ngIf="!route.terminal" class="breadcrumb-item">
+            <a href="" [routerLink]="[route.url]">{{route.displayName}}</a>
+          </li>
+          <li *ngIf="route.terminal" class="breadcrumb-item active">{{ route.displayName }}</li>
+        </ng-template>
+      </ul>
+    </breadcrumb>
+  </div>
+</div>
+<button (click)="test()"></button>

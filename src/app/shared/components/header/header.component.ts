@@ -2,6 +2,7 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  DoCheck,
   OnDestroy,
   OnInit,
 } from '@angular/core';
@@ -9,9 +10,6 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { fbToken, fbTokenExp, userId } from '../../consts/consts';
 import { TranslateService } from '@ngx-translate/core';
-import { selectActiveTasks } from '../../../store/tasks/selectors';
-import { Store } from '@ngrx/store';
-import { AppState } from '../../../store/app-state';
 import { Subject, takeUntil } from 'rxjs';
 
 @Component({

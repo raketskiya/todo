@@ -37,6 +37,14 @@
       "PasswordShouldBeAtLeast6Characters": "Password should be at least 6 characters",
       "RepeatYourPassword": "Repeat your password",
       "PasswordsDoNotMatch": "Passwords don't match"
+    },
+    "Errors": {
+      "INVALID_EMAIL": "Invalid email",
+      "EMAIL_NOT_FOUND": "Email not found",
+      "INVALID_PASSWORD": "Invalid password",
+      "EMAIL_EXISTS": "Email exists",
+      "MISSING_PASSWORD": "Missing password",
+      "ADMIN_ONLY_OPERATION": "Enter data for sign up"
     }
   }
 

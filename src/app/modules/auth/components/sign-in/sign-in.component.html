@@ -1,7 +1,7 @@
  <div class="auth">
     <p class="page-title">{{'Sign in.TITLE' | translate}}</p>
    <div class="error">
-     <p type="danger" *ngIf="authService.error$ | async as error" >{{ error }}</p>
+     <p type="danger" *ngIf="authService.error$ | async as error" >{{ error | translate }}</p>
    </div>
 
 

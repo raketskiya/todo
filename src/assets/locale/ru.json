@@ -37,6 +37,14 @@
       "PasswordShouldBeAtLeast6Characters": "Пароль должен быть 6 и более символов",
       "RepeatYourPassword": "Повторите ваш пароль",
       "PasswordsDoNotMatch": "Пароли не совпадают"
+    },
+    "Errors": {
+      "INVALID_EMAIL": "Неправильная почта",
+      "EMAIL_NOT_FOUND": "Такая почта не найдена",
+      "INVALID_PASSWORD": "Неправильный пароль",
+      "EMAIL_EXISTS": "Такой аккаунт уже есть",
+      "MISSING_PASSWORD": "Введите пароль",
+      "ADMIN_ONLY_OPERATION": "Введите данные"
     }
   }
 }

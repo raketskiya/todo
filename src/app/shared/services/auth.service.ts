@@ -69,12 +69,12 @@ export class AuthService implements OnDestroy {
     const { message } = error.error.error;
 
     enum Errors {
-      INVALID_EMAIL = 'Invalid email',
-      EMAIL_NOT_FOUND = 'Email not found',
-      INVALID_PASSWORD = 'Invalid password',
-      EMAIL_EXISTS = 'Email exists',
-      MISSING_PASSWORD = 'Missing password',
-      ADMIN_ONLY_OPERATION = 'Enter date for sign up',
+      INVALID_EMAIL = 'Auth.Errors.INVALID_EMAIL',
+      EMAIL_NOT_FOUND = 'Auth.Errors.EMAIL_NOT_FOUND',
+      INVALID_PASSWORD = 'Auth.Errors.INVALID_PASSWORD',
+      EMAIL_EXISTS = 'Auth.Errors.EMAIL_EXISTS',
+      MISSING_PASSWORD = 'Auth.Errors.MISSING_PASSWORD',
+      ADMIN_ONLY_OPERATION = 'Auth.Errors.ADMIN_ONLY_OPERATION',
     }
 
     this.error$.next(Errors[message]);

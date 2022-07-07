@@ -35,9 +35,9 @@ import {
     trigger('appearance', [
       transition('void => *', [
         style({ opacity: 0 }),
-        animate('0.7s', style({ opacity: 1 })),
+        animate('0.4s', style({ opacity: 1 })),
       ]),
-      transition('* => void', [animate('0.7s', style({ opacity: 0 }))]),
+      transition('* => void', [animate('0.4s', style({ opacity: 0 }))]),
     ]),
   ],
 })
@@ -57,6 +57,10 @@ export class TasksComponent implements OnInit, OnDestroy {
     private store: Store<AppState>,
     private ref: ChangeDetectorRef
   ) {}
+
+  public identify(index: number, item: Task) {
+    return item.id;
+  }
 
   ngOnInit(): void {
     this.store.dispatch(getAllTasks());

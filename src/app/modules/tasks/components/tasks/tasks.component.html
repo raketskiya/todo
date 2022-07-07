@@ -20,9 +20,10 @@
           class="tasks"
           (cdkDropListDropped)="drop($event)">
           <app-task
-
+            @appearance
             class="task"
-            *ngFor="let item of activeTasks"
+            *ngFor="let item of activeTasks; trackBy:identify"
+
             cdkDrag
             [cdkDragData]="item"
             (onRemove)="deleteTask($event)"
@@ -46,9 +47,9 @@
           class="tasks"
           (cdkDropListDropped)="drop($event)">
           <app-task
-
+            @appearance
             class="task"
-            *ngFor="let item of completedTasks"
+            *ngFor="let item of completedTasks; trackBy:identify"
             cdkDrag
             [cdkDragData]="item"
             (onRemove)="deleteTask($event)"

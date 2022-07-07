@@ -27,7 +27,7 @@ import {
 export class TaskInputComponent implements ControlValueAccessor, OnInit {
   onChange!: (value: string) => void;
   onTouche!: () => void;
-  public textControl = new FormControl('', [Validators.required]);
+  public textControl = new FormControl('');
 
   constructor() {}
 

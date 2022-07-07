@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
   selector: 'app-breadcrumbs',
   templateUrl: './breadcrumbs.component.html',
   styleUrls: ['./breadcrumbs.component.scss'],
-  //changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BreadcrumbsComponent implements OnInit, OnDestroy {
   private ngUnsubscribe: Subject<void> = new Subject();
@@ -26,20 +26,13 @@ export class BreadcrumbsComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    console.log(this.route.url);
     this.auth.isLogin.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => {
       this.ref.markForCheck();
-      console.log('test');
     });
-    this.ref.markForCheck();
   }
 
   ngOnDestroy(): void {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
   }
-
-  // test() {
-  //   console.log(this.route.url);
-  // }
 }

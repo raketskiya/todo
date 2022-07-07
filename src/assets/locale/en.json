@@ -26,6 +26,10 @@
     "Description": "Description",
     "Name": "Name"
   },
+  "Breadcrumbs": {
+    "Tasks": "Tasks",
+    "Theme": "Theme"
+  },
   "Auth": {
     "Email": "Enter your email",
     "Password": "Enter your password",

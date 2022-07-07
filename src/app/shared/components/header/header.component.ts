@@ -49,6 +49,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   public theme(): void {
     this.router.navigate(['tasks/theme']);
+    this.auth.isLogin.next();
   }
 
   public logOut(): void {

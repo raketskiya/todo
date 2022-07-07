@@ -89,4 +89,15 @@ describe('AddTaskComponent', () => {
     button.nativeElement.click();
     expect(event).toHaveBeenCalledWith(task);
   });
+
+  it('forms fields have to be clear after addition task', () => {
+    const nameControl = component.tasksForm.get('name');
+    const descriptionControl = component.tasksForm.get('description');
+    nameControl?.setValue('name');
+    descriptionControl?.setValue('description');
+    component.addTask();
+    expect(nameControl?.value).toBe(null);
+    expect(descriptionControl?.value).toBe(null);
+    expect(component.tasksForm.invalid).toBeTruthy();
+  });
 });

@@ -26,6 +26,10 @@
     "Description": "Описание",
     "Name": "Название"
   },
+  "Breadcrumbs": {
+    "Tasks": "Задачи",
+    "Theme": "Тема"
+  },
   "Auth": {
     "Email": "Введите ваш почту",
     "Password": "Введите ваш пароль",

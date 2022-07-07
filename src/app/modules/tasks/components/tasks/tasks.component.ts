@@ -25,6 +25,7 @@ import {
   getAllTasks,
   updateTasks,
 } from '../../../../store/tasks/actions';
+import { AuthService } from '../../../../shared/services/auth.service';
 
 @Component({
   selector: 'app-tasks',
@@ -55,7 +56,8 @@ export class TasksComponent implements OnInit, OnDestroy {
   constructor(
     private tasksService: TasksService,
     private store: Store<AppState>,
-    private ref: ChangeDetectorRef
+    private ref: ChangeDetectorRef,
+    private auth: AuthService
   ) {}
 
   public identify(index: number, item: Task) {
@@ -82,6 +84,7 @@ export class TasksComponent implements OnInit, OnDestroy {
         this.completedSpinner++;
         this.ref.markForCheck();
       });
+    this.auth.isLogin.next();
   }
 
   public addTask(task: Task): void {

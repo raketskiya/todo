@@ -7,7 +7,6 @@ import {
   Output,
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { TasksService } from '../../../../shared/services/tasks.service';
 import { Task } from '../../../../shared/interfaces/task';
 import { Subject, takeUntil } from 'rxjs';
 import { Store } from '@ngrx/store';
@@ -25,17 +24,14 @@ export class AddTaskComponent implements OnDestroy, OnInit {
   private activeTasks$ = this.store.select(selectActiveTasks);
   public activeTasks: Task[] = [];
 
-  @Output() onAdd = new EventEmitter<Task>();
+  @Output() onAdd: EventEmitter<Task> = new EventEmitter<Task>();
 
   tasksForm: FormGroup = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.maxLength(30)]),
-    description: new FormControl('', Validators.maxLength(500)),
+    description: new FormControl('', Validators.maxLength(100)),
   });
 
-  constructor(
-    private tasksService: TasksService,
-    private store: Store<AppState>
-  ) {}
+  constructor(private store: Store<AppState>) {}
 
   ngOnInit() {
     this.activeTasks$
@@ -44,10 +40,11 @@ export class AddTaskComponent implements OnDestroy, OnInit {
   }
 
   public addTask(): void {
+    const date = new Date().setMilliseconds(0);
     const length = this.activeTasks.length;
     const task: Task = {
       name: this.tasksForm.controls['name'].value,
-      date: new Date(),
+      date: new Date(date),
       id: '',
       complete: false,
       description: this.tasksForm.controls['description'].value,

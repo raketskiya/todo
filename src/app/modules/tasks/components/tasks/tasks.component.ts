@@ -59,8 +59,6 @@ export class TasksComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    // this.store.dispatch(getAllActiveTasks());
-    // this.store.dispatch(getAllCompletedTasks());
     this.store.dispatch(getAllTasks());
     this.activeTasks$
       .pipe(takeUntil(this.ngUnsubscribe))

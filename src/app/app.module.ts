@@ -23,7 +23,11 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { appReducers } from './store/reducers';
 import { TasksEffects } from './store/tasks/effects';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import {
+  TranslateLoader,
+  TranslateModule,
+  TranslatePipe,
+} from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 const INTERCEPTOR_PROVIDER: Provider = {

@@ -6,16 +6,13 @@ import { appReducers } from '../../../../store/reducers';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { Task } from '../../../../shared/interfaces/task';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ControlsModule } from '../../../../shared/controls/controls.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
-  return new TranslateHttpLoader(http, './assets/locale/', '.json');
-}
+import { HttpLoaderFactory } from '../../../../app.module';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('AddTaskComponent', () => {
   let component: AddTaskComponent;
@@ -26,6 +23,7 @@ describe('AddTaskComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [AddTaskComponent],
       imports: [
+        HttpClientTestingModule,
         StoreModule.forRoot(appReducers),
         TranslateModule.forRoot({
           loader: {
@@ -84,7 +82,6 @@ describe('AddTaskComponent', () => {
     const event = spyOn(component.onAdd, 'emit');
     const button = fixture.debugElement.query(By.css('.btn'));
     event.calls.reset();
-    console.log(component.tasksForm.invalid);
     fixture.detectChanges();
     button.nativeElement.click();
     expect(event).toHaveBeenCalledWith(task);

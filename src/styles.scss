@@ -27,6 +27,14 @@ $todo-theme: mat.define-light-theme((
     warn: $todo-warn,
   )
 ));
+$todo-theme-dark: mat.define-dark-theme((
+  color: (
+    primary: $todo-primary,
+    accent: $todo-accent,
+    warn: $todo-warn,
+  )
+));
+
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component

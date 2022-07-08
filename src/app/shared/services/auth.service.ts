@@ -17,7 +17,7 @@ import {
 } from '../../../environments/interface';
 import { fbToken, fbTokenExp, userId } from '../consts/consts';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class AuthService implements OnDestroy {
   public error$: Subject<string> = new Subject<string>();
 

@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  constructor(private auth: AuthService, private router: Router) {}
+  constructor(private auth: AuthService, private router: Router) { }
 
   public intercept(
     req: HttpRequest<any>,
@@ -30,7 +30,7 @@ export class AuthInterceptor implements HttpInterceptor {
       catchError((err: HttpErrorResponse) => {
         if (err.status === 401) {
           this.auth.logout();
-          this.router.navigate(['sighIn']);
+          this.router.navigate(['signIn']);
         }
         return throwError(err);
       })

@@ -55,7 +55,7 @@ export class SignInComponent implements OnDestroy {
   }
 
   public changeSighType(): void {
-    this.router.navigate(['sighUp']);
+    this.router.navigate(['/signUp']);
   }
 
   ngOnDestroy() {

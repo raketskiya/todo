@@ -29,7 +29,7 @@ export class SignUpComponent implements OnDestroy {
 
   private ngUnsubscribe: Subject<void> = new Subject();
 
-  constructor(public authService: AuthService, private router: Router) {}
+  constructor(public authService: AuthService, private router: Router) { }
 
   private handleResponse(response: FbAuthResponse | null, user: User): void {
     this.router.navigate(['/tasks']);
@@ -69,7 +69,7 @@ export class SignUpComponent implements OnDestroy {
   }
 
   public changeSighType(): void {
-    this.router.navigate(['sighIn']);
+    this.router.navigate(['signIn']);
   }
 
   ngOnDestroy() {

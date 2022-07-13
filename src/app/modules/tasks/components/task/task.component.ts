@@ -6,11 +6,11 @@ import {
   OnDestroy,
   Output,
 } from '@angular/core';
-import { Task } from '../../../../shared/interfaces/task';
 import { Subject, takeUntil } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
-import { EditModalComponent } from '../edit-modal/edit-modal.component';
 import { Store } from '@ngrx/store';
+import { EditModalComponent } from '../edit-modal/edit-modal.component';
+import { Task } from '../../../../shared/interfaces/task';
 import { AppState } from '../../../../store/app-state';
 import { editTask } from '../../../../store/tasks/actions';
 
@@ -23,14 +23,21 @@ import { editTask } from '../../../../store/tasks/actions';
 export class TaskComponent implements OnDestroy {
   ngUnsubscribe: Subject<void> = new Subject();
 
-  @Input() description: string = '';
-  @Input() name: string = '';
-  @Input() date: Date = new Date();
-  @Input() id: string = '';
-  @Input() complete: any;
-  @Input() position: any;
-  @Output() completeData = new EventEmitter<Task>();
-  @Output() onRemove = new EventEmitter<Object>();
+  @Input() public description: string = '';
+
+  @Input() public name: string = '';
+
+  @Input() public date: Date = new Date();
+
+  @Input() public id: string = '';
+
+  @Input() public complete: boolean = false;
+
+  @Input() public position: number = 0;
+
+  @Output() public completeData = new EventEmitter<Task>();
+
+  @Output() public onRemove = new EventEmitter<Task>();
 
   constructor(public dialog: MatDialog, private store: Store<AppState>) {}
 
@@ -84,7 +91,7 @@ export class TaskComponent implements OnDestroy {
     this.completeData.emit(task);
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
   }

@@ -7,9 +7,9 @@ import {
   Output,
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Task } from '../../../../shared/interfaces/task';
 import { Subject, takeUntil } from 'rxjs';
 import { Store } from '@ngrx/store';
+import { Task } from '../../../../shared/interfaces/task';
 import { AppState } from '../../../../store/app-state';
 import { selectActiveTasks } from '../../../../store/tasks/selectors';
 
@@ -20,13 +20,15 @@ import { selectActiveTasks } from '../../../../store/tasks/selectors';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddTaskComponent implements OnDestroy, OnInit {
-  ngUnsubscribe: Subject<void> = new Subject();
+  private ngUnsubscribe: Subject<void> = new Subject();
+
   private activeTasks$ = this.store.select(selectActiveTasks);
+
   public activeTasks: Task[] = [];
 
-  @Output() onAdd: EventEmitter<Task> = new EventEmitter<Task>();
+  @Output() public onAdd: EventEmitter<Task> = new EventEmitter<Task>();
 
-  tasksForm: FormGroup = new FormGroup({
+  public tasksForm: FormGroup = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.maxLength(30)]),
     description: new FormControl('', Validators.maxLength(100)),
   });
@@ -36,12 +38,14 @@ export class AddTaskComponent implements OnDestroy, OnInit {
   ngOnInit() {
     this.activeTasks$
       .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe((activeTasks) => (this.activeTasks = [...activeTasks]));
+      .subscribe((activeTasks) => {
+        this.activeTasks = [...activeTasks];
+      });
   }
 
   public addTask(): void {
     const date = new Date().setMilliseconds(0);
-    const length = this.activeTasks.length;
+    const { length } = this.activeTasks;
     const task: Task = {
       name: this.tasksForm.controls['name'].value,
       date: new Date(date),

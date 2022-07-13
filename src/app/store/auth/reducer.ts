@@ -1,5 +1,5 @@
-import { User } from '../../shared/interfaces/user.interface';
 import { createReducer, on } from '@ngrx/store';
+import { User } from '../../shared/interfaces/user.interface';
 import { addUser } from './actions';
 
 export interface AuthState {
@@ -14,6 +14,6 @@ export const authReducer = createReducer(
   initialState,
   on(addUser, (state, { user }) => ({
     ...state,
-    user: user,
+    user,
   }))
 );

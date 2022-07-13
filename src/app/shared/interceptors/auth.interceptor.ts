@@ -7,26 +7,27 @@ import {
   HttpRequest,
 } from '@angular/common/http';
 import { catchError, Observable, throwError } from 'rxjs';
-import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  constructor(private auth: AuthService, private router: Router) { }
+  constructor(private auth: AuthService, private router: Router) {}
 
   public intercept(
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
+    let reqClone = req;
     if (this.auth.fbToken !== '' && this.auth.isTokenValid()) {
-      req = req.clone({
+      reqClone = req.clone({
         setParams: {
           auth: this.auth.fbToken,
         },
       });
     }
 
-    return next.handle(req).pipe(
+    return next.handle(reqClone).pipe(
       catchError((err: HttpErrorResponse) => {
         if (err.status === 401) {
           this.auth.logout();

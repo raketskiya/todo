@@ -1,6 +1,5 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { User } from '../interfaces/user.interface';
 import {
   catchError,
   map,
@@ -10,6 +9,7 @@ import {
   tap,
   throwError,
 } from 'rxjs';
+import { User } from '../interfaces/user.interface';
 import { environment } from '../../../environments/environment';
 import {
   FbAuthResponse,
@@ -22,8 +22,11 @@ export class AuthService implements OnDestroy {
   public error$: Subject<string> = new Subject<string>();
 
   public isLogin: Subject<void> = new Subject();
+
   public fbToken: string = '';
+
   public fbTokenExp: string = '';
+
   public userId: string = '';
 
   constructor(private http: HttpClient) {}
@@ -89,9 +92,7 @@ export class AuthService implements OnDestroy {
         { idToken: this.fbToken }
       )
       .pipe(
-        map((el) => {
-          return el.users[0].localId === this.userId;
-        }),
+        map((el) => el.users[0].localId === this.userId),
         catchError(() => {
           this.logout();
           return of(false);
@@ -119,7 +120,9 @@ export class AuthService implements OnDestroy {
       sessionStorage.removeItem(fbToken);
       sessionStorage.removeItem(fbTokenExp);
       sessionStorage.removeItem(userId);
-      this.fbToken = this.fbTokenExp = this.userId = '';
+      this.fbToken = '';
+      this.fbTokenExp = '';
+      this.userId = '';
       this.isLogin.next();
     }
   }

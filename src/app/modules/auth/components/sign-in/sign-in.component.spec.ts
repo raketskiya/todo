@@ -1,24 +1,24 @@
 import { HttpClient } from '@angular/common/http';
-import { SignInComponent } from './sign-in.component';
 import { ComponentFixture, fakeAsync, TestBed } from '@angular/core/testing';
-import { AuthService } from '../../../../shared/services/auth.service';
 import { RouterTestingModule } from '@angular/router/testing';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { HttpLoaderFactory } from '../../../../app.module';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { ControlsModule } from '../../../../shared/controls/controls.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { routes } from '../../../../app-routing.module';
 import { Location } from '@angular/common';
+import { routes } from '../../../../app-routing.module';
+import { ControlsModule } from '../../../../shared/controls/controls.module';
+import { HttpLoaderFactory } from '../../../../app.module';
+import { AuthService } from '../../../../shared/services/auth.service';
+import { SignInComponent } from './sign-in.component';
 
 describe('SignInComponent', () => {
   let component: SignInComponent;
   let fixture: ComponentFixture<SignInComponent>;
-  let user = {
+  const user = {
     login: 'a@mail.ru',
     password: '123123',
   };

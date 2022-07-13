@@ -5,8 +5,6 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { Task } from '../../../../shared/interfaces/task';
-import { TasksService } from '../../../../shared/services/tasks.service';
 import { Store } from '@ngrx/store';
 import { Subject, takeUntil } from 'rxjs';
 import {
@@ -15,6 +13,8 @@ import {
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
 import { animate, style, transition, trigger } from '@angular/animations';
+import { TasksService } from '../../../../shared/services/tasks.service';
+import { Task } from '../../../../shared/interfaces/task';
 import {
   selectActiveTasks,
   selectCompleteTasks,
@@ -44,11 +44,15 @@ import { AuthService } from '../../../../shared/services/auth.service';
 })
 export class TasksComponent implements OnInit, OnDestroy {
   public completedTasks: Task[] = [];
+
   public activeTasks: Task[] = [];
+
   private completedTasks$ = this.store.select(selectCompleteTasks);
+
   private activeTasks$ = this.store.select(selectActiveTasks);
 
   public activeSpinner: number = 0;
+
   public completedSpinner: number = 0;
 
   private ngUnsubscribe: Subject<void> = new Subject();
@@ -60,7 +64,7 @@ export class TasksComponent implements OnInit, OnDestroy {
     private auth: AuthService
   ) {}
 
-  public identify(index: number, item: Task) {
+  public identify(index: number, item: Task): string {
     return item.id;
   }
 
@@ -69,18 +73,18 @@ export class TasksComponent implements OnInit, OnDestroy {
     this.activeTasks$
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((activeTasks) => {
-        this.activeTasks = [...activeTasks].sort((a, b) => {
-          return a.position - b.position;
-        });
+        this.activeTasks = [...activeTasks].sort(
+          (a, b) => a.position - b.position
+        );
         this.activeSpinner++;
         this.ref.markForCheck();
       });
     this.completedTasks$
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((completedTasks) => {
-        this.completedTasks = [...completedTasks].sort((a, b) => {
-          return a.position - b.position;
-        });
+        this.completedTasks = [...completedTasks].sort(
+          (a, b) => a.position - b.position
+        );
         this.completedSpinner++;
         this.ref.markForCheck();
       });
@@ -91,7 +95,7 @@ export class TasksComponent implements OnInit, OnDestroy {
     this.store.dispatch(addActiveTask({ task }));
   }
 
-  public deleteTask(task: any): void {
+  public deleteTask(task: Task): void {
     if (task.complete) {
       const index: number = this.completedTasks.findIndex(
         (el) => el.id === task.id
@@ -142,12 +146,12 @@ export class TasksComponent implements OnInit, OnDestroy {
     const completeTasksObj: Object = {};
     const tasksObj: Object = {};
 
-    active.forEach(
-      (el, index) => (activeTasksObj[el.id] = { ...el, position: index })
-    );
-    complete.forEach(
-      (el, index) => (completeTasksObj[el.id] = { ...el, position: index })
-    );
+    active.forEach((el, index) => {
+      activeTasksObj[el.id] = { ...el, position: index };
+    });
+    complete.forEach((el, index) => {
+      completeTasksObj[el.id] = { ...el, position: index };
+    });
 
     Object.assign(tasksObj, activeTasksObj, completeTasksObj);
 

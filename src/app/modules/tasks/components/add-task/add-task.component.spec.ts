@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { AddTaskComponent } from './add-task.component';
 import { StoreModule } from '@ngrx/store';
-import { appReducers } from '../../../../store/reducers';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { Task } from '../../../../shared/interfaces/task';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { ControlsModule } from '../../../../shared/controls/controls.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpLoaderFactory } from '../../../../app.module';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { ControlsModule } from '../../../../shared/controls/controls.module';
+import { HttpLoaderFactory } from '../../../../app.module';
+import { Task } from '../../../../shared/interfaces/task';
+import { appReducers } from '../../../../store/reducers';
+import { AddTaskComponent } from './add-task.component';
 
 describe('AddTaskComponent', () => {
   let component: AddTaskComponent;

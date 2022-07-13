@@ -2,13 +2,12 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  DoCheck,
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
 import { Subject, takeUntil } from 'rxjs';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-breadcrumbs',

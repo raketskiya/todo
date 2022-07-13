@@ -1,10 +1,9 @@
 import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../../../../shared/services/auth.service';
 import { Router } from '@angular/router';
-import { User } from '../../../../shared/interfaces/user.interface';
-import { FbAuthResponse } from '../../../../../environments/interface';
 import { Subject, takeUntil } from 'rxjs';
+import { AuthService } from '../../../../shared/services/auth.service';
+import { User } from '../../../../shared/interfaces/user.interface';
 
 @Component({
   selector: 'app-sign-in',
@@ -13,7 +12,7 @@ import { Subject, takeUntil } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SignInComponent implements OnDestroy {
-  signInForm = new FormGroup({
+  public signInForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.maxLength(40)]),
     password: new FormControl('', [
       Validators.required,
@@ -25,13 +24,6 @@ export class SignInComponent implements OnDestroy {
   private ngUnsubscribe: Subject<void> = new Subject();
 
   constructor(public authService: AuthService, private router: Router) {}
-
-  private handleResponse(response: FbAuthResponse | null, user: User): void {
-    this.router.navigate(['/tasks']);
-    if (response) {
-      user.localId = response.localId;
-    }
-  }
 
   public submit(): void {
     const user: User = {
@@ -46,7 +38,9 @@ export class SignInComponent implements OnDestroy {
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(
         (response) => {
-          this.handleResponse(response, user);
+          if (response) {
+            this.router.navigate(['/tasks']);
+          }
         },
         () => {
           this.signInForm.reset();

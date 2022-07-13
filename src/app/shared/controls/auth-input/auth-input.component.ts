@@ -27,9 +27,8 @@ import {
 })
 export class AuthInputComponent implements OnInit, ControlValueAccessor {
   onChange!: (value: string) => void;
-  onTouche!: () => void;
 
-  public hide: boolean = true;
+  onTouche!: () => void;
 
   public authControlEmail = new FormControl(null, [
     Validators.email,
@@ -44,10 +43,9 @@ export class AuthInputComponent implements OnInit, ControlValueAccessor {
     Validators.maxLength(40),
   ]);
 
-  @Input() place = '';
-  @Input() type = '';
+  @Input() public place = '';
 
-  constructor() {}
+  @Input() public type = '';
 
   ngOnInit(): void {
     this.authControlEmail.valueChanges.subscribe((val) => {
@@ -62,7 +60,7 @@ export class AuthInputComponent implements OnInit, ControlValueAccessor {
     });
   }
 
-  public setDisabledState(isDisabled: boolean): void {}
+  public setDisabledState(): void {}
 
   public registerOnChange(fn: any): void {
     this.onChange = fn;

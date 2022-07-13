@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { TasksService } from '../../shared/services/tasks.service';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, EMPTY, map, mergeMap, switchMap } from 'rxjs';
+import { TasksService } from '../../shared/services/tasks.service';
 import { Task } from '../../shared/interfaces/task';
 import {
   addActiveTask,
@@ -21,7 +21,7 @@ export class TasksEffects {
       ofType(getAllTasks),
       switchMap(() =>
         this.tasksService.getAllTasks().pipe(
-          map((tasks: Task[]) => getAllTasksSuccess({ tasks: tasks })),
+          map((tasks: Task[]) => getAllTasksSuccess({ tasks })),
           catchError(() => EMPTY)
         )
       )
@@ -33,7 +33,7 @@ export class TasksEffects {
       ofType(addActiveTask),
       mergeMap((el) =>
         this.tasksService.create(el.task).pipe(
-          map((task: Task) => addActiveTaskSuccess({ task: task })),
+          map((task: Task) => addActiveTaskSuccess({ task })),
           catchError(() => EMPTY)
         )
       )

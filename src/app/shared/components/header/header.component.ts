@@ -2,15 +2,14 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  DoCheck,
   OnDestroy,
   OnInit,
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
-import { fbToken, fbTokenExp, userId } from '../../consts/consts';
 import { TranslateService } from '@ngx-translate/core';
 import { Subject, takeUntil } from 'rxjs';
+import { AuthService } from '../../services/auth.service';
+import { fbToken, fbTokenExp, userId } from '../../consts/consts';
 
 @Component({
   selector: 'app-header',

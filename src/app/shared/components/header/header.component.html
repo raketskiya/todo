@@ -5,7 +5,7 @@
         <mat-icon>language</mat-icon>
         {{language}}
       </button>
-      <button  class="lng-btn" mat-flat-button (click)="theme()">
+      <button *ngIf="!!this.auth.fbToken"  class="lng-btn" mat-flat-button (click)="theme()">
         {{'Header.Theme' | translate}}
       </button>
     </div>

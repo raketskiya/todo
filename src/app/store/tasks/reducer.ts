@@ -1,5 +1,5 @@
-import { Task } from '../../shared/interfaces/task';
 import { createReducer, on } from '@ngrx/store';
+import { Task } from '../../shared/interfaces/task';
 import { addActiveTaskSuccess, getAllTasksSuccess } from './actions';
 
 export interface TasksState {
@@ -27,7 +27,7 @@ export const tasksReducer = createReducer(
     return {
       ...state,
       complitedTasks: completeTasks,
-      activeTasks: activeTasks,
+      activeTasks,
     };
   })
 );

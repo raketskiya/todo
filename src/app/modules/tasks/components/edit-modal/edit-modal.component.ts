@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Inject,
-  OnInit,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
@@ -18,7 +13,7 @@ export class EditModalComponent {
     @Inject(MAT_DIALOG_DATA) public data: { name: string; description: string }
   ) {}
 
-  cancel() {
+  public cancel(): void {
     this.dialogRef.close();
   }
 }

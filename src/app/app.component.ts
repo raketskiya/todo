@@ -9,9 +9,10 @@ import { environment } from '../environments/environment';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent implements OnInit {
-  title = 'todo';
+  public title = 'todo';
 
   constructor(public translateService: TranslateService) {}
+
   ngOnInit(): void {
     this.translateService.use(environment.locales[0]);
   }

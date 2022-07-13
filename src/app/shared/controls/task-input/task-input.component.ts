@@ -8,7 +8,6 @@ import {
   ControlValueAccessor,
   FormControl,
   NG_VALUE_ACCESSOR,
-  Validators,
 } from '@angular/forms';
 
 @Component({
@@ -26,10 +25,10 @@ import {
 })
 export class TaskInputComponent implements ControlValueAccessor, OnInit {
   onChange!: (value: string) => void;
-  onTouche!: () => void;
-  public textControl = new FormControl('');
 
-  constructor() {}
+  onTouche!: () => void;
+
+  public textControl = new FormControl('');
 
   ngOnInit(): void {
     this.textControl.valueChanges.subscribe((val) => {
@@ -39,7 +38,7 @@ export class TaskInputComponent implements ControlValueAccessor, OnInit {
     });
   }
 
-  public setDisabledState(isDisabled: boolean): void {}
+  public setDisabledState(): void {}
 
   public registerOnChange(fn: any): void {
     this.onChange = fn;

@@ -17,13 +17,11 @@ export class TasksService {
         task
       )
       .pipe(
-        map((response: FbCreateResponse) => {
-          return {
-            ...task,
-            id: response.name,
-            date: new Date(task.date),
-          };
-        })
+        map((response: FbCreateResponse) => ({
+          ...task,
+          id: response.name,
+          date: new Date(task.date),
+        }))
       );
   }
 
@@ -33,10 +31,10 @@ export class TasksService {
         `${environment.fbDbURL}/users/${this.auth.userId}/tasks.json`
       )
       .pipe(
-        map((response) => {
-          return response
+        map((response) =>
+          response
             ? Object.entries(response).map((el) => {
-                let { name, date, complete, description, position } = el[1];
+                const { name, date, complete, description, position } = el[1];
                 return {
                   id: el[0],
                   name,
@@ -46,8 +44,8 @@ export class TasksService {
                   position,
                 };
               })
-            : [];
-        })
+            : []
+        )
       );
   }
 
@@ -64,11 +62,9 @@ export class TasksService {
     );
   }
 
-  public updateTasks(tasks: any): Observable<any> {
-    console.log(tasks);
-    return this.http.put<any>(
+  public updateTasks(tasks: Object): Observable<void> {
+    return this.http.put<void>(
       `${environment.fbDbURL}/users/${this.auth.userId}/tasks.json`,
-
       tasks
     );
   }

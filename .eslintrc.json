@@ -1,0 +1,44 @@
+{
+  "root": true,
+  "ignorePatterns": [
+    "projects/**/*"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "*.ts"
+      ],
+      "parserOptions": {
+        "project": [
+          "./tsconfig.json"
+        ],
+        "createDefaultProgram": true
+      },
+      "extends": [
+        "airbnb-base",
+        "airbnb-typescript/base",
+        "prettier"
+      ],
+      "plugins": ["prettier"],
+      "rules": {
+        "no-unused-vars": "warn",
+        "no-console": "off",
+        "prettier/prettier": "error",
+        "class-methods-use-this": "off",
+        "import/prefer-default-export": "off",
+        "no-plusplus": "off",
+        "import/no-extraneous-dependencies": "off",
+        "no-unused-expressions": "off"
+      }
+    },
+    {
+      "files": [
+        "*.html"
+      ],
+      "extends": [
+        "plugin:@angular-eslint/template/recommended"
+      ],
+      "rules": {}
+    }
+  ]
+}

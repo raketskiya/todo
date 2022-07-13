@@ -1,15 +1,22 @@
 <div class="add-form-wrapper">
   <div class="add-form">
-    <form [formGroup]="tasksForm" (ngSubmit)="addTask()">
+    <form [formGroup]="tasksForm" >
       <div class="name-wrapper">
-        <label>Name:</label>
         <app-task-input class="form-item" formControlName="name"></app-task-input>
       </div>
-      <div class="description-wrapper">
-        <label>Description:</label>
-        <textarea class="form-item description" formControlName="description" maxlength="60"></textarea>
-      </div>
-      <button class="form-item btn btn-primary" [disabled]="tasksForm.invalid">Add</button>
+
+        <div class="description-wrapper">
+          <mat-form-field appearance="fill">
+            <mat-label>{{'Add.Description' | translate}}</mat-label>
+            <textarea matInput  cdkTextareaAutosize  #description maxlength="100"  cdkAutosizeMinRows="1"
+                      cdkAutosizeMaxRows="2" name="description" formControlName="description"></textarea>
+            <mat-hint align="end">{{description.value.length}} / 100</mat-hint>
+          </mat-form-field>
+        </div>
+        <button mat-fab color="primary" class="form-item btn btn-primary" [disabled]="tasksForm.invalid" (click)="addTask()">
+          <mat-icon>add</mat-icon>
+        </button>
+
     </form>
   </div>
 </div>

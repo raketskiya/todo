@@ -1,0 +1,45 @@
+input{
+  max-width:450px;
+  width: 450px;
+}
+
+mat-form-field{
+  max-width:450px;
+  width: 450px;
+}
+
+textarea{
+  height: 60px;
+  resize: none;
+  overflow: hidden;
+}
+
+form{
+  overflow: hidden;
+}
+
+.mat-dialog-actions{
+  display: flex;
+  justify-content: space-around;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.mat-button{
+
+}
+
+
+/* 320px - 576px */
+@media screen and (max-width: 576px) {
+  mat-form-field{
+    max-width:220px;
+    width: 220px;
+  }
+  input{
+    font-size: 12px;
+    max-width:215px;
+    width: 215px;
+  }
+}
+

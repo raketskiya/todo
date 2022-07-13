@@ -1,0 +1,54 @@
+{
+  "Sign in": {
+    "TITLE": "Вход",
+    "Sign in button": "Войти",
+    "Create button" : "Создать аккаунт"
+  },
+  "Sign up": {
+    "TITLE": "Регистрация",
+    "Sign up button": "Создать",
+    "Have button" : "У меня уже есть аккаунт"
+  },
+  "Tasks": {
+    "Active": "Активные задачи",
+    "Complete": "Выполненные задачи"
+  },
+  "Header": {
+    "Logout": "Выйти",
+    "Theme": "Тема"
+  },
+  "Edit": {
+    "Title": "Редактирование задачи",
+    "Cancel": "Отмена",
+    "Ok": "Ок"
+  },
+  "Add": {
+    "Description": "Описание",
+    "Name": "Название"
+  },
+  "Breadcrumbs": {
+    "Tasks": "Задачи",
+    "Theme": "Тема"
+  },
+  "Auth": {
+    "Email": "Введите ваш почту",
+    "Password": "Введите ваш пароль",
+    "repeatPassword": "Повторите ваш пароль",
+    "Validation": {
+      "EnterYourEmail": "Введите вашу почту",
+      "ThisInputIsShouldBeEmail": "Это поле для почты",
+      "EnterYourPassword": "Введите ваш пароль",
+      "PasswordShouldBeAtLeast6Characters": "Пароль должен быть 6 и более символов",
+      "RepeatYourPassword": "Повторите ваш пароль",
+      "PasswordsDoNotMatch": "Пароли не совпадают"
+    },
+    "Errors": {
+      "INVALID_EMAIL": "Неправильная почта",
+      "EMAIL_NOT_FOUND": "Такая почта не найдена",
+      "INVALID_PASSWORD": "Неправильный пароль",
+      "EMAIL_EXISTS": "Такой аккаунт уже есть",
+      "MISSING_PASSWORD": "Введите пароль",
+      "ADMIN_ONLY_OPERATION": "Введите данные"
+    }
+  }
+}

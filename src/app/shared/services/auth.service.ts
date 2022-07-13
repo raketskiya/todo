@@ -1,103 +1,129 @@
-import {Injectable, OnDestroy} from '@angular/core';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
-import {User} from '../interfaces/user.interface';
-import {catchError, map, Observable, of, Subject, tap, throwError} from 'rxjs';
-import {environment} from '../../../environments/environment';
-import {FbAuthResponse, FbUserResponse} from '../../../environments/interface';
+import { Injectable, OnDestroy } from '@angular/core';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import {
+  catchError,
+  map,
+  Observable,
+  of,
+  Subject,
+  tap,
+  throwError,
+} from 'rxjs';
+import { User } from '../interfaces/user.interface';
+import { environment } from '../../../environments/environment';
+import {
+  FbAuthResponse,
+  FbUserResponse,
+} from '../../../environments/interface';
+import { fbToken, fbTokenExp, userId } from '../consts/consts';
 
-@Injectable()
-export class AuthService implements OnDestroy{
-
+@Injectable({ providedIn: 'root' })
+export class AuthService implements OnDestroy {
   public error$: Subject<string> = new Subject<string>();
 
-  constructor(private  http: HttpClient) {}
+  public isLogin: Subject<void> = new Subject();
 
-  get token(): string | null {
-    const expDate = new Date(Number(localStorage.getItem('fb-token-exp')))
-    if (new Date() > expDate) {
-      this.logout();
-      return null;
-    }
-    return localStorage.getItem('fb-token');
+  public fbToken: string = '';
+
+  public fbTokenExp: string = '';
+
+  public userId: string = '';
+
+  constructor(private http: HttpClient) {}
+
+  public isTokenValid(): boolean {
+    return new Date() <= new Date(this.fbTokenExp);
   }
 
-  login(user: User): Observable<FbAuthResponse | null> {
-    const body:User = {
+  public login(user: User): Observable<FbAuthResponse | null> {
+    const body: User = {
       ...user,
-      returnSecureToken: true
-    }
-    return this.http.post<FbAuthResponse>(`${environment.apiURL}signInWithPassword?key=${environment.apiKey}`, body)
+      returnSecureToken: true,
+    };
+    return this.http
+      .post<FbAuthResponse>(
+        `${environment.apiURL}signInWithPassword?key=${environment.apiKey}`,
+        body
+      )
       .pipe(
-        tap(AuthService.setToken),
+        tap(this.setToken.bind(this)),
         catchError(this.handleAuthError.bind(this))
       );
   }
 
-  signUp(user: User): Observable<FbAuthResponse | null> {
-    const body:User = {
+  public signUp(user: User): Observable<FbAuthResponse | null> {
+    const body: User = {
       ...user,
-      returnSecureToken: true
-    }
+      returnSecureToken: true,
+    };
     delete body.localId;
-    return this.http.post<FbAuthResponse>(`${environment.apiURL}signUp?key=${environment.apiKey}`, body)
+    return this.http
+      .post<FbAuthResponse>(
+        `${environment.apiURL}signUp?key=${environment.apiKey}`,
+        body
+      )
       .pipe(
-        tap(AuthService.setToken),
+        tap(this.setToken.bind(this)),
         catchError(this.handleAuthError.bind(this))
       );
   }
 
-  handleAuthError(error: HttpErrorResponse): Observable<never> {
-    const {message} = error.error.error;
+  private handleAuthError(error: HttpErrorResponse): Observable<never> {
+    const { message } = error.error.error;
 
-    const errors: any = {
-      'INVALID_EMAIL':'Invalid email',
-      'EMAIL_NOT_FOUND':'Email not found',
-      'INVALID_PASSWORD':'Invalid password',
-      'EMAIL_EXISTS':'Email exists',
-      'WEAK_PASSWORD : Password should be at least 6 characters':'Weak password',
-      'MISSING_PASSWORD':'Missing password',
-      'ADMIN_ONLY_OPERATION':'Enter date for sign up',
+    enum Errors {
+      INVALID_EMAIL = 'Auth.Errors.INVALID_EMAIL',
+      EMAIL_NOT_FOUND = 'Auth.Errors.EMAIL_NOT_FOUND',
+      INVALID_PASSWORD = 'Auth.Errors.INVALID_PASSWORD',
+      EMAIL_EXISTS = 'Auth.Errors.EMAIL_EXISTS',
+      MISSING_PASSWORD = 'Auth.Errors.MISSING_PASSWORD',
+      ADMIN_ONLY_OPERATION = 'Auth.Errors.ADMIN_ONLY_OPERATION',
     }
 
-    this.error$.next(errors[message]);
+    this.error$.next(Errors[message]);
 
-    return throwError(error)
+    return throwError(error);
   }
 
-  getUserInfo(): Observable<boolean> {
-    const token = localStorage.getItem('fb-token');
-    return this.http.post<FbUserResponse>(`${environment.apiURL}lookup?key=${environment.apiKey}`, {idToken: token})
+  public getUserInfo(): Observable<boolean> {
+    return this.http
+      .post<FbUserResponse>(
+        `${environment.apiURL}lookup?key=${environment.apiKey}`,
+        { idToken: this.fbToken }
+      )
       .pipe(
-        map(el => {
-          if(el.users[0].localId == localStorage.getItem('userId')){
-            return true;
-          } else {
-            return false;
-          }
-        }),
+        map((el) => el.users[0].localId === this.userId),
         catchError(() => {
-          localStorage.clear();
+          this.logout();
           return of(false);
         })
       );
   }
 
-  logout(): void {
-    AuthService.setToken(null)
+  public logout(): void {
+    this.setToken(null);
   }
 
-  isAuthenticated(): boolean {
-    return !!this.token;
-  }
+  private setToken(response: FbAuthResponse | null): void {
+    if (response) {
+      this.fbToken = response.idToken;
+      this.fbTokenExp = new Date(
+        new Date().getTime() + +response.expiresIn * 1000
+      ).toString();
+      this.userId = String(response.localId);
 
-  private static setToken(response: FbAuthResponse | null ): void {
-    if(response) {
-      const expDate = new Date(new Date().getTime() + +response.expiresIn * 1000);
-      localStorage.setItem('fb-token', response.idToken);
-      localStorage.setItem('fb-token-exp', expDate.toString());
-      localStorage.setItem('userId', String(response.localId))
+      sessionStorage.setItem(fbToken, this.fbToken);
+      sessionStorage.setItem(fbTokenExp, this.fbTokenExp);
+      sessionStorage.setItem(userId, this.userId);
+      this.isLogin.next();
     } else {
-      localStorage.clear();
+      sessionStorage.removeItem(fbToken);
+      sessionStorage.removeItem(fbTokenExp);
+      sessionStorage.removeItem(userId);
+      this.fbToken = '';
+      this.fbTokenExp = '';
+      this.userId = '';
+      this.isLogin.next();
     }
   }
 

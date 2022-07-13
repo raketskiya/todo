@@ -27,6 +27,14 @@ $todo-theme: mat.define-light-theme((
     warn: $todo-warn,
   )
 ));
+$todo-theme-dark: mat.define-dark-theme((
+  color: (
+    primary: $todo-primary,
+    accent: $todo-accent,
+    warn: $todo-warn,
+  )
+));
+
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
@@ -39,10 +47,9 @@ $todo-theme: mat.define-light-theme((
 
 
 html, body { height: 100%; background-color: #ececec  }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; font-size: 1px }
 
-/* Importing Bootstrap SCSS file. */
-@import '~bootstrap/scss/bootstrap';
+
 
 :root{
   --bs-body-bg: #ECECEC;

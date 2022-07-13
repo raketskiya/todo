@@ -1,10 +1,11 @@
 .tasks-container {
-  width: 600px;
+  width: 700px;
   max-width: 100%;
   margin: 0 25px 25px 0;
   display: inline-block;
   vertical-align: top;
 }
+
 
 .tasks {
   border: solid 1px #ccc;
@@ -53,24 +54,85 @@
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
-.tasks-wrapper{
+.tasks-wrapper {
   display: flex;
   flex-direction: column;
+  width: 1450px;
+
 }
 
-.all-tasks{
+.all-tasks {
   display: flex;
   justify-content: space-around;
 }
 
-.active-tasks{
+.active-tasks {
 
 }
 
-.complited-tasks{
-
+.complited-tasks {
+ margin-right: 0;
 }
 
-h2{
+h2 {
   text-align: center;
+}
+
+.spinner{
+  display: flex;
+  justify-content: center;
+}
+
+/*Responsive*/
+
+
+/* 992px - 1200px */
+@media screen and (max-width: 1200px) {
+  .tasks-wrapper{
+    width: 960px;
+  }
+  .tasks-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0;
+  }
+}
+
+/* 768px - 992px */
+@media screen and (max-width: 992px) {
+  .tasks-wrapper{
+    width: 734px;
+  }
+  .tasks-container{
+    margin: 0;
+  }
+
+}
+
+/* 576px - 768px */
+@media screen and (max-width: 768px) {
+  .tasks-wrapper{
+    width: 544px;
+  }
+  .tasks-container{
+    max-width: 530px;
+    width: 530px;
+    margin: 0;
+  }
+  .all-tasks{
+
+  }
+}
+
+/* 320px - 576px */
+@media screen and (max-width: 576px) {
+  .tasks-wrapper{
+    width: 288px;
+  }
+  .tasks-container{
+    max-width: 274px;
+    width: 274px;
+    margin: 0;
+  }
 }

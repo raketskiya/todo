@@ -1,19 +1,10 @@
-.auth-wrapper{
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  overflow: auto;
 
-}
-
-.auth{
+.auth {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 450px;
-  height: 500px;
+  height: 420px;
   position: absolute;
   top: 0;
   right: 0;
@@ -26,68 +17,75 @@
   box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.5);
 }
 
-.form-wrapper{
+.form-wrapper {
   display: flex;
   flex-direction: column;
 }
 
-.change-type-btn{
-  margin-top: 20px;
+.change-type-btn {
+
   width: 250px;
 }
 
-hr{
+hr {
   width: 350px;
 
 }
 
-.form-item{
+.form-item {
   margin-bottom: 30px;
   height: 40px;
 }
 
-p{
+p {
   margin-top: 10px;
   margin-bottom: 10px;
 }
 
-.submit-btn{
+.submit-btn {
   margin-bottom: 20px;
   height: 40px;
   width: 200px;
 }
 
-.btn{
+.btn {
   border-radius: 10px;
 }
 
-.submit-btn-wrapper{
+.submit-btn-wrapper {
   display: flex;
   justify-content: center;
 }
 
-.validation{
+.validation {
   color: red;
 }
 
-.error{
+.error {
+  display: flex;
+  justify-content: center;
   margin-bottom: 5px;
   width: 305px;
-  color: white;
-  text-align: center;
-  background-color: red;
+  color: #ba3939;
+  background: #ffe0e0;
+
 }
 
-.page-title{
+.page-title {
   font-size: 30px;
   margin-top: 20px;
   margin-bottom: 20px;
 }
 
-ngb-alert{
+ngb-alert {
   display: flex;
   align-items: center;
   width: 300px;
   height: 20px;
 }
 
+@media screen and (max-width: 576px) {
+  .auth{
+    width: 290px;
+  }
+}

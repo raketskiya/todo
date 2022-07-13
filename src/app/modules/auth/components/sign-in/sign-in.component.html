@@ -1,30 +1,27 @@
-<div class="auth-wrapper">
-  <div class="auth">
-    <p class="page-title">Sign in</p>
-<!--    <div class="error" *ngIf="auth.error$ | async as error">-->
-<!--      {{error}}-->
-<!--    </div>-->
+ <div class="auth">
+    <p class="page-title">{{'Sign in.TITLE' | translate}}</p>
+   <div class="error">
+     <p type="danger" *ngIf="authService.error$ | async as error" >{{ error | translate }}</p>
+   </div>
 
-      <ngb-alert type="danger" *ngIf="auth.error$ | async as error" [dismissible]="false">{{ error }}</ngb-alert>
 
     <div class="form-wrapper">
       <form [formGroup]="signInForm" (ngSubmit)="submit()">
         <div class="authError">
         </div>
-        <div class="form-item" >
-          <app-auth-input formControlName="email" place = "Email..." type="email"></app-auth-input>
+        <div class="form-item">
+          <app-auth-input formControlName="email" place="Email..." type="email"></app-auth-input>
         </div>
-        <div class="form-item" >
-          <app-auth-input class="form-item" formControlName="password" place = "Password..." type="password"></app-auth-input>
+        <div class="form-item">
+          <app-auth-input class="form-item" formControlName="password" place="Password..."
+                          type="password"></app-auth-input>
         </div>
         <div class="submit-btn-wrapper">
-          <button class="submit-btn btn btn-primary" type="submit" [disabled]="signInForm.invalid">Sign in</button>
+          <button mat-flat-button color="primary" class="submit-btn btn btn-primary" type="submit" [disabled]="signInForm.invalid">{{'Sign in.Sign in button' | translate}}</button>
         </div>
       </form>
     </div>
     <div class="form-wrapper">
-      <button class="form-item change-type-btn btn btn-secondary" (click)="changeSighType()">Create an account</button>
+      <button mat-flat-button color="primary"  class="form-item change-type-btn btn btn-secondary" (click)="changeSighType()">{{'Sign in.Create button' | translate}}</button>
     </div>
-
   </div>
-</div>

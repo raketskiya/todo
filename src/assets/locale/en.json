@@ -1,0 +1,55 @@
+{
+  "Sign in": {
+    "TITLE": "Sign in",
+    "Sign in button": "Sign in",
+    "Create button" : "Create an account"
+  },
+  "Sign up": {
+    "TITLE": "Sign up",
+    "Sign up button": "Sign up",
+    "Have button" : "I am already have an account"
+  },
+  "Tasks": {
+    "Active": "Active tasks",
+    "Complete": "Completed tasks"
+  },
+  "Header": {
+    "Logout": "Log out",
+    "Theme": "Theme"
+  },
+  "Edit": {
+    "Title": "Task edit",
+    "Cancel": "Cancel",
+    "Ok": "Ok"
+  },
+  "Add": {
+    "Description": "Description",
+    "Name": "Name"
+  },
+  "Breadcrumbs": {
+    "Tasks": "Tasks",
+    "Theme": "Theme"
+  },
+  "Auth": {
+    "Email": "Enter your email",
+    "Password": "Enter your password",
+    "repeatPassword": "Repeat your password",
+    "Validation": {
+      "EnterYourEmail": "Enter Your Email",
+      "ThisInputIsShouldBeEmail": "This input is should be email",
+      "EnterYourPassword": " Enter your password",
+      "PasswordShouldBeAtLeast6Characters": "Password should be at least 6 characters",
+      "RepeatYourPassword": "Repeat your password",
+      "PasswordsDoNotMatch": "Passwords don't match"
+    },
+    "Errors": {
+      "INVALID_EMAIL": "Invalid email",
+      "EMAIL_NOT_FOUND": "Email not found",
+      "INVALID_PASSWORD": "Invalid password",
+      "EMAIL_EXISTS": "Email exists",
+      "MISSING_PASSWORD": "Missing password",
+      "ADMIN_ONLY_OPERATION": "Enter data for sign up"
+    }
+  }
+
+}

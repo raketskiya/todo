@@ -1,10 +1,15 @@
 <div>
   <div class="container">
     <div class="buttons" >
-      <button class="lng-btn" mat-flat-button (click)="changeLanguage()">
-        <mat-icon>language</mat-icon>
-        {{language}}
-      </button>
+      <mat-form-field appearance="fill">
+        <mat-select [(value)]="language">
+          <mat-option *ngFor="let lang of languages" (onSelectionChange)="changeLanguage()" [value]="lang">
+            {{lang}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+
       <button *ngIf="!!this.auth.fbToken"  class="lng-btn" mat-flat-button (click)="theme()">
         {{'Header.Theme' | translate}}
       </button>

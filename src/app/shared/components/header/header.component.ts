@@ -25,7 +25,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private ref: ChangeDetectorRef
   ) {}
 
-  public language: string = 'en';
+  public language: string = 'ru';
+
+  public languages: string[] = ['en', 'ru'];
 
   private ngUnsubscribe: Subject<void> = new Subject();
 
@@ -42,7 +44,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   public changeLanguage(): void {
-    this.language === 'en' ? (this.language = 'ru') : (this.language = 'en');
     this.translate.use(this.language);
   }
 
